@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Tag Checker</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+#mtc-root{
+  --forest-900:#0f2419;
+  --forest-800:#16331f;
+  --forest-700:#1f4029;
+  --moss-500:#4a7c59;
+  --moss-400:#6b9b76;
+  --sage-200:#c8dcc4;
+  --cream-50:#f7f5ef;
+  --cream-100:#efece2;
+  --ink-900:#1a2620;
+  --gold-400:#b8935a;
+  --fail-500:#a8503f;
+
+  --bg:var(--cream-50);
+  --panel:#ffffff;
+  --text:var(--ink-900);
+  --text-dim:#5a6b5f;
+  --border:var(--sage-200);
+  --accent:var(--moss-500);
+  --accent-text:#ffffff;
+  --mono-bg:var(--cream-100);
+
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  border-radius:14px;
+  padding:32px;
+  max-width:760px;
+  margin:0 auto;
+  transition:background .3s ease,color .3s ease;
+}
+#mtc-root.dark{
+  --bg:var(--forest-900);
+  --panel:var(--forest-800);
+  --text:#eef2ea;
+  --text-dim:#a9beac;
+  --border:var(--forest-700);
+  --accent:var(--moss-400);
+  --accent-text:#0f2419;
+  --mono-bg:var(--forest-700);
+}
+#mtc-root *{box-sizing:border-box;}
+#mtc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px;}
+#mtc-title{font-family:'Fraunces',serif;font-weight:600;font-size:28px;margin:0;letter-spacing:-0.01em;}
+#mtc-title .leaf{color:var(--accent);}
+#mtc-sub{color:var(--text-dim);font-size:14px;margin:6px 0 26px;line-height:1.5;}
+#mtc-toggle{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:20px;
+  padding:6px 14px;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+  font-family:'Inter',sans-serif;
+}
+#mtc-toggle:hover{border-color:var(--accent);}
+
+#mtc-row{display:flex;gap:10px;margin-bottom:10px;}
+#mtc-url{
+  flex:1;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--panel);
+  color:var(--text);
+  font-size:14px;
+  font-family:'IBM Plex Mono',monospace;
+}
+#mtc-url:focus{outline:none;border-color:var(--accent);}
+#mtc-btn{
+  background:var(--accent);
+  color:var(--accent-text);
+  border:none;
+  border-radius:8px;
+  padding:0 22px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+}
+#mtc-btn:hover{opacity:.9;}
+#mtc-btn:disabled{opacity:.5;cursor:default;}
+
+#mtc-alt{font-size:12.5px;color:var(--text-dim);margin:0 0 22px;}
+#mtc-alt button{background:none;border:none;color:var(--accent);cursor:pointer;font-size:12.5px;padding:0;text-decoration:underline;font-family:'Inter',sans-serif;}
+
+#mtc-paste{display:none;margin-bottom:22px;}
+#mtc-paste textarea{
+  width:100%;min-height:120px;padding:12px;border:1px solid var(--border);
+  border-radius:8px;background:var(--panel);color:var(--text);
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;resize:vertical;
+}
+#mtc-paste-btn{margin-top:8px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;}
+
+#mtc-status{font-size:13.5px;color:var(--text-dim);margin-bottom:16px;min-height:18px;}
+#mtc-status.err{color:var(--fail-500);}
+
+#mtc-score-wrap{display:none;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:22px;}
+#mtc-score{font-family:'Fraunces',serif;font-size:34px;font-weight:600;color:var(--accent);min-width:60px;}
+#mtc-score-label{font-size:13px;color:var(--text-dim);line-height:1.5;}
+
+#mtc-results{display:none;flex-direction:column;gap:10px;}
+.mtc-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-left:3px solid var(--border);
+  border-radius:8px;
+  padding:14px 16px;
+}
+.mtc-card.ok{border-left-color:var(--moss-500);}
+.mtc-card.warn{border-left-color:var(--gold-400);}
+.mtc-card.fail{border-left-color:var(--fail-500);}
+.mtc-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.mtc-card-name{font-weight:600;font-size:13.5px;}
+.mtc-card-status{font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:2px 9px;border-radius:20px;font-weight:600;}
+.mtc-card.ok .mtc-card-status{background:rgba(74,124,89,.15);color:var(--moss-500);}
+.mtc-card.warn .mtc-card-status{background:rgba(184,147,90,.18);color:var(--gold-400);}
+.mtc-card.fail .mtc-card-status{background:rgba(168,80,63,.15);color:var(--fail-500);}
+.mtc-card-val{
+  margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+  background:var(--mono-bg);padding:8px 10px;border-radius:6px;color:var(--text);
+  word-break:break-word;line-height:1.5;
+}
+.mtc-card-note{font-size:12px;color:var(--text-dim);margin-top:6px;}
+
+#mtc-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--text-dim);text-align:center;}
+</style>
+</head>
+<body>
+
+<div id="mtc-root">
+  <div id="mtc-top">
+    <div>
+      <h2 id="mtc-title"><span class="leaf">&#127807;</span> Meta Tag Checker</h2>
+    </div>
+    <button id="mtc-toggle" onclick="mtcToggleTheme()">&#9789; Dark mode</button>
+  </div>
+  <p id="mtc-sub">Enter a page URL to inspect its title, description, Open Graph, and Twitter card tags &mdash; with quick pass/warn/fail checks for SEO length limits.</p>
+
+  <div id="mtc-row">
+    <input id="mtc-url" type="text" placeholder="https://example.com/page" />
+    <button id="mtc-btn" onclick="mtcCheck()">Check tags</button>
+  </div>
+  <p id="mtc-alt">Some sites block automatic fetching. If it fails, <button onclick="mtcShowPaste()">paste the page source instead</button>.</p>
+
+  <div id="mtc-paste">
+    <textarea id="mtc-html" placeholder="View source on the page (Ctrl/Cmd+U), copy all, and paste it here."></textarea>
+    <button id="mtc-paste-btn" onclick="mtcCheckPasted()">Analyze pasted source</button>
+  </div>
+
+  <p id="mtc-status"></p>
+
+  <div id="mtc-score-wrap">
+    <div id="mtc-score">-</div>
+    <div id="mtc-score-label">SEO tag score &mdash; based on the checks below</div>
+  </div>
+
+  <div id="mtc-results"></div>
+
+  <div id="mtc-foot">Free tool by M | art diary &middot; results depend on how the site renders its HTML</div>
+</div>
+
+<script>
+function mtcToggleTheme(){
+  const root=document.getElementById('mtc-root');
+  const btn=document.getElementById('mtc-toggle');
+  root.classList.toggle('dark');
+  btn.innerHTML=root.classList.contains('dark') ? '&#9728; Light mode' : '&#9789; Dark mode';
+}
+
+function mtcShowPaste(){
+  document.getElementById('mtc-paste').style.display='block';
+}
+
+function mtcSetStatus(msg,isErr){
+  const el=document.getElementById('mtc-status');
+  el.textContent=msg;
+  el.className=isErr?'err':'';
+}
+
+async function mtcCheck(){
+  const url=document.getElementById('mtc-url').value.trim();
+  if(!url){mtcSetStatus('Enter a URL first.',true);return;}
+  const btn=document.getElementById('mtc-btn');
+  btn.disabled=true;btn.textContent='Checking...';
+  mtcSetStatus('Fetching page...');
+  try{
+    const proxy='https://api.allorigins.win/raw?url='+encodeURIComponent(url);
+    const res=await fetch(proxy);
+    if(!res.ok) throw new Error('bad response');
+    const html=await res.text();
+    mtcAnalyze(html,url);
+    mtcSetStatus('Done.');
+  }catch(e){
+    mtcSetStatus('Could not fetch that URL automatically (the site may block external requests). Try "paste the page source instead" below.',true);
+  }
+  btn.disabled=false;btn.textContent='Check tags';
+}
+
+function mtcCheckPasted(){
+  const html=document.getElementById('mtc-html').value;
+  if(!html.trim()){mtcSetStatus('Paste some HTML first.',true);return;}
+  mtcAnalyze(html,'pasted source');
+  mtcSetStatus('Analyzed pasted source.');
+}
+
+function mtcGet(doc,selector,attr){
+  const el=doc.querySelector(selector);
+  if(!el) return null;
+  return attr ? el.getAttribute(attr) : el.textContent;
+}
+
+function mtcAnalyze(html,source){
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(html,'text/html');
+
+  const title=mtcGet(doc,'title');
+  const desc=mtcGet(doc,'meta[name="description"]','content');
+  const canonical=mtcGet(doc,'link[rel="canonical"]','href');
+  const robots=mtcGet(doc,'meta[name="robots"]','content');
+  const viewport=mtcGet(doc,'meta[name="viewport"]','content');
+  const ogTitle=mtcGet(doc,'meta[property="og:title"]','content');
+  const ogDesc=mtcGet(doc,'meta[property="og:description"]','content');
+  const ogImage=mtcGet(doc,'meta[property="og:image"]','content');
+  const ogType=mtcGet(doc,'meta[property="og:type"]','content');
+  const twCard=mtcGet(doc,'meta[name="twitter:card"]','content');
+  const twTitle=mtcGet(doc,'meta[name="twitter:title"]','content');
+  const twImage=mtcGet(doc,'meta[name="twitter:image"]','content');
+
+  const checks=[];
+
+  checks.push(mtcLenCheck('Title tag',title,30,60,'Aim for 30-60 characters so it doesn\'t get cut off in search results.'));
+  checks.push(mtcLenCheck('Meta description',desc,70,160,'Aim for 70-160 characters &mdash; enough to be useful, short enough not to truncate.'));
+  checks.push(mtcExistCheck('Canonical URL',canonical,'Helps prevent duplicate-content issues across similar URLs.'));
+  checks.push(mtcExistCheck('Viewport tag',viewport,'Needed for the page to render correctly on mobile.'));
+  checks.push(mtcRobotsCheck('Robots meta',robots));
+  checks.push(mtcExistCheck('Open Graph title',ogTitle,'Controls the headline shown when this page is shared on Facebook/LinkedIn.'));
+  checks.push(mtcExistCheck('Open Graph description',ogDesc,'Controls the summary text shown on social shares.'));
+  checks.push(mtcExistCheck('Open Graph image',ogImage,'Without this, shared links often show no preview image.'));
+  checks.push(mtcExistCheck('Open Graph type',ogType,'Tells platforms whether this is an article, website, product, etc.'));
+  checks.push(mtcExistCheck('Twitter card',twCard,'Controls how the page looks when shared on X/Twitter.'));
+  checks.push(mtcExistCheck('Twitter title',twTitle,null));
+  checks.push(mtcExistCheck('Twitter image',twImage,null));
+
+  const passCount=checks.filter(c=>c.status==='ok').length;
+  const score=Math.round((passCount/checks.length)*100);
+
+  document.getElementById('mtc-score').textContent=score;
+  document.getElementById('mtc-score-label').innerHTML=`SEO tag score for <strong>${source==='pasted source'?'pasted source':mtcEsc(source)}</strong> &mdash; ${passCount} of ${checks.length} checks passed`;
+  document.getElementById('mtc-score-wrap').style.display='flex';
+
+  const wrap=document.getElementById('mtc-results');
+  wrap.innerHTML='';
+  checks.forEach(c=>{
+    const card=document.createElement('div');
+    card.className='mtc-card '+c.status;
+    card.innerHTML=`
+      <div class="mtc-card-top">
+        <span class="mtc-card-name">${c.name}</span>
+        <span class="mtc-card-status">${c.status==='ok'?'Pass':c.status==='warn'?'Warn':'Missing'}</span>
+      </div>
+      ${c.value?`<div class="mtc-card-val">${mtcEsc(c.value)}</div>`:''}
+      ${c.note?`<div class="mtc-card-note">${c.note}</div>`:''}
+    `;
+    wrap.appendChild(card);
+  });
+  wrap.style.display='flex';
+}
+
+function mtcEsc(s){
+  const d=document.createElement('div');
+  d.textContent=s;
+  return d.innerHTML;
+}
+
+function mtcLenCheck(name,value,min,max,note){
+  if(!value) return {name,status:'fail',value:null,note:'Not found. '+note};
+  const len=value.trim().length;
+  let status='ok';
+  if(len<min||len>max) status='warn';
+  return {name,status,value:value.trim(),note:`${len} characters. ${note}`};
+}
+
+function mtcExistCheck(name,value,note){
+  if(!value) return {name,status:'fail',value:null,note:note?('Not found. '+note):'Not found.'};
+  return {name,status:'ok',value:value.trim(),note:note||''};
+}
+
+function mtcRobotsCheck(value){
+  if(!value) return {name:'Robots meta',status:'warn',value:null,note:'Not set &mdash; search engines will default to indexing the page, which is usually fine.'};
+  const blocked=/noindex/i.test(value);
+  return {name:'Robots meta',status:blocked?'warn':'ok',value:value.trim(),note:blocked?'This page is set to noindex, so it won\'t appear in search results.':''};
+}
+</script>
+
+</body>
+</html>
