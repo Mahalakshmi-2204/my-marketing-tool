@@ -3,56 +3,303 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GrowthKit | Free Marketing Tools & SEO Suite</title>
+
+    <meta
+      name="description"
+      content="GrowthKit provides free SEO and digital marketing tools for marketers, freelancers, agencies and website owners."
+    />
+
+    <meta
+      name="keywords"
+      content="free SEO tools, meta tag checker, title tag checker, SEO tools, marketing tools"
+    />
+
+    <title>GrowthKit | Free SEO & Digital Marketing Tools</title>
+
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <nav class="navbar">
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#tools">Tools</a></li>
-        <li><a href="#about">About</a></li>
-        <li>
-          <a href="meta-tag-checker.html" class="nav-btn"
-            >Launch Meta Checker</a
-          >
-        </li>
-      </ul>
-    </nav>
 
-    <header id="home" class="hero">
-      <h1>Professional Digital Marketing Tools. 100% Free.</h1>
-      <p>
-        High-performance client-side SEO calculators, open graph generators, and
-        audit tools designed for digital agencies.
-      </p>
-      <a href="#tools" class="cta-btn">Explore Tools</a>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+
+    <div id="header"></div>
+
+    <!-- ================= HERO ================= -->
+
+    <header class="hero" id="home">
+      <div class="hero-content">
+        <div class="hero-badge">✦ 100% Free Marketing Tools</div>
+
+        <h1>
+          Free SEO Tools to
+          <span>Grow Your Website</span>
+        </h1>
+
+        <p>
+          Analyze, optimize and improve your website with simple, fast and free
+          SEO & digital marketing tools.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#tools" class="primary-btn"> Explore Tools → </a>
+
+          <a href="tools/meta-tag-checker.html" class="secondary-btn">
+            Try Meta Checker
+          </a>
+        </div>
+      </div>
     </header>
 
-    <section id="tools" class="container">
-      <h2>Our Marketing Utilities</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Meta Tag Checker</h3>
+    <!-- ================= TOOLS ================= -->
+
+    <main id="tools">
+      <!-- SEO TOOLS -->
+
+      <section class="tools-section">
+        <div class="section-heading">
+          <span class="section-label"> SEO </span>
+
+          <h2>SEO Tools</h2>
+
           <p>
-            Analyze title lengths, meta descriptions, and Open Graph previews
-            instantly.
+            Analyze important SEO elements and find opportunities to improve
+            your website.
           </p>
-          <a href="tool.html" class="card-link">Open Tool &rarr;</a>
         </div>
-        <div class="card disabled">
-          <h3>UTM Campaign Builder</h3>
+
+        <div class="card-grid">
+          <!-- META TAG -->
+
+          <article class="tool-card featured">
+            <div class="card-icon">🏷️</div>
+
+            <div class="card-content">
+              <span class="card-label"> SEO ANALYSIS </span>
+
+              <h3>Meta Tag Checker</h3>
+
+              <p>
+                Check your title, meta description, Open Graph tags and other
+                important metadata.
+              </p>
+
+              <a href="tools/meta-tag-checker.html" class="card-link">
+                Open Tool →
+              </a>
+            </div>
+          </article>
+
+          <!-- TITLE -->
+
+          <article class="tool-card">
+            <div class="card-icon">📝</div>
+
+            <div class="card-content">
+              <span class="card-label"> ON-PAGE SEO </span>
+
+              <h3>Title Tag Checker</h3>
+
+              <p>
+                Check title length and optimize your page title for search
+                engines.
+              </p>
+
+              <a href="tools/title-tag-checker.html" class="card-link">
+                Open Tool →
+              </a>
+            </div>
+          </article>
+
+          <!-- META DESCRIPTION -->
+
+          <article class="tool-card">
+            <div class="card-icon">📄</div>
+
+            <div class="card-content">
+              <span class="card-label"> ON-PAGE SEO </span>
+
+              <h3>Meta Description Checker</h3>
+
+              <p>
+                Analyze your meta description length and create better search
+                snippets.
+              </p>
+
+              <span class="coming-soon"> Coming Soon </span>
+            </div>
+          </article>
+
+          <!-- OG -->
+
+          <article class="tool-card">
+            <div class="card-icon">🔗</div>
+
+            <div class="card-content">
+              <span class="card-label"> SOCIAL SEO </span>
+
+              <h3>Open Graph Preview</h3>
+
+              <p>
+                Preview how your website will appear when shared on social
+                media.
+              </p>
+
+              <span class="coming-soon"> Coming Soon </span>
+            </div>
+          </article>
+
+          <!-- KEYWORD -->
+
+          <article class="tool-card">
+            <div class="card-icon">🔍</div>
+
+            <div class="card-content">
+              <span class="card-label"> CONTENT SEO </span>
+
+              <h3>Keyword Density Checker</h3>
+
+              <p>
+                Analyze keyword usage and discover the most frequently used
+                terms.
+              </p>
+
+              <span class="coming-soon"> Coming Soon </span>
+            </div>
+          </article>
+
+          <!-- WORD COUNTER -->
+
+          <article class="tool-card">
+            <div class="card-icon">🔢</div>
+
+            <div class="card-content">
+              <span class="card-label"> CONTENT </span>
+
+              <h3>Word Counter</h3>
+
+              <p>
+                Count words, characters and sentences in your content instantly.
+              </p>
+
+              <span class="coming-soon"> Coming Soon </span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- MARKETING TOOLS 
+
+      <section class="tools-section alternate">
+        <div class="section-heading">
+          <span class="section-label"> MARKETING </span>
+
+          <h2>Marketing Tools</h2>
+
           <p>
-            Easily construct tracked URLs for Google Analytics 4 integration.
+            Build campaigns and track your marketing traffic more effectively.
           </p>
-          <span class="badge">Coming Soon</span>
         </div>
+
+        <div class="card-grid">
+          <article class="tool-card">
+            <div class="card-icon">📊</div>
+
+            <div class="card-content">
+              <span class="card-label"> ANALYTICS </span>
+
+              <h3>UTM Campaign Builder</h3>
+
+              <p>
+                Create UTM tracking URLs for Google Analytics and marketing
+                campaigns.
+              </p>
+
+              <span class="coming-soon"> Coming Soon </span>
+            </div>
+          </article>
+        </div>
+      </section>-->
+
+      <!-- TECHNICAL SEO 
+
+      <section class="tools-section">
+        <div class="section-heading">
+          <span class="section-label"> TECHNICAL SEO </span>
+
+          <h2>Technical SEO Tools</h2>
+
+          <p>Useful utilities for managing important technical SEO files.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="tool-card">
+            <div class="card-icon">🤖</div>
+
+            <div class="card-content">
+              <span class="card-label"> CRAWLING </span>
+
+              <h3>Robots.txt Generator</h3>
+
+              <p>Generate a robots.txt file for your website in seconds.</p>
+
+              <span class="coming-soon"> Coming Soon </span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>-->
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section" id="about">
+      <div class="about-container">
+        <span class="section-label"> ABOUT GROWTHKIT </span>
+
+        <h2>
+          Simple Tools.
+          <span>Better Marketing.</span>
+        </h2>
+
+        <p>
+          GrowthKit is a collection of simple and free SEO and digital marketing
+          utilities designed to help marketers, freelancers, agencies and
+          website owners work faster.
+        </p>
       </div>
     </section>
 
-    <footer>
-      <p>&copy; 2026 GrowthKit. Hosted seamlessly on Vercel.</p>
-    </footer>
+    <!-- ================= BLOG ================= 
+
+    <section class="blog-section">
+      <div class="section-heading">
+        <span class="section-label"> LEARN </span>
+
+        <h2>SEO Guides & Resources</h2>
+
+        <p>Learn practical SEO and digital marketing strategies.</p>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-icon">📚</div>
+
+        <div>
+          <span class="card-label"> SEO GUIDE </span>
+
+          <h3>Complete SEO Guide for Beginners</h3>
+
+          <p>
+            Learn the fundamentals of SEO and how to optimize your website for
+            search engines.
+          </p>
+
+          <a href="blog/seo-guide.html" class="card-link"> Read Guide → </a>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- ================= FOOTER ================= -->
+
+    <div id="footer"></div>
 
     <script src="script.js"></script>
   </body>

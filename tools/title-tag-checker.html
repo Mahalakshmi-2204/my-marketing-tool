@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Free Title Tag Checker. Analyze your SEO title length and improve your page titles with GrowthKit."
+    />
+
+    <title>Free Title Tag Checker | GrowthKit</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .title-input {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 16px;
+        outline: none;
+      }
+
+      .title-input:focus {
+        border-color: var(--primary);
+      }
+
+      .counter-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 10px;
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
+
+      .progress-wrapper {
+        height: 8px;
+        margin-top: 18px;
+        overflow: hidden;
+        background: var(--bg);
+        border-radius: 20px;
+      }
+
+      .progress-bar {
+        width: 0;
+        height: 100%;
+        background: var(--primary);
+        transition: width 0.2s ease;
+      }
+
+      .result-box {
+        margin-top: 25px;
+        padding: 22px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .status.good {
+        background: rgba(74, 124, 89, 0.12);
+        color: #4a7c59;
+      }
+
+      .status.warning {
+        background: rgba(184, 147, 90, 0.15);
+        color: #9a783e;
+      }
+
+      .status.bad {
+        background: rgba(168, 80, 63, 0.12);
+        color: #a8503f;
+      }
+
+      .result-box h3 {
+        margin-bottom: 7px;
+        font-size: 18px;
+      }
+
+      .result-message {
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .recommendations {
+        margin-top: 22px;
+      }
+
+      .recommendations h3 {
+        font-size: 16px;
+      }
+
+      .recommendations ul {
+        padding-left: 20px;
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .recommendations li {
+        margin-bottom: 7px;
+      }
+
+      .preview {
+        margin-top: 25px;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--card);
+      }
+
+      .preview-label {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .google-preview {
+        max-width: 650px;
+      }
+
+      .google-title {
+        color: #1a0dab;
+        font-size: 19px;
+        line-height: 1.3;
+        margin-bottom: 4px;
+      }
+
+      .google-url {
+        color: #188038;
+        font-size: 13px;
+        margin-bottom: 5px;
+      }
+
+      .google-description {
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 20px;
+        }
+
+        .counter-row {
+          flex-direction: column;
+          gap: 4px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE SEO TOOL </span>
+
+        <h1>Title Tag <span>Checker</span></h1>
+
+        <p>
+          Check your page title length, analyze its SEO status and get practical
+          recommendations for improving your title tag.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <label for="titleInput"> Enter your title tag </label>
+
+        <input
+          id="titleInput"
+          class="title-input"
+          type="text"
+          maxlength="200"
+          placeholder="Example: Free SEO Tools for Digital Marketers"
+        />
+
+        <div class="counter-row">
+          <span>
+            Characters:
+            <strong id="characterCount">0</strong>
+          </span>
+
+          <span> Recommended: 30–60 characters </span>
+        </div>
+
+        <div class="progress-wrapper">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div class="result-box">
+          <span id="status" class="status"> Start typing </span>
+
+          <h3>SEO Status</h3>
+
+          <p id="resultMessage" class="result-message">
+            Enter your title above to start the analysis.
+          </p>
+
+          <div class="recommendations">
+            <h3>Recommendations</h3>
+
+            <ul id="recommendationList">
+              <li>Keep your title descriptive and relevant.</li>
+
+              <li>Aim for approximately 30–60 characters.</li>
+
+              <li>Include your primary keyword naturally.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="preview">
+          <span class="preview-label"> Search Preview </span>
+
+          <div class="google-preview">
+            <div id="previewTitle" class="google-title">Your Page Title</div>
+
+            <div class="google-url">https://example.com</div>
+
+            <div class="google-description">
+              This is an example of how your page title can appear in a search
+              result.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="../index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+    <div id="footer"></div>
+    <script src="../script.js"></script>
+
+    <script>
+      const titleInput = document.getElementById("titleInput");
+
+      const characterCount = document.getElementById("characterCount");
+
+      const progressBar = document.getElementById("progressBar");
+
+      const status = document.getElementById("status");
+
+      const resultMessage = document.getElementById("resultMessage");
+
+      const recommendationList = document.getElementById("recommendationList");
+
+      const previewTitle = document.getElementById("previewTitle");
+
+      titleInput.addEventListener("input", analyzeTitle);
+
+      function analyzeTitle() {
+        const title = titleInput.value.trim();
+
+        const length = title.length;
+
+        characterCount.textContent = length;
+
+        previewTitle.textContent = title || "Your Page Title";
+
+        let progress = (length / 60) * 100;
+
+        progress = Math.min(progress, 100);
+
+        progressBar.style.width = progress + "%";
+
+        recommendationList.innerHTML = "";
+
+        if (length === 0) {
+          setStatus("Start typing", "");
+
+          resultMessage.textContent =
+            "Enter your title above to start the analysis.";
+
+          addRecommendation("Keep your title descriptive and relevant.");
+
+          addRecommendation("Aim for approximately 30–60 characters.");
+
+          addRecommendation("Include your primary keyword naturally.");
+
+          return;
+        }
+
+        if (length < 30) {
+          setStatus("Too Short", "bad");
+
+          resultMessage.textContent =
+            "Your title is quite short. Consider adding useful descriptive information.";
+
+          addRecommendation("Add more descriptive information about the page.");
+
+          addRecommendation("Include the primary topic or keyword naturally.");
+
+          addRecommendation("Avoid making the title unnecessarily vague.");
+        } else if (length <= 60) {
+          setStatus("Good Length", "good");
+
+          resultMessage.textContent =
+            "Your title is within the recommended character range.";
+
+          addRecommendation(
+            "Your title length is within the recommended range.",
+          );
+
+          addRecommendation(
+            "Make sure the title accurately represents the page.",
+          );
+
+          addRecommendation("Keep your main keyword natural and relevant.");
+        } else {
+          setStatus("Too Long", "warning");
+
+          resultMessage.textContent =
+            "Your title is longer than the recommended range and may be truncated in search results.";
+
+          addRecommendation("Try reducing the title to around 60 characters.");
+
+          addRecommendation("Remove unnecessary words or repetition.");
+
+          addRecommendation(
+            "Keep the most important words near the beginning.",
+          );
+        }
+      }
+
+      function setStatus(text, className) {
+        status.textContent = text;
+
+        status.className = "status " + className;
+      }
+
+      function addRecommendation(text) {
+        const item = document.createElement("li");
+
+        item.textContent = text;
+
+        recommendationList.appendChild(item);
+      }
+    </script>
+  </body>
+</html>
