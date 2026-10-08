@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,10 +10,10 @@
     />
     <meta
       name="description"
-      content="Free Title Tag Checker. Analyze your SEO title length and improve your page titles with GrowthKit."
+      content="Free Meta Description Checker. Check your meta description length, preview how it looks in Google and get tips to improve it with GrowthKit."
     />
 
-    <title>Free Title Tag Checker | GrowthKit</title>
+    <title>Free Meta Description Checker | GrowthKit</title>
 
     <link rel="stylesheet" href="../style.css" />
 
@@ -61,18 +62,36 @@
         font-weight: 700;
       }
 
-      .title-input {
+      .field + .field {
+        margin-top: 20px;
+      }
+
+      .optional {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .text-input,
+      .desc-input {
         width: 100%;
         padding: 15px;
         border: 1px solid var(--border);
         border-radius: 10px;
         background: var(--bg);
         color: var(--text);
-        font-size: 16px;
+        font-family: inherit;
+        font-size: 15px;
         outline: none;
       }
 
-      .title-input:focus {
+      .desc-input {
+        min-height: 130px;
+        line-height: 1.6;
+        resize: vertical;
+      }
+
+      .text-input:focus,
+      .desc-input:focus {
         border-color: var(--primary);
       }
 
@@ -199,6 +218,14 @@
       .google-description {
         color: var(--text-secondary);
         font-size: 13px;
+        line-height: 1.55;
+        word-break: break-word;
+      }
+
+      .preview-note {
+        margin-top: 12px;
+        color: var(--text-secondary);
+        font-size: 12px;
       }
 
       .back-link {
@@ -293,55 +320,47 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is a title tag?",
+            "name": "What is a meta description?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The title tag is the HTML element that sets your page's title. It's the clickable headline in Google results and the text shown on the browser tab."
+              "text": "A meta description is an HTML tag that summarizes a page in one or two sentences. Search engines often show it as the snippet under your title in search results."
             }
           },
           {
             "@type": "Question",
-            "name": "What is the ideal title tag length?",
+            "name": "What is the ideal meta description length?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Aim for roughly 30 to 60 characters. Google truncates titles by pixel width (around 600px), so treat 60 characters as a safe guideline, not a hard limit."
+              "text": "Aim for roughly 70 to 160 characters. Google truncates snippets by pixel width, so treat 160 as a safe guideline rather than a hard limit."
             }
           },
           {
             "@type": "Question",
-            "name": "What happens if my title is too long?",
+            "name": "Is the meta description a ranking factor?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Google may cut it off with an ellipsis or rewrite it. Put your most important words at the beginning."
+              "text": "Google has said meta descriptions are not a direct ranking factor. A clear, compelling one can still improve your click-through rate, which helps bring in more visitors."
             }
           },
           {
             "@type": "Question",
-            "name": "What if my title is too short?",
+            "name": "Will Google always show my meta description?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A very short title often leaves out context or keywords that help searchers decide to click. Adding a descriptor or your brand name usually fixes it."
+              "text": "No. Google often rewrites snippets to better match what someone searched for, using text from your page instead. A well-written description is shown more often when it accurately matches the page content."
             }
           },
           {
             "@type": "Question",
-            "name": "Should I include my brand name in the title?",
+            "name": "What makes a good meta description?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Usually yes, at the end, separated by a pipe or dash. Put your primary keyword first and your brand last."
+              "text": "Describe what the page offers in plain language, include your main keyword naturally, and give a reason to click. Make it unique for every page and accurate to the content."
             }
           },
           {
             "@type": "Question",
-            "name": "Does every page need a unique title?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Duplicate titles make it harder for search engines to tell your pages apart."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does this tool store my title?",
+            "name": "Does this tool store my description?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "No. The analysis runs entirely in your browser, and nothing you type is sent to a server or saved."
@@ -359,32 +378,35 @@
       <div class="tool-header">
         <span class="section-label"> FREE SEO TOOL </span>
 
-        <h1>Title Tag <span>Checker</span></h1>
+        <h1>Meta Description <span>Checker</span></h1>
 
         <p>
-          Check your page title length, analyze its SEO status and get practical
-          recommendations for improving your title tag.
+          Check your meta description length, see how it may look in Google
+          search results and get practical tips for writing a better snippet.
         </p>
       </div>
 
       <div class="checker-box">
-        <label for="titleInput"> Enter your title tag </label>
+        <div class="field">
+          <label for="descInput"> Enter your meta description </label>
 
-        <input
-          id="titleInput"
-          class="title-input"
-          type="text"
-          maxlength="200"
-          placeholder="Example: Free SEO Tools for Digital Marketers"
-        />
+          <textarea
+            id="descInput"
+            class="desc-input"
+            maxlength="400"
+            placeholder="Example: Use our free SEO tools to check titles, meta descriptions and social tags in seconds. No sign-up needed."
+          ></textarea>
+        </div>
 
         <div class="counter-row">
           <span>
             Characters:
             <strong id="characterCount">0</strong>
+            &middot; Words:
+            <strong id="wordCount">0</strong>
           </span>
 
-          <span> Recommended: 30–60 characters </span>
+          <span> Recommended: 70–160 characters </span>
         </div>
 
         <div class="progress-wrapper">
@@ -397,15 +419,15 @@
           <h3>SEO Status</h3>
 
           <p id="resultMessage" class="result-message">
-            Enter your title above to start the analysis.
+            Enter your meta description above to start the analysis.
           </p>
 
           <div class="recommendations">
             <h3>Recommendations</h3>
 
             <ul id="recommendationList">
-              <li>Keep your title descriptive and relevant.</li>
-              <li>Aim for approximately 30–60 characters.</li>
+              <li>Summarize what the page offers in plain language.</li>
+              <li>Aim for approximately 70–160 characters.</li>
               <li>Include your primary keyword naturally.</li>
             </ul>
           </div>
@@ -414,16 +436,34 @@
         <div class="preview">
           <span class="preview-label"> Search Preview </span>
 
-          <div class="google-preview">
+          <div class="field">
+            <label for="previewTitleInput">
+              Page title <span class="optional">(optional)</span>
+            </label>
+
+            <input
+              id="previewTitleInput"
+              class="text-input"
+              type="text"
+              maxlength="120"
+              placeholder="Example: Free SEO Tools for Digital Marketers"
+            />
+          </div>
+
+          <div class="google-preview" style="margin-top: 20px">
             <div id="previewTitle" class="google-title">Your Page Title</div>
 
             <div class="google-url">https://example.com</div>
 
-            <div class="google-description">
-              This is an example of how your page title can appear in a search
-              result.
+            <div id="previewDescription" class="google-description">
+              Your meta description will appear here as you type.
             </div>
           </div>
+
+          <p class="preview-note">
+            Previews are approximate. Google decides what to display and may
+            truncate by pixel width or rewrite the snippet.
+          </p>
         </div>
       </div>
 
@@ -434,63 +474,53 @@
       <h2>Frequently asked questions</h2>
 
       <details open>
-        <summary>What is a title tag?</summary>
+        <summary>What is a meta description?</summary>
         <p>
-          The title tag is the HTML element that sets your page's title. It's
-          the clickable headline in Google results and the text shown on the
-          browser tab. It's one of the strongest on-page signals for telling
-          search engines and searchers what a page is about.
+          A meta description is an HTML tag that summarizes a page in one or two
+          sentences. Search engines often show it as the snippet under your
+          title in search results.
         </p>
       </details>
 
       <details>
-        <summary>What is the ideal title tag length?</summary>
+        <summary>What is the ideal meta description length?</summary>
         <p>
-          Aim for roughly 30 to 60 characters. Google actually truncates titles
-          by pixel width (around 600px) rather than character count, so titles
-          with wide letters like "W" or "M" may cut off earlier. Treat 60 as a
-          safe guideline, not a hard limit.
+          Aim for roughly 70 to 160 characters. Google truncates snippets by
+          pixel width rather than character count, so treat 160 as a safe
+          guideline rather than a hard limit.
         </p>
       </details>
 
       <details>
-        <summary>What happens if my title is too long?</summary>
+        <summary>Is the meta description a ranking factor?</summary>
         <p>
-          Google may cut it off with an ellipsis, hiding words at the end.
-          Google can also rewrite titles it considers too long, vague or stuffed
-          with keywords. Put your most important words at the beginning.
+          Google has said meta descriptions are not a direct ranking factor. A
+          clear, compelling one can still improve your click-through rate,
+          which helps bring in more visitors.
         </p>
       </details>
 
       <details>
-        <summary>What if my title is too short?</summary>
+        <summary>Will Google always show my meta description?</summary>
         <p>
-          A very short title often leaves out context or keywords that help
-          searchers decide to click. Adding a descriptor or your brand name
-          usually fixes it.
+          No. Google often rewrites snippets to better match what someone
+          searched for, using text from your page instead. A well-written
+          description is shown more often when it accurately matches the page
+          content.
         </p>
       </details>
 
       <details>
-        <summary>Should I include my brand name in the title?</summary>
+        <summary>What makes a good meta description?</summary>
         <p>
-          Usually yes, at the end, separated by a pipe or dash (for example
-          "Free SEO Tools | GrowthKit"). Put your primary keyword first and your
-          brand last, and leave the brand out if it pushes the title over the
-          limit.
+          Describe what the page offers in plain language, include your main
+          keyword naturally, and give a reason to click. Make it unique for
+          every page and accurate to the content.
         </p>
       </details>
 
       <details>
-        <summary>Does every page need a unique title?</summary>
-        <p>
-          Yes. Duplicate titles make it harder for search engines to tell your
-          pages apart and can lead to the wrong page ranking for a query.
-        </p>
-      </details>
-
-      <details>
-        <summary>Does this tool store my title?</summary>
+        <summary>Does this tool store my description?</summary>
         <p>
           No. The analysis runs entirely in your browser, and nothing you type
           is sent to a server or saved.
@@ -503,70 +533,94 @@
     <script src="../script.js"></script>
 
     <script>
-      const titleInput = document.getElementById("titleInput");
+      const MIN_LENGTH = 70;
+      const MAX_LENGTH = 160;
+
+      const descInput = document.getElementById("descInput");
+      const previewTitleInput = document.getElementById("previewTitleInput");
       const characterCount = document.getElementById("characterCount");
+      const wordCount = document.getElementById("wordCount");
       const progressBar = document.getElementById("progressBar");
       const status = document.getElementById("status");
       const resultMessage = document.getElementById("resultMessage");
       const recommendationList = document.getElementById("recommendationList");
       const previewTitle = document.getElementById("previewTitle");
+      const previewDescription = document.getElementById("previewDescription");
 
-      titleInput.addEventListener("input", analyzeTitle);
+      descInput.addEventListener("input", analyzeDescription);
+      previewTitleInput.addEventListener("input", updateTitlePreview);
 
-      function analyzeTitle() {
-        const title = titleInput.value.trim();
-        const length = title.length;
+      function updateTitlePreview() {
+        previewTitle.textContent =
+          previewTitleInput.value.trim() || "Your Page Title";
+      }
+
+      function analyzeDescription() {
+        const description = descInput.value.trim();
+        const length = description.length;
+        const words = description ? description.split(/\s+/).length : 0;
 
         characterCount.textContent = length;
-        previewTitle.textContent = title || "Your Page Title";
+        wordCount.textContent = words;
 
-        let progress = (length / 60) * 100;
+        let progress = (length / MAX_LENGTH) * 100;
         progress = Math.min(progress, 100);
         progressBar.style.width = progress + "%";
+
+        // Search preview, truncated the way a snippet would be
+        if (!description) {
+          previewDescription.textContent =
+            "Your meta description will appear here as you type.";
+        } else if (length > MAX_LENGTH) {
+          previewDescription.textContent =
+            description.slice(0, MAX_LENGTH).trimEnd() + "…";
+        } else {
+          previewDescription.textContent = description;
+        }
 
         recommendationList.innerHTML = "";
 
         if (length === 0) {
           setStatus("Start typing", "");
           resultMessage.textContent =
-            "Enter your title above to start the analysis.";
+            "Enter your meta description above to start the analysis.";
 
-          addRecommendation("Keep your title descriptive and relevant.");
-          addRecommendation("Aim for approximately 30–60 characters.");
+          addRecommendation("Summarize what the page offers in plain language.");
+          addRecommendation("Aim for approximately 70–160 characters.");
           addRecommendation("Include your primary keyword naturally.");
           return;
         }
 
-        if (length < 30) {
+        if (length < MIN_LENGTH) {
           setStatus("Too Short", "bad");
           resultMessage.textContent =
-            "Your title is quite short. Consider adding useful descriptive information.";
+            "Your description is short. You have room to give searchers more context.";
 
-          addRecommendation("Add more descriptive information about the page.");
+          addRecommendation("Explain what the visitor will find or learn.");
           addRecommendation("Include the primary topic or keyword naturally.");
-          addRecommendation("Avoid making the title unnecessarily vague.");
-        } else if (length <= 60) {
+          addRecommendation("Add a reason to click, such as a benefit.");
+        } else if (length <= MAX_LENGTH) {
           setStatus("Good Length", "good");
           resultMessage.textContent =
-            "Your title is within the recommended character range.";
+            "Your description is within the recommended character range.";
 
-          addRecommendation(
-            "Your title length is within the recommended range.",
-          );
-          addRecommendation(
-            "Make sure the title accurately represents the page.",
-          );
+          addRecommendation("Make sure it accurately describes the page.");
           addRecommendation("Keep your main keyword natural and relevant.");
+          addRecommendation("Use a unique description on every page.");
         } else {
           setStatus("Too Long", "warning");
           resultMessage.textContent =
-            "Your title is longer than the recommended range and may be truncated in search results.";
+            "Your description is longer than the recommended range and may be truncated in search results.";
 
-          addRecommendation("Try reducing the title to around 60 characters.");
-          addRecommendation("Remove unnecessary words or repetition.");
+          addRecommendation("Try reducing it to around 160 characters.");
+          addRecommendation("Remove filler words or repetition.");
           addRecommendation(
-            "Keep the most important words near the beginning.",
+            "Put the most important information near the beginning.",
           );
+        }
+
+        if (/\s{2,}/.test(descInput.value.trim())) {
+          addRecommendation("Remove extra spaces or line breaks.");
         }
       }
 

@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
+    <meta
+      name="description"
+      content="Free Open Graph Preview tool. See how your link looks on Facebook, LinkedIn and X, check your OG title, description and image, and copy ready-to-use meta tags."
+    />
+
+    <title>Free Open Graph Preview | GrowthKit</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .field + .field {
+        margin-top: 18px;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .optional {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .text-input,
+      .desc-input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .desc-input {
+        min-height: 90px;
+        line-height: 1.6;
+        resize: vertical;
+      }
+
+      .text-input:focus,
+      .desc-input:focus {
+        border-color: var(--primary);
+      }
+
+      .field-hint {
+        margin-top: 6px;
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      .section-title {
+        margin: 30px 0 14px;
+        font-size: 16px;
+      }
+
+      /* ---------- Platform tabs ---------- */
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .tab-button {
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: var(--card);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .tab-button.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      .tab-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .preview-stage {
+        padding: 22px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      /* ---------- Share card ---------- */
+      .share-card {
+        max-width: 520px;
+        margin: 0 auto;
+        overflow: hidden;
+        background: var(--card);
+        border: 1px solid var(--border);
+      }
+
+      .card-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1.91 / 1;
+        overflow: hidden;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .card-image img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+      }
+
+      .card-body {
+        padding: 12px 14px 14px;
+      }
+
+      .card-domain {
+        margin-bottom: 4px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .card-title {
+        margin-bottom: 4px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-word;
+      }
+
+      .card-description {
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.45;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-word;
+      }
+
+      /* Platform-specific looks */
+      .share-card.facebook {
+        border-radius: 0;
+      }
+
+      .share-card.linkedin {
+        border-radius: 6px;
+      }
+
+      .share-card.linkedin .card-domain {
+        order: 3;
+        margin: 4px 0 0;
+        text-transform: none;
+      }
+
+      .share-card.linkedin .card-body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .share-card.linkedin .card-title {
+        order: 1;
+        font-size: 15px;
+        -webkit-line-clamp: 2;
+      }
+
+      .share-card.linkedin .card-description {
+        display: none;
+      }
+
+      .share-card.x {
+        border-radius: 16px;
+        position: relative;
+      }
+
+      .share-card.x .card-body {
+        padding: 10px 14px 12px;
+      }
+
+      .share-card.x .card-domain {
+        order: 3;
+        margin: 4px 0 0;
+        text-transform: none;
+      }
+
+      .share-card.x .card-body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .share-card.x .card-title {
+        order: 1;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .share-card.x .card-description {
+        order: 2;
+        -webkit-line-clamp: 2;
+      }
+
+      .platform-note {
+        margin-top: 14px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      /* ---------- Checks ---------- */
+      .checks {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .check-card {
+        padding: 14px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--border);
+        border-radius: 10px;
+      }
+
+      .check-card.pass {
+        border-left-color: #4a7c59;
+      }
+
+      .check-card.warning {
+        border-left-color: #b8935a;
+      }
+
+      .check-card.missing {
+        border-left-color: #a8503f;
+      }
+
+      .check-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+      }
+
+      .check-name {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .check-status {
+        padding: 4px 9px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .pass .check-status {
+        color: #4a7c59;
+        background: rgba(74, 124, 89, 0.12);
+      }
+
+      .warning .check-status {
+        color: #9a783e;
+        background: rgba(184, 147, 90, 0.15);
+      }
+
+      .missing .check-status {
+        color: #a8503f;
+        background: rgba(168, 80, 63, 0.12);
+      }
+
+      .check-note {
+        margin-top: 6px;
+        color: var(--text-secondary);
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      /* ---------- Generated code ---------- */
+      .code-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 30px 0 14px;
+      }
+
+      .code-header h3 {
+        font-size: 16px;
+      }
+
+      .copy-button {
+        padding: 8px 15px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .copy-button:hover {
+        border-color: var(--primary);
+      }
+
+      .code-output {
+        width: 100%;
+        min-height: 230px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: monospace;
+        font-size: 12.5px;
+        line-height: 1.6;
+        resize: vertical;
+        outline: none;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 20px;
+        }
+
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are Open Graph tags?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Open Graph tags are meta tags in your page's HTML that control the title, description and image shown when your link is shared on platforms like Facebook, LinkedIn and Slack."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the best Open Graph image size?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A size of 1200 by 630 pixels (about a 1.91 to 1 ratio) works well across most platforms. Use a JPG or PNG, and keep important content away from the edges because some platforms crop."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do Open Graph tags affect SEO rankings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not directly. They don't act as a Google ranking factor, but a good preview card can increase clicks and shares, which brings more visitors to your page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is my old preview still showing after I changed my tags?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Platforms cache previews. You can refresh them with Facebook's Sharing Debugger or LinkedIn's Post Inspector. Other platforms may take time to update."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this preview exactly what each platform will show?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It's an approximation. Platforms change their card designs and cropping over time, so use this to catch problems early and confirm with each platform's own debugger."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool store my information?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Everything runs in your browser and nothing is saved. If you enter an image URL, your browser loads that image directly from its host to show the preview."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE SEO TOOL </span>
+
+        <h1>Open Graph <span>Preview</span></h1>
+
+        <p>
+          See how your link will look when shared on Facebook, LinkedIn and X.
+          Check your title, description and image, then copy ready-to-use meta
+          tags.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <div class="field">
+          <label for="ogTitle"> Title (og:title) </label>
+          <input
+            id="ogTitle"
+            class="text-input"
+            type="text"
+            maxlength="150"
+            placeholder="Example: Free SEO Tools for Digital Marketers"
+          />
+        </div>
+
+        <div class="field">
+          <label for="ogDescription"> Description (og:description) </label>
+          <textarea
+            id="ogDescription"
+            class="desc-input"
+            maxlength="300"
+            placeholder="Example: Check titles, meta descriptions and social tags in seconds. No sign-up needed."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="ogImage"> Image URL (og:image) </label>
+          <input
+            id="ogImage"
+            class="text-input"
+            type="url"
+            placeholder="https://example.com/images/share-card.jpg"
+          />
+          <p class="field-hint">
+            Use a full, public image URL. Recommended size: 1200 × 630 pixels.
+          </p>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="ogUrl"> Page URL (og:url) </label>
+            <input
+              id="ogUrl"
+              class="text-input"
+              type="url"
+              placeholder="https://example.com/page"
+            />
+          </div>
+
+          <div class="field">
+            <label for="ogSiteName">
+              Site name <span class="optional">(optional)</span>
+            </label>
+            <input
+              id="ogSiteName"
+              class="text-input"
+              type="text"
+              maxlength="60"
+              placeholder="GrowthKit"
+            />
+          </div>
+        </div>
+
+        <h3 class="section-title">Share preview</h3>
+
+        <div class="tabs" role="tablist" aria-label="Preview platform">
+          <button
+            class="tab-button active"
+            role="tab"
+            aria-selected="true"
+            data-platform="facebook"
+          >
+            Facebook
+          </button>
+          <button
+            class="tab-button"
+            role="tab"
+            aria-selected="false"
+            data-platform="linkedin"
+          >
+            LinkedIn
+          </button>
+          <button
+            class="tab-button"
+            role="tab"
+            aria-selected="false"
+            data-platform="x"
+          >
+            X (Twitter)
+          </button>
+        </div>
+
+        <div class="preview-stage">
+          <div id="shareCard" class="share-card facebook">
+            <div class="card-image" id="cardImageBox">
+              <span id="imagePlaceholder">Your image will appear here</span>
+              <img id="cardImage" alt="Open Graph preview image" />
+            </div>
+
+            <div class="card-body">
+              <div id="cardDomain" class="card-domain">example.com</div>
+              <div id="cardTitle" class="card-title">Your page title</div>
+              <div id="cardDescription" class="card-description">
+                Your page description will appear here as you type.
+              </div>
+            </div>
+          </div>
+
+          <p class="platform-note">
+            Previews are approximate. Platforms change their card designs over
+            time.
+          </p>
+        </div>
+
+        <h3 class="section-title">Checks</h3>
+
+        <div id="checks" class="checks"></div>
+
+        <div class="code-header">
+          <h3>Your meta tags</h3>
+          <button id="copyButton" class="copy-button" type="button">
+            Copy tags
+          </button>
+        </div>
+
+        <textarea
+          id="codeOutput"
+          class="code-output"
+          readonly
+          aria-label="Generated Open Graph meta tags"
+        ></textarea>
+      </div>
+
+      <a href="../index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>What are Open Graph tags?</summary>
+        <p>
+          Open Graph tags are meta tags in your page's HTML that control the
+          title, description and image shown when your link is shared on
+          platforms like Facebook, LinkedIn and Slack.
+        </p>
+      </details>
+
+      <details>
+        <summary>What is the best Open Graph image size?</summary>
+        <p>
+          A size of 1200 by 630 pixels (about a 1.91 to 1 ratio) works well
+          across most platforms. Use a JPG or PNG, and keep important content
+          away from the edges because some platforms crop.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do Open Graph tags affect SEO rankings?</summary>
+        <p>
+          Not directly. They don't act as a Google ranking factor, but a good
+          preview card can increase clicks and shares, which brings more
+          visitors to your page.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Why is my old preview still showing after I changed my tags?
+        </summary>
+        <p>
+          Platforms cache previews. You can refresh them with Facebook's
+          Sharing Debugger or LinkedIn's Post Inspector. Other platforms may
+          take time to update.
+        </p>
+      </details>
+
+      <details>
+        <summary>Is this preview exactly what each platform will show?</summary>
+        <p>
+          It's an approximation. Platforms change their card designs and
+          cropping over time, so use this to catch problems early and confirm
+          with each platform's own debugger.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool store my information?</summary>
+        <p>
+          No. Everything runs in your browser and nothing is saved. If you
+          enter an image URL, your browser loads that image directly from its
+          host to show the preview.
+        </p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="../script.js"></script>
+
+    <script>
+      const ogTitle = document.getElementById("ogTitle");
+      const ogDescription = document.getElementById("ogDescription");
+      const ogImage = document.getElementById("ogImage");
+      const ogUrl = document.getElementById("ogUrl");
+      const ogSiteName = document.getElementById("ogSiteName");
+
+      const shareCard = document.getElementById("shareCard");
+      const cardImage = document.getElementById("cardImage");
+      const imagePlaceholder = document.getElementById("imagePlaceholder");
+      const cardDomain = document.getElementById("cardDomain");
+      const cardTitle = document.getElementById("cardTitle");
+      const cardDescription = document.getElementById("cardDescription");
+
+      const checksContainer = document.getElementById("checks");
+      const codeOutput = document.getElementById("codeOutput");
+      const copyButton = document.getElementById("copyButton");
+      const tabButtons = document.querySelectorAll(".tab-button");
+
+      let imageState = { status: "none", width: 0, height: 0 };
+      let lastImageUrl = "";
+
+      [ogTitle, ogDescription, ogUrl, ogSiteName].forEach((el) =>
+        el.addEventListener("input", update),
+      );
+      ogImage.addEventListener("input", onImageChange);
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((b) => {
+            b.classList.remove("active");
+            b.setAttribute("aria-selected", "false");
+          });
+
+          button.classList.add("active");
+          button.setAttribute("aria-selected", "true");
+
+          shareCard.className = "share-card " + button.dataset.platform;
+          update();
+        });
+      });
+
+      copyButton.addEventListener("click", copyTags);
+
+      function getDomain() {
+        const siteName = ogSiteName.value.trim();
+        const url = ogUrl.value.trim();
+
+        let host = "";
+
+        try {
+          host = new URL(url).hostname.replace(/^www\./, "");
+        } catch {
+          host = "";
+        }
+
+        return host || siteName || "example.com";
+      }
+
+      function onImageChange() {
+        const url = ogImage.value.trim();
+
+        if (url === lastImageUrl) {
+          return;
+        }
+
+        lastImageUrl = url;
+
+        if (!url) {
+          imageState = { status: "none", width: 0, height: 0 };
+          cardImage.style.display = "none";
+          cardImage.removeAttribute("src");
+          imagePlaceholder.style.display = "block";
+          imagePlaceholder.textContent = "Your image will appear here";
+          update();
+          return;
+        }
+
+        let valid = true;
+
+        try {
+          const parsed = new URL(url);
+          valid = parsed.protocol === "https:" || parsed.protocol === "http:";
+        } catch {
+          valid = false;
+        }
+
+        if (!valid) {
+          imageState = { status: "invalid", width: 0, height: 0 };
+          cardImage.style.display = "none";
+          imagePlaceholder.style.display = "block";
+          imagePlaceholder.textContent = "Enter a full image URL";
+          update();
+          return;
+        }
+
+        imageState = { status: "loading", width: 0, height: 0 };
+        imagePlaceholder.style.display = "block";
+        imagePlaceholder.textContent = "Loading image...";
+        cardImage.style.display = "none";
+
+        const requested = url;
+
+        cardImage.onload = () => {
+          if (requested !== lastImageUrl) {
+            return;
+          }
+
+          imageState = {
+            status: "loaded",
+            width: cardImage.naturalWidth,
+            height: cardImage.naturalHeight,
+          };
+
+          cardImage.style.display = "block";
+          imagePlaceholder.style.display = "none";
+          update();
+        };
+
+        cardImage.onerror = () => {
+          if (requested !== lastImageUrl) {
+            return;
+          }
+
+          imageState = { status: "error", width: 0, height: 0 };
+          cardImage.style.display = "none";
+          imagePlaceholder.style.display = "block";
+          imagePlaceholder.textContent =
+            "Image could not be loaded. Check the URL.";
+          update();
+        };
+
+        cardImage.src = url;
+        update();
+      }
+
+      function update() {
+        const title = ogTitle.value.trim();
+        const description = ogDescription.value.trim();
+
+        cardDomain.textContent = getDomain();
+        cardTitle.textContent = title || "Your page title";
+        cardDescription.textContent =
+          description || "Your page description will appear here as you type.";
+
+        renderChecks(title, description);
+        renderCode(title, description);
+      }
+
+      function renderChecks(title, description) {
+        const checks = [];
+
+        // Title
+        if (!title) {
+          checks.push({
+            name: "og:title",
+            status: "missing",
+            note: "Add a title. It's the headline of your share card.",
+          });
+        } else if (title.length < 30 || title.length > 60) {
+          checks.push({
+            name: "og:title",
+            status: "warning",
+            note:
+              title.length +
+              " characters. Around 30–60 characters usually displays well without being cut off.",
+          });
+        } else {
+          checks.push({
+            name: "og:title",
+            status: "pass",
+            note: title.length + " characters. Good length.",
+          });
+        }
+
+        // Description
+        if (!description) {
+          checks.push({
+            name: "og:description",
+            status: "missing",
+            note: "Add a short description to support your title.",
+          });
+        } else if (description.length < 60 || description.length > 160) {
+          checks.push({
+            name: "og:description",
+            status: "warning",
+            note:
+              description.length +
+              " characters. Around 60–160 characters is a good target; longer text is often cut off.",
+          });
+        } else {
+          checks.push({
+            name: "og:description",
+            status: "pass",
+            note: description.length + " characters. Good length.",
+          });
+        }
+
+        // Image
+        checks.push(imageCheck());
+
+        // URL
+        const url = ogUrl.value.trim();
+        let urlValid = false;
+
+        try {
+          new URL(url);
+          urlValid = true;
+        } catch {
+          urlValid = false;
+        }
+
+        if (!url) {
+          checks.push({
+            name: "og:url",
+            status: "missing",
+            note: "Add the page's full, preferred URL.",
+          });
+        } else if (!urlValid) {
+          checks.push({
+            name: "og:url",
+            status: "warning",
+            note: "This doesn't look like a full URL. Include https://.",
+          });
+        } else {
+          checks.push({
+            name: "og:url",
+            status: "pass",
+            note: "URL looks valid.",
+          });
+        }
+
+        checksContainer.innerHTML = "";
+
+        checks.forEach((check) => {
+          const card = document.createElement("div");
+          card.className = "check-card " + check.status;
+
+          const label =
+            check.status === "pass"
+              ? "Pass"
+              : check.status === "warning"
+                ? "Warning"
+                : "Missing";
+
+          card.innerHTML = `
+            <div class="check-top">
+              <span class="check-name">${escapeHTML(check.name)}</span>
+              <span class="check-status">${label}</span>
+            </div>
+            <div class="check-note">${escapeHTML(check.note)}</div>
+          `;
+
+          checksContainer.appendChild(card);
+        });
+      }
+
+      function imageCheck() {
+        const name = "og:image";
+
+        switch (imageState.status) {
+          case "none":
+            return {
+              name,
+              status: "missing",
+              note: "Add an image. Links without one often look plain and get fewer clicks.",
+            };
+
+          case "invalid":
+            return {
+              name,
+              status: "warning",
+              note: "Enter a full image URL starting with https://.",
+            };
+
+          case "loading":
+            return { name, status: "warning", note: "Loading image..." };
+
+          case "error":
+            return {
+              name,
+              status: "warning",
+              note: "The image couldn't be loaded. Check that the URL is correct and publicly accessible.",
+            };
+
+          default: {
+            const { width, height } = imageState;
+            const ratio = width / height;
+            const size = width + " × " + height + " px.";
+
+            if (width < 600) {
+              return {
+                name,
+                status: "warning",
+                note:
+                  size +
+                  " This is small and may show as a small thumbnail card. Aim for 1200 × 630 px.",
+              };
+            }
+
+            if (ratio < 1.7 || ratio > 2.1) {
+              return {
+                name,
+                status: "warning",
+                note:
+                  size +
+                  " The shape differs from the recommended 1.91:1, so it may be cropped.",
+              };
+            }
+
+            return {
+              name,
+              status: "pass",
+              note: size + " Good size and shape for share cards.",
+            };
+          }
+        }
+      }
+
+      function escapeAttr(value) {
+        return value
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function renderCode(title, description) {
+        const image = ogImage.value.trim();
+        const url = ogUrl.value.trim();
+        const siteName = ogSiteName.value.trim();
+
+        const lines = [];
+
+        lines.push("<!-- Open Graph -->");
+        lines.push('<meta property="og:type" content="website" />');
+
+        if (url) {
+          lines.push(`<meta property="og:url" content="${escapeAttr(url)}" />`);
+        }
+
+        if (title) {
+          lines.push(
+            `<meta property="og:title" content="${escapeAttr(title)}" />`,
+          );
+        }
+
+        if (description) {
+          lines.push(
+            `<meta property="og:description" content="${escapeAttr(description)}" />`,
+          );
+        }
+
+        if (image) {
+          lines.push(
+            `<meta property="og:image" content="${escapeAttr(image)}" />`,
+          );
+        }
+
+        if (siteName) {
+          lines.push(
+            `<meta property="og:site_name" content="${escapeAttr(siteName)}" />`,
+          );
+        }
+
+        lines.push("");
+        lines.push("<!-- X (Twitter) -->");
+        lines.push('<meta name="twitter:card" content="summary_large_image" />');
+
+        if (title) {
+          lines.push(
+            `<meta name="twitter:title" content="${escapeAttr(title)}" />`,
+          );
+        }
+
+        if (description) {
+          lines.push(
+            `<meta name="twitter:description" content="${escapeAttr(description)}" />`,
+          );
+        }
+
+        if (image) {
+          lines.push(
+            `<meta name="twitter:image" content="${escapeAttr(image)}" />`,
+          );
+        }
+
+        codeOutput.value = lines.join("\n");
+      }
+
+      async function copyTags() {
+        const text = codeOutput.value;
+
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          codeOutput.select();
+          document.execCommand("copy");
+        }
+
+        copyButton.textContent = "Copied!";
+
+        setTimeout(() => {
+          copyButton.textContent = "Copy tags";
+        }, 1800);
+      }
+
+      function escapeHTML(value) {
+        const div = document.createElement("div");
+        div.textContent = value;
+        return div.innerHTML;
+      }
+
+      update();
+    </script>
+  </body>
+</html>

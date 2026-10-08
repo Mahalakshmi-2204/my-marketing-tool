@@ -278,6 +278,70 @@
         font-weight: 700;
       }
 
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
       @media (max-width: 600px) {
         .url-row {
           flex-direction: column;
@@ -292,10 +356,77 @@
         }
       }
     </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does this tool actually check?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It checks the title tag, meta description, canonical URL, viewport, robots directive, Open Graph tags and Twitter Card tags, which control how a page appears in search results and social previews."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does title length matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Google truncates titles that are too long, so keep them to roughly 30 to 60 characters. Titles that are too short waste space you could use for keywords."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the ideal meta description length?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Roughly 70 to 160 characters. Shorter descriptions give searchers too little context; longer ones get truncated in the search snippet."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do Open Graph and Twitter tags matter if I don't run ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They control the preview card shown when your link is shared on LinkedIn, Facebook, Slack or X. Without them, platforms guess the image and description, which often looks broken."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool store my URL or HTML?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We don't store anything. Pasted HTML is analyzed entirely in your browser. When you enter a URL, the page is fetched through a third-party proxy service, so the URL is sent to that service."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this really free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. No account, no paywall and no limit on how many pages you check."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why didn't the URL checker work on my site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Browsers block a page from reading another site's HTML unless that site allows it (CORS), and some sites also block proxy requests. Use the Paste HTML option as a reliable fallback."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>
     <div id="header"></div>
+
     <main class="tool-page">
       <div class="tool-header">
         <span class="section-label"> FREE SEO TOOL </span>
@@ -358,6 +489,80 @@
 
       <a href="../index.html" class="back-link"> ← Back to GrowthKit </a>
     </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>What does this tool actually check?</summary>
+        <p>
+          It looks at the tags that control how a page shows up in Google search
+          results and when it's shared on social media: the &lt;title&gt; tag,
+          meta description, canonical URL, viewport, robots directive, Open
+          Graph tags (used by Facebook, LinkedIn and most link previews) and
+          Twitter Card tags.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why does title length matter?</summary>
+        <p>
+          Google truncates titles that are too long, so keep them to roughly 30
+          to 60 characters. A title that's too short wastes an opportunity to
+          include keywords; one that's too long gets cut off in search results,
+          so we flag both cases.
+        </p>
+      </details>
+
+      <details>
+        <summary>What's the ideal meta description length?</summary>
+        <p>
+          Roughly 70 to 160 characters. Shorter descriptions don't give
+          searchers enough context to click; longer ones get truncated in the
+          search snippet.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Why do Open Graph and Twitter tags matter if I don't run ads?
+        </summary>
+        <p>
+          These tags control the preview card people see when your link is
+          shared on LinkedIn, Facebook, Slack, or Twitter/X. Without them,
+          platforms fall back to guessing an image and description, which often
+          looks broken or unappealing.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool store my URL or HTML?</summary>
+        <p>
+          We don't store anything. Pasted HTML is analyzed entirely in your
+          browser. When you enter a URL, the page is fetched through a
+          third-party proxy service, so the URL is sent to that service.
+        </p>
+      </details>
+
+      <details>
+        <summary>Is this really free?</summary>
+        <p>
+          Yes, no account, no paywall, no limit on how many pages you check.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why didn't the URL checker work on my site?</summary>
+        <p>
+          Browsers block a page from reading another site's raw HTML unless that
+          site explicitly allows it (a security rule called CORS), and some
+          sites also block proxy requests. That's why the "Paste HTML" option
+          exists as a reliable fallback: view source on the page and paste it
+          in.
+        </p>
+      </details>
+    </section>
+
     <div id="footer"></div>
 
     <script src="../script.js"></script>
@@ -365,14 +570,11 @@
     <script>
       async function checkURL() {
         const input = document.getElementById("urlInput");
-
         const button = document.getElementById("checkButton");
-
         const url = input.value.trim();
 
         if (!url) {
           setStatus("Please enter a webpage URL.", true);
-
           return;
         }
 
@@ -380,13 +582,11 @@
           new URL(url);
         } catch {
           setStatus("Please enter a valid URL.", true);
-
           return;
         }
 
         button.disabled = true;
         button.textContent = "Checking...";
-
         setStatus("Fetching webpage...");
 
         try {
@@ -402,7 +602,6 @@
           const html = await response.text();
 
           analyzeHTML(html, url);
-
           setStatus("Analysis completed.");
         } catch (error) {
           setStatus(
@@ -424,12 +623,10 @@
 
         if (!html) {
           setStatus("Please paste HTML source first.", true);
-
           return;
         }
 
         analyzeHTML(html, "Pasted HTML");
-
         setStatus("HTML source analyzed successfully.");
       }
 
@@ -437,7 +634,6 @@
         const element = document.getElementById("statusMessage");
 
         element.textContent = message;
-
         element.className = error ? "status-message error" : "status-message";
       }
 
@@ -453,7 +649,6 @@
 
       function analyzeHTML(html, source) {
         const parser = new DOMParser();
-
         const documentObject = parser.parseFromString(html, "text/html");
 
         const title =
@@ -468,30 +663,24 @@
             ?.trim() || null;
 
         const robots = getMeta(documentObject, 'meta[name="robots"]');
-
         const viewport = getMeta(documentObject, 'meta[name="viewport"]');
 
         const ogTitle = getMeta(documentObject, 'meta[property="og:title"]');
-
         const ogDescription = getMeta(
           documentObject,
           'meta[property="og:description"]',
         );
-
         const ogImage = getMeta(documentObject, 'meta[property="og:image"]');
-
         const ogType = getMeta(documentObject, 'meta[property="og:type"]');
 
         const twitterCard = getMeta(
           documentObject,
           'meta[name="twitter:card"]',
         );
-
         const twitterTitle = getMeta(
           documentObject,
           'meta[name="twitter:title"]',
         );
-
         const twitterImage = getMeta(
           documentObject,
           'meta[name="twitter:image"]',
@@ -582,11 +771,9 @@
         checks.push(existsCheck("Twitter Image", twitterImage));
 
         const passed = checks.filter((item) => item.status === "pass").length;
-
         const score = Math.round((passed / checks.length) * 100);
 
         displayScore(score, passed, checks.length, source);
-
         displayResults(checks);
       }
 
@@ -694,40 +881,23 @@
           }
 
           card.innerHTML = `
-
             <div class="result-top">
-
-                <span class="result-name">
-                    ${escapeHTML(check.name)}
-                </span>
-
-                <span class="result-status">
-                    ${statusText}
-                </span>
-
+              <span class="result-name">${escapeHTML(check.name)}</span>
+              <span class="result-status">${statusText}</span>
             </div>
 
             ${
               check.value
-                ? `
-                    <div class="result-value">
-                        ${escapeHTML(check.value)}
-                    </div>
-                    `
+                ? `<div class="result-value">${escapeHTML(check.value)}</div>`
                 : ""
             }
 
             ${
               check.note
-                ? `
-                    <div class="result-note">
-                        ${escapeHTML(check.note)}
-                    </div>
-                    `
+                ? `<div class="result-note">${escapeHTML(check.note)}</div>`
                 : ""
             }
-
-        `;
+          `;
 
           container.appendChild(card);
         });
