@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
+    <meta
+      name="description"
+      content="Free Word Counter. Count words, characters, sentences and paragraphs instantly, see reading time and check your text against common length limits."
+    />
+
+    <title>Free Word Counter | GrowthKit</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .content-input {
+        width: 100%;
+        min-height: 260px;
+        padding: 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 15px;
+        line-height: 1.7;
+        resize: vertical;
+        outline: none;
+      }
+
+      .content-input:focus {
+        border-color: var(--primary);
+      }
+
+      .live-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .live-count {
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
+
+      .live-count strong {
+        color: var(--text);
+      }
+
+      .small-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .small-button {
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .small-button:hover {
+        border-color: var(--primary);
+      }
+
+      .small-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .section-title {
+        margin: 30px 0 14px;
+        font-size: 16px;
+      }
+
+      /* ---------- Stats ---------- */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .stat {
+        padding: 16px 10px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--primary);
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .stat span {
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      /* ---------- Limits ---------- */
+      .limits {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .limit-card {
+        padding: 14px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+
+      .limit-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 9px;
+      }
+
+      .limit-name {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .limit-name small {
+        margin-left: 6px;
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .limit-numbers {
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .limit-card.over .limit-numbers {
+        color: #a8503f;
+        font-weight: 700;
+      }
+
+      .limit-track {
+        height: 8px;
+        overflow: hidden;
+        background: var(--card);
+        border-radius: 20px;
+      }
+
+      .limit-fill {
+        width: 0;
+        height: 100%;
+        background: var(--primary);
+        border-radius: 20px;
+        transition: width 0.2s ease;
+      }
+
+      .limit-card.over .limit-fill {
+        background: #a8503f;
+      }
+
+      .note {
+        margin-top: 12px;
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
+      @media (max-width: 700px) {
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 20px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .limit-fill {
+          transition: none;
+        }
+      }
+    </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does this word counter count words?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It counts any group of characters separated by spaces or line breaks as one word. A hyphenated word like well-known counts as one word."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between characters with and without spaces?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Characters with spaces counts every character including spaces and line breaks. Characters without spaces leaves out all spaces and line breaks. Different platforms use different rules, so check which one your limit refers to."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is reading time calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Reading time assumes about 238 words per minute, a commonly cited average for adults reading silently. Speaking time assumes about 130 words per minute. Real speeds vary from person to person."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do sentences and paragraphs get counted?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sentences are counted by full stops, question marks and exclamation marks. Paragraphs are counted as lines of text separated by a line break. Abbreviations like Dr. can make the sentence count slightly high."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long should a blog post be?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no required length for SEO. Write as many words as it takes to cover the topic well and answer what the reader came for, and no more."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool store my text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The counting runs entirely in your browser, and nothing you type or paste is sent to a server or saved."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE WRITING TOOL </span>
+
+        <h1>Word <span>Counter</span></h1>
+
+        <p>
+          Count words, characters, sentences and paragraphs as you type. See
+          your reading time and check your text against common length limits.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <label for="contentInput"> Type or paste your text </label>
+
+        <textarea
+          id="contentInput"
+          class="content-input"
+          placeholder="Start typing or paste your text here..."
+        ></textarea>
+
+        <div class="live-row">
+          <span class="live-count">
+            <strong id="liveWords">0</strong> words &middot;
+            <strong id="liveChars">0</strong> characters
+          </span>
+
+          <div class="small-buttons">
+            <button id="sampleButton" class="small-button" type="button">
+              Try sample text
+            </button>
+            <button id="clearButton" class="small-button" type="button">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <h3 class="section-title">Details</h3>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="statWords">0</strong>
+            <span>Words</span>
+          </div>
+          <div class="stat">
+            <strong id="statChars">0</strong>
+            <span>Characters</span>
+          </div>
+          <div class="stat">
+            <strong id="statCharsNoSpaces">0</strong>
+            <span>Without spaces</span>
+          </div>
+          <div class="stat">
+            <strong id="statSentences">0</strong>
+            <span>Sentences</span>
+          </div>
+          <div class="stat">
+            <strong id="statParagraphs">0</strong>
+            <span>Paragraphs</span>
+          </div>
+          <div class="stat">
+            <strong id="statAvgWords">0</strong>
+            <span>Words per sentence</span>
+          </div>
+          <div class="stat">
+            <strong id="statReading">0 sec</strong>
+            <span>Reading time</span>
+          </div>
+          <div class="stat">
+            <strong id="statSpeaking">0 sec</strong>
+            <span>Speaking time</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">Common length limits</h3>
+
+        <div id="limits" class="limits"></div>
+
+        <p class="note">
+          Characters are counted with spaces. SEO lengths are guidelines, not
+          strict rules. Platform limits are for standard accounts and can
+          change.
+        </p>
+      </div>
+
+      <a href="../index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>How does this word counter count words?</summary>
+        <p>
+          It counts any group of characters separated by spaces or line breaks
+          as one word. A hyphenated word like "well-known" counts as one word.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          What is the difference between characters with and without spaces?
+        </summary>
+        <p>
+          Characters with spaces counts every character including spaces and
+          line breaks. Characters without spaces leaves out all spaces and line
+          breaks. Different platforms use different rules, so check which one
+          your limit refers to.
+        </p>
+      </details>
+
+      <details>
+        <summary>How is reading time calculated?</summary>
+        <p>
+          Reading time assumes about 238 words per minute, a commonly cited
+          average for adults reading silently. Speaking time assumes about 130
+          words per minute. Real speeds vary from person to person.
+        </p>
+      </details>
+
+      <details>
+        <summary>How do sentences and paragraphs get counted?</summary>
+        <p>
+          Sentences are counted by full stops, question marks and exclamation
+          marks. Paragraphs are counted as lines of text separated by a line
+          break. Abbreviations like "Dr." can make the sentence count slightly
+          high.
+        </p>
+      </details>
+
+      <details>
+        <summary>How long should a blog post be?</summary>
+        <p>
+          There is no required length for SEO. Write as many words as it takes
+          to cover the topic well and answer what the reader came for, and no
+          more.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool store my text?</summary>
+        <p>
+          No. The counting runs entirely in your browser, and nothing you type
+          or paste is sent to a server or saved.
+        </p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="../script.js"></script>
+
+    <script>
+      const READING_WPM = 238;
+      const SPEAKING_WPM = 130;
+
+      const LIMITS = [
+        { name: "SEO title", note: "guideline", max: 60 },
+        { name: "Meta description", note: "guideline", max: 160 },
+        { name: "X (Twitter) post", note: "standard", max: 280 },
+        { name: "Instagram caption", note: "", max: 2200 },
+        { name: "LinkedIn post", note: "", max: 3000 },
+      ];
+
+      const SAMPLE_TEXT =
+        "Good writing is clear, honest and easy to follow. Start with the main point, then support it with a few " +
+        "well-chosen details.\n\nShort sentences help. So do short paragraphs! Ask yourself what the reader " +
+        "wants to know, and answer that first. Then read your draft out loud to catch anything that sounds awkward.";
+
+      const contentInput = document.getElementById("contentInput");
+      const limitsContainer = document.getElementById("limits");
+
+      const limitElements = LIMITS.map((limit) => {
+        const card = document.createElement("div");
+        card.className = "limit-card";
+
+        const top = document.createElement("div");
+        top.className = "limit-top";
+
+        const name = document.createElement("span");
+        name.className = "limit-name";
+        name.textContent = limit.name;
+
+        if (limit.note) {
+          const small = document.createElement("small");
+          small.textContent = limit.note;
+          name.appendChild(small);
+        }
+
+        const numbers = document.createElement("span");
+        numbers.className = "limit-numbers";
+
+        top.append(name, numbers);
+
+        const track = document.createElement("div");
+        track.className = "limit-track";
+
+        const fill = document.createElement("div");
+        fill.className = "limit-fill";
+
+        track.appendChild(fill);
+        card.append(top, track);
+        limitsContainer.appendChild(card);
+
+        return { card, numbers, fill, max: limit.max };
+      });
+
+      contentInput.addEventListener("input", analyze);
+
+      document.getElementById("sampleButton").addEventListener("click", () => {
+        contentInput.value = SAMPLE_TEXT;
+        analyze();
+      });
+
+      document.getElementById("clearButton").addEventListener("click", () => {
+        contentInput.value = "";
+        analyze();
+        contentInput.focus();
+      });
+
+      function formatNumber(value) {
+        return value.toLocaleString();
+      }
+
+      function formatTime(words, wordsPerMinute) {
+        if (words === 0) {
+          return "0 sec";
+        }
+
+        const totalSeconds = Math.round((words / wordsPerMinute) * 60);
+
+        if (totalSeconds < 60) {
+          return Math.max(1, totalSeconds) + " sec";
+        }
+
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+
+        return seconds === 0
+          ? minutes + " min"
+          : minutes + " min " + seconds + " sec";
+      }
+
+      function analyze() {
+        const text = contentInput.value;
+
+        const wordMatches = text.trim().match(/\S+/g);
+        const words = wordMatches ? wordMatches.length : 0;
+
+        const characters = Array.from(text).length;
+        const charactersNoSpaces = Array.from(text.replace(/\s/g, "")).length;
+
+        const sentences = text
+          .split(/[.!?\u2026]+(?=\s|$)/)
+          .filter((part) => part.trim().length > 0).length;
+
+        const paragraphs = text
+          .split(/\n+/)
+          .filter((part) => part.trim().length > 0).length;
+
+        const wordsPerSentence = sentences ? Math.round(words / sentences) : 0;
+
+        document.getElementById("liveWords").textContent = formatNumber(words);
+        document.getElementById("liveChars").textContent =
+          formatNumber(characters);
+
+        document.getElementById("statWords").textContent = formatNumber(words);
+        document.getElementById("statChars").textContent =
+          formatNumber(characters);
+        document.getElementById("statCharsNoSpaces").textContent =
+          formatNumber(charactersNoSpaces);
+        document.getElementById("statSentences").textContent =
+          formatNumber(sentences);
+        document.getElementById("statParagraphs").textContent =
+          formatNumber(paragraphs);
+        document.getElementById("statAvgWords").textContent =
+          formatNumber(wordsPerSentence);
+        document.getElementById("statReading").textContent = formatTime(
+          words,
+          READING_WPM,
+        );
+        document.getElementById("statSpeaking").textContent = formatTime(
+          words,
+          SPEAKING_WPM,
+        );
+
+        limitElements.forEach((item) => {
+          const over = characters > item.max;
+          const percent = Math.min((characters / item.max) * 100, 100);
+
+          item.fill.style.width = percent + "%";
+          item.card.classList.toggle("over", over);
+
+          item.numbers.textContent = over
+            ? formatNumber(characters) +
+              " / " +
+              formatNumber(item.max) +
+              " (" +
+              formatNumber(characters - item.max) +
+              " over)"
+            : formatNumber(characters) + " / " + formatNumber(item.max);
+        });
+      }
+
+      analyze();
+    </script>
+  </body>
+</html>

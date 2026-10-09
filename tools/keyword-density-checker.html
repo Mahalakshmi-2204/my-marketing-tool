@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
+    <meta
+      name="description"
+      content="Free Keyword Density Checker. Paste your text to see word count, your most-used words and phrases, and the density of your target keyword."
+    />
+
+    <title>Free Keyword Density Checker | GrowthKit</title>
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .field + .field {
+        margin-top: 18px;
+      }
+
+      .optional {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .text-input,
+      .content-input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .content-input {
+        min-height: 220px;
+        line-height: 1.6;
+        resize: vertical;
+      }
+
+      .text-input:focus,
+      .content-input:focus {
+        border-color: var(--primary);
+      }
+
+      .actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .option {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        cursor: pointer;
+      }
+
+      .option input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+
+      .small-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .small-button {
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .small-button:hover {
+        border-color: var(--primary);
+      }
+
+      .section-title {
+        margin: 30px 0 14px;
+        font-size: 16px;
+      }
+
+      /* ---------- Stats ---------- */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .stat {
+        padding: 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--primary);
+        font-size: 26px;
+        font-weight: 800;
+      }
+
+      .stat span {
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      /* ---------- Target keyword ---------- */
+      .target-box {
+        display: none;
+        margin-top: 24px;
+        padding: 22px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .status.good {
+        background: rgba(74, 124, 89, 0.12);
+        color: #4a7c59;
+      }
+
+      .status.warning {
+        background: rgba(184, 147, 90, 0.15);
+        color: #9a783e;
+      }
+
+      .status.bad {
+        background: rgba(168, 80, 63, 0.12);
+        color: #a8503f;
+      }
+
+      .target-box h3 {
+        margin-bottom: 7px;
+        font-size: 18px;
+      }
+
+      .target-numbers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+        margin: 10px 0;
+      }
+
+      .target-numbers div strong {
+        display: block;
+        color: var(--primary);
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .target-numbers div span {
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      .target-message {
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      /* ---------- Tabs + table ---------- */
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .tab-button {
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: var(--card);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .tab-button.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      .tab-button:focus-visible,
+      .small-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg);
+      }
+
+      .density-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      .density-table th,
+      .density-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .density-table th {
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .density-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .density-table td.num {
+        width: 80px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .density-table td.keyword {
+        font-weight: 600;
+        word-break: break-word;
+      }
+
+      .density-table td.bar-cell {
+        width: 36%;
+        min-width: 130px;
+      }
+
+      .bar-track {
+        height: 8px;
+        overflow: hidden;
+        background: var(--card);
+        border-radius: 20px;
+      }
+
+      .bar-fill {
+        height: 100%;
+        background: var(--primary);
+        border-radius: 20px;
+      }
+
+      .empty-message {
+        padding: 22px 16px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .formula-note {
+        margin-top: 12px;
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
+      @media (max-width: 700px) {
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 20px;
+        }
+
+        .density-table td.bar-cell,
+        .density-table th.bar-cell {
+          display: none;
+        }
+      }
+    </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is keyword density?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Keyword density is the percentage of your text taken up by a word or phrase. It is calculated by dividing the number of times the keyword appears by the total number of words, then multiplying by 100."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the ideal keyword density?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no ideal number, and Google has not published a target. Many writers use roughly 1 to 2 percent as a loose guide, but it is more important to write naturally and cover the topic well."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can too much keyword repetition hurt my rankings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Repeating a keyword unnaturally is called keyword stuffing, and Google's spam policies list it as a violation. It also makes your writing harder to read."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does ignore common words do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It hides everyday words like the, and, of and is from the results, so your real topic words and phrases stand out. Turn it off to count every word."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I use one keyword or related phrases?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use your main keyword where it fits naturally, plus related words and variations. The two-word and three-word tabs help you see which phrases you already use often."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool store my text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The analysis runs entirely in your browser, and nothing you paste is sent to a server or saved."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE SEO TOOL </span>
+
+        <h1>Keyword Density <span>Checker</span></h1>
+
+        <p>
+          Paste your content to see your word count, your most-used words and
+          phrases, and how often your target keyword appears.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <div class="field">
+          <label for="contentInput"> Paste your text </label>
+          <textarea
+            id="contentInput"
+            class="content-input"
+            placeholder="Paste your blog post, page copy or product description here..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="keywordInput">
+            Target keyword <span class="optional">(optional)</span>
+          </label>
+          <input
+            id="keywordInput"
+            class="text-input"
+            type="text"
+            maxlength="80"
+            placeholder="Example: meta description"
+          />
+        </div>
+
+        <div class="actions-row">
+          <label class="option" for="ignoreCommon">
+            <input id="ignoreCommon" type="checkbox" checked />
+            Ignore common words (the, and, of...)
+          </label>
+
+          <div class="small-buttons">
+            <button id="sampleButton" class="small-button" type="button">
+              Try sample text
+            </button>
+            <button id="clearButton" class="small-button" type="button">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="statWords">0</strong>
+            <span>Words</span>
+          </div>
+          <div class="stat">
+            <strong id="statUnique">0</strong>
+            <span>Unique words</span>
+          </div>
+          <div class="stat">
+            <strong id="statChars">0</strong>
+            <span>Characters</span>
+          </div>
+          <div class="stat">
+            <strong id="statTime">0</strong>
+            <span>Min to read</span>
+          </div>
+        </div>
+
+        <div id="targetBox" class="target-box">
+          <span id="targetStatus" class="status"></span>
+
+          <h3 id="targetTitle">Target keyword</h3>
+
+          <div class="target-numbers">
+            <div>
+              <strong id="targetCount">0</strong>
+              <span>Times used</span>
+            </div>
+            <div>
+              <strong id="targetDensity">0%</strong>
+              <span>Density</span>
+            </div>
+          </div>
+
+          <p id="targetMessage" class="target-message"></p>
+        </div>
+
+        <h3 class="section-title">Most used words and phrases</h3>
+
+        <div class="tabs" role="tablist" aria-label="Phrase length">
+          <button
+            class="tab-button active"
+            role="tab"
+            aria-selected="true"
+            data-size="1"
+          >
+            1 word
+          </button>
+          <button
+            class="tab-button"
+            role="tab"
+            aria-selected="false"
+            data-size="2"
+          >
+            2 words
+          </button>
+          <button
+            class="tab-button"
+            role="tab"
+            aria-selected="false"
+            data-size="3"
+          >
+            3 words
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="density-table">
+            <thead>
+              <tr>
+                <th>Keyword</th>
+                <th>Count</th>
+                <th>Density</th>
+                <th class="bar-cell"></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+        <p class="formula-note">
+          Density = times used &divide; total words &times; 100. Only words and
+          phrases used at least twice are listed.
+        </p>
+      </div>
+
+      <a href="../index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>What is keyword density?</summary>
+        <p>
+          Keyword density is the percentage of your text taken up by a word or
+          phrase. It is calculated by dividing the number of times the keyword
+          appears by the total number of words, then multiplying by 100.
+        </p>
+      </details>
+
+      <details>
+        <summary>What is the ideal keyword density?</summary>
+        <p>
+          There is no ideal number, and Google has not published a target. Many
+          writers use roughly 1 to 2 percent as a loose guide, but it is more
+          important to write naturally and cover the topic well.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can too much keyword repetition hurt my rankings?</summary>
+        <p>
+          Yes. Repeating a keyword unnaturally is called keyword stuffing, and
+          Google's spam policies list it as a violation. It also makes your
+          writing harder to read.
+        </p>
+      </details>
+
+      <details>
+        <summary>What does "ignore common words" do?</summary>
+        <p>
+          It hides everyday words like the, and, of and is from the results, so
+          your real topic words and phrases stand out. Turn it off to count
+          every word.
+        </p>
+      </details>
+
+      <details>
+        <summary>Should I use one keyword or related phrases?</summary>
+        <p>
+          Use your main keyword where it fits naturally, plus related words and
+          variations. The two-word and three-word tabs help you see which
+          phrases you already use often.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool store my text?</summary>
+        <p>
+          No. The analysis runs entirely in your browser, and nothing you paste
+          is sent to a server or saved.
+        </p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="../script.js"></script>
+
+    <script>
+      const STOP_WORDS = new Set(
+        (
+          "a about above after again against all also am an and any are aren't as at be because been before being " +
+          "below between both but by can can't cannot could couldn't did didn't do does doesn't doing don't down " +
+          "during each few for from further had hadn't has hasn't have haven't having he he'd he'll he's her here " +
+          "here's hers herself him himself his how how's i i'd i'll i'm i've if in into is isn't it it's its itself " +
+          "just let's me more most mustn't my myself no nor not of off on once only or other ought our ours " +
+          "ourselves out over own same shan't she she'd she'll she's should shouldn't so some such than that that's " +
+          "the their theirs them themselves then there there's these they they'd they'll they're they've this those " +
+          "through to too under until up very was wasn't we we'd we'll we're we've were weren't what what's when " +
+          "when's where where's which while who who's whom why why's will with won't would wouldn't you you'd " +
+          "you'll you're you've your yours yourself yourselves s t re ve ll d m"
+        ).split(" "),
+      );
+
+      const SAMPLE_TEXT =
+        "A meta description is a short summary of a web page. Search engines often show the meta description " +
+        "under the page title in search results. A good meta description tells searchers what the page offers " +
+        "and gives them a reason to click. Writing a clear meta description for every page can improve your " +
+        "click-through rate, even though the meta description is not a direct ranking factor. Keep each meta " +
+        "description unique, accurate and easy to read.";
+
+      const contentInput = document.getElementById("contentInput");
+      const keywordInput = document.getElementById("keywordInput");
+      const ignoreCommon = document.getElementById("ignoreCommon");
+      const tableBody = document.getElementById("tableBody");
+      const tabButtons = document.querySelectorAll(".tab-button");
+
+      let phraseSize = 1;
+
+      [contentInput, keywordInput].forEach((el) =>
+        el.addEventListener("input", analyze),
+      );
+      ignoreCommon.addEventListener("change", analyze);
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((b) => {
+            b.classList.remove("active");
+            b.setAttribute("aria-selected", "false");
+          });
+
+          button.classList.add("active");
+          button.setAttribute("aria-selected", "true");
+
+          phraseSize = Number(button.dataset.size);
+          analyze();
+        });
+      });
+
+      document.getElementById("sampleButton").addEventListener("click", () => {
+        contentInput.value = SAMPLE_TEXT;
+        keywordInput.value = "meta description";
+        analyze();
+      });
+
+      document.getElementById("clearButton").addEventListener("click", () => {
+        contentInput.value = "";
+        keywordInput.value = "";
+        analyze();
+      });
+
+      function tokenize(text) {
+        const matches = text
+          .toLowerCase()
+          .replace(/[\u2019]/g, "'")
+          .match(/[\p{L}\p{N}]+(?:'[\p{L}]+)?/gu);
+
+        return matches || [];
+      }
+
+      function formatPercent(value) {
+        return (Math.round(value * 100) / 100).toFixed(2) + "%";
+      }
+
+      function countPhrase(words, phrase) {
+        const n = phrase.length;
+        let count = 0;
+
+        for (let i = 0; i <= words.length - n; i++) {
+          let match = true;
+
+          for (let j = 0; j < n; j++) {
+            if (words[i + j] !== phrase[j]) {
+              match = false;
+              break;
+            }
+          }
+
+          if (match) {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      function getTop(words, size, skipCommon) {
+        const counts = new Map();
+
+        for (let i = 0; i <= words.length - size; i++) {
+          const parts = words.slice(i, i + size);
+
+          if (skipCommon) {
+            const first = parts[0];
+            const last = parts[parts.length - 1];
+
+            if (STOP_WORDS.has(first) || STOP_WORDS.has(last)) {
+              continue;
+            }
+          }
+
+          const key = parts.join(" ");
+          counts.set(key, (counts.get(key) || 0) + 1);
+        }
+
+        return Array.from(counts.entries())
+          .filter(([, count]) => count >= 2)
+          .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+          .slice(0, 15);
+      }
+
+      function analyze() {
+        const text = contentInput.value;
+        const words = tokenize(text);
+        const total = words.length;
+
+        document.getElementById("statWords").textContent = total;
+        document.getElementById("statUnique").textContent = new Set(words).size;
+        document.getElementById("statChars").textContent = text.length;
+        document.getElementById("statTime").textContent = total
+          ? Math.max(1, Math.round(total / 200))
+          : 0;
+
+        renderTarget(words, total);
+        renderTable(words, total);
+      }
+
+      function renderTarget(words, total) {
+        const box = document.getElementById("targetBox");
+        const phrase = tokenize(keywordInput.value);
+
+        if (phrase.length === 0 || total === 0) {
+          box.style.display = "none";
+          return;
+        }
+
+        const count = countPhrase(words, phrase);
+        const density = (count / total) * 100;
+        const label = phrase.join(" ");
+
+        document.getElementById("targetTitle").textContent =
+          "Keyword: " + label;
+        document.getElementById("targetCount").textContent = count;
+        document.getElementById("targetDensity").textContent =
+          formatPercent(density);
+
+        const status = document.getElementById("targetStatus");
+        const message = document.getElementById("targetMessage");
+
+        if (count === 0) {
+          status.textContent = "Not found";
+          status.className = "status bad";
+          message.textContent =
+            "This keyword doesn't appear in your text. If it's your main topic, consider using it naturally in the content.";
+        } else if (density > 3) {
+          status.textContent = "Very high";
+          status.className = "status warning";
+          message.textContent =
+            "This keyword makes up a large share of your text and may read as repetitive or keyword stuffing. Try varying your wording.";
+        } else if (density < 0.5) {
+          status.textContent = "Low";
+          status.className = "status warning";
+          message.textContent =
+            "This keyword is used lightly. That's fine if the content still clearly covers the topic, but check that it appears where it fits naturally, such as the intro or a heading.";
+        } else {
+          status.textContent = "Looks natural";
+          status.className = "status good";
+          message.textContent =
+            "Your usage falls in a range many writers consider natural. There's no official target, so prioritize clear, helpful writing.";
+        }
+
+        box.style.display = "block";
+      }
+
+      function renderTable(words, total) {
+        tableBody.innerHTML = "";
+
+        if (total === 0) {
+          addEmptyRow("Paste some text above to see your results.");
+          return;
+        }
+
+        const rows = getTop(words, phraseSize, ignoreCommon.checked);
+
+        if (rows.length === 0) {
+          addEmptyRow(
+            "No repeated " +
+              (phraseSize === 1 ? "words" : "phrases") +
+              " found yet. Try more text or a different tab.",
+          );
+          return;
+        }
+
+        const maxCount = rows[0][1];
+
+        rows.forEach(([keyword, count]) => {
+          const density = (count / total) * 100;
+          const tr = document.createElement("tr");
+
+          const keywordCell = document.createElement("td");
+          keywordCell.className = "keyword";
+          keywordCell.textContent = keyword;
+
+          const countCell = document.createElement("td");
+          countCell.className = "num";
+          countCell.textContent = count;
+
+          const densityCell = document.createElement("td");
+          densityCell.className = "num";
+          densityCell.textContent = formatPercent(density);
+
+          const barCell = document.createElement("td");
+          barCell.className = "bar-cell";
+
+          const track = document.createElement("div");
+          track.className = "bar-track";
+
+          const fill = document.createElement("div");
+          fill.className = "bar-fill";
+          fill.style.width = (count / maxCount) * 100 + "%";
+
+          track.appendChild(fill);
+          barCell.appendChild(track);
+
+          tr.append(keywordCell, countCell, densityCell, barCell);
+          tableBody.appendChild(tr);
+        });
+      }
+
+      function addEmptyRow(message) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+
+        td.colSpan = 4;
+        td.className = "empty-message";
+        td.textContent = message;
+
+        tr.appendChild(td);
+        tableBody.appendChild(tr);
+      }
+
+      analyze();
+    </script>
+  </body>
+</html>
