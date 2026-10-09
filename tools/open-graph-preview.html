@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
     <meta
       name="google-site-verification"
       content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
@@ -722,9 +730,9 @@
           Why is my old preview still showing after I changed my tags?
         </summary>
         <p>
-          Platforms cache previews. You can refresh them with Facebook's
-          Sharing Debugger or LinkedIn's Post Inspector. Other platforms may
-          take time to update.
+          Platforms cache previews. You can refresh them with Facebook's Sharing
+          Debugger or LinkedIn's Post Inspector. Other platforms may take time
+          to update.
         </p>
       </details>
 
@@ -740,9 +748,9 @@
       <details>
         <summary>Does this tool store my information?</summary>
         <p>
-          No. Everything runs in your browser and nothing is saved. If you
-          enter an image URL, your browser loads that image directly from its
-          host to show the preview.
+          No. Everything runs in your browser and nothing is saved. If you enter
+          an image URL, your browser loads that image directly from its host to
+          show the preview.
         </p>
       </details>
     </section>
@@ -1118,7 +1126,9 @@
 
         lines.push("");
         lines.push("<!-- X (Twitter) -->");
-        lines.push('<meta name="twitter:card" content="summary_large_image" />');
+        lines.push(
+          '<meta name="twitter:card" content="summary_large_image" />',
+        );
 
         if (title) {
           lines.push(
