@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>How to Write SEO-Friendly Blog Posts That Rank | GrowthKit</title>
+    <meta
+      name="description"
+      content="Learn a practical process for writing helpful SEO-friendly blog posts that match search intent and attract the right audience."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://YOUR-PROJECT.vercel.app/blog/seo-friendly-blog-posts.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="GrowthKit" />
+    <meta
+      property="og:title"
+      content="How to Write SEO-Friendly Blog Posts That Rank | GrowthKit"
+    />
+    <meta
+      property="og:description"
+      content="A practical guide to creating useful content that answers search intent."
+    />
+    <meta
+      property="og:url"
+      content="https://YOUR-PROJECT.vercel.app/blog/seo-friendly-blog-posts.html"
+    />
+    <meta
+      property="og:image"
+      content="https://YOUR-PROJECT.vercel.app/images/seo-blog-hero.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green: #00b85a;
+        --green-dark: #008c43;
+        --green-pale: #effaf3;
+        --ink: #101828;
+        --muted: #53627b;
+        --line: #e7edf0;
+        --surface: #f7faf8;
+        --white: #fff;
+        --shadow: 0 10px 30px rgba(16, 24, 40, 0.045);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+      }
+      body {
+        margin: 0;
+        background: #fff;
+        color: var(--ink);
+        font-family: Inter, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      .site-header {
+        height: 66px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.96);
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .nav-wrap {
+        width: min(1440px, 100%);
+        padding: 0 clamp(18px, 4vw, 56px);
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 38px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font-size: 23px;
+        font-weight: 800;
+        letter-spacing: -0.9px;
+        white-space: nowrap;
+      }
+      .brand-mark {
+        width: 27px;
+        height: 27px;
+        display: inline-block;
+        background: linear-gradient(135deg, #19d875, #008e48);
+        border-radius: 4px 11px 4px 4px;
+        transform: skew(-10deg);
+        position: relative;
+      }
+      .brand-mark:after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 30px;
+        left: 12px;
+        top: -2px;
+        background: #fff;
+        opacity: 0.75;
+        transform: rotate(42deg);
+      }
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-left: 32px;
+      }
+      .main-nav a {
+        text-decoration: none;
+        color: #34425d;
+        font-size: 13px;
+        padding: 25px 0;
+        position: relative;
+      }
+      .main-nav a:hover,
+      .main-nav a.active {
+        color: var(--green-dark);
+      }
+      .main-nav a.active {
+        font-weight: 700;
+      }
+      .main-nav a.active:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--green);
+        border-radius: 4px 4px 0 0;
+      }
+      .nav-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        background: #f5f7fa;
+        border: 1px solid #edf0f4;
+        border-radius: 30px;
+        padding: 10px 14px;
+        width: 230px;
+        color: #66758d;
+      }
+      .search-box input {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        width: 100%;
+        font: inherit;
+        font-size: 12px;
+        color: var(--ink);
+      }
+      .primary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        border: 0;
+        border-radius: 30px;
+        padding: 12px 20px;
+        font:
+          700 12px Inter,
+          Arial,
+          sans-serif;
+        cursor: pointer;
+        transition:
+          transform 0.18s,
+          background 0.18s;
+      }
+      .primary-btn:hover {
+        background: #009f4c;
+        transform: translateY(-1px);
+      }
+      .hero-band {
+        background:
+          radial-gradient(
+            ellipse at 60% 60%,
+            rgba(226, 250, 234, 0.75),
+            transparent 52%
+          ),
+          linear-gradient(100deg, #fbfdfc, #f8fcf9 60%, #fff);
+        border-bottom: 1px solid #f0f4f1;
+      }
+      .hero {
+        width: min(1440px, 100%);
+        margin: auto;
+        padding: 34px clamp(18px, 4vw, 56px) 30px;
+        display: grid;
+        grid-template-columns: minmax(0, 0.98fr) minmax(0, 1fr);
+        gap: clamp(28px, 4.5vw, 68px);
+        align-items: center;
+      }
+      .category {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 13px;
+        border-radius: 30px;
+        background: #e2f7ea;
+        color: #008842;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .hero h1 {
+        font-size: clamp(38px, 4.2vw, 62px);
+        line-height: 1.09;
+        letter-spacing: -2.6px;
+        margin: 17px 0 15px;
+        font-weight: 800;
+        max-width: 690px;
+      }
+      .hero-desc {
+        font-size: clamp(16px, 1.35vw, 19px);
+        line-height: 1.72;
+        color: #52627f;
+        max-width: 590px;
+        margin: 0;
+      }
+      .byline {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px 16px;
+        margin-top: 23px;
+        color: #344563;
+        font-size: 12px;
+      }
+      .author-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #16d777, #007d40);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 800;
+        font-size: 13px;
+      }
+      .meta-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .meta-dot {
+        color: #00a950;
+        font-size: 10px;
+      }
+      .hero-image-wrap {
+        position: relative;
+        min-width: 0;
+      }
+      .hero-image {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1.58;
+        object-fit: cover;
+        border-radius: 12px;
+        background: #eaf2ec;
+        box-shadow: 0 12px 34px rgba(21, 60, 36, 0.08);
+      }
+      .image-caption {
+        position: absolute;
+        left: 16px;
+        bottom: 14px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        padding: 8px 11px;
+        border-radius: 8px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #223a2c;
+        backdrop-filter: blur(8px);
+      }
+      .content-layout {
+        width: min(1440px, 100%);
+        margin: auto;
+        padding: 24px clamp(18px, 4vw, 56px) 70px;
+        display: grid;
+        grid-template-columns: minmax(190px, 260px) minmax(0, 1fr) minmax(
+            250px,
+            300px
+          );
+        gap: clamp(18px, 2vw, 28px);
+        align-items: start;
+      }
+      .left-sidebar,
+      .right-sidebar {
+        min-width: 0;
+      }
+      .sticky-stack {
+        position: sticky;
+        top: 86px;
+        display: grid;
+        gap: 18px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        padding: 18px;
+        background: #fff;
+      }
+      .panel-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 800;
+        margin: 0 0 14px;
+      }
+      .mini-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: inline-grid;
+        place-items: center;
+        background: #e5f9ec;
+        color: #00a650;
+        flex-shrink: 0;
+      }
+      .toc {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 3px;
+      }
+      .toc a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #52627e;
+        font-size: 12px;
+        line-height: 1.45;
+        padding: 8px;
+        border-radius: 7px;
+      }
+      .toc a:hover,
+      .toc a.active {
+        background: #eefaf2;
+        color: #008d43;
+      }
+      .toc-number {
+        width: 22px;
+        height: 22px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #edf1f5;
+        color: #52627e;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .toc a.active .toc-number {
+        background: var(--green);
+        color: white;
+      }
+      .tool-promo {
+        background: linear-gradient(145deg, #effaf3, #f7fcf8);
+        border-color: #e2f4e8;
+        padding: 20px;
+      }
+      .promo-symbol {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #d8f7e3;
+        color: #00a650;
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+      .tool-promo h3 {
+        font-size: 15px;
+        line-height: 1.5;
+        margin: 0 0 8px;
+      }
+      .tool-promo p {
+        font-size: 12px;
+        line-height: 1.75;
+        color: #536783;
+        margin: 0 0 15px;
+      }
+      .tool-promo .primary-btn {
+        border-radius: 7px;
+        padding: 12px 15px;
+        width: auto;
+        font-size: 11px;
+      }
+      .article {
+        min-width: 0;
+        padding: 0 0 12px;
+      }
+      .takeaways {
+        padding: 17px 19px;
+        background: linear-gradient(110deg, #effaf3, #f7fcf9);
+        border: 1px solid #e7f5eb;
+        border-radius: 10px;
+        margin-bottom: 21px;
+      }
+      .takeaways-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #008e43;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 9px;
+      }
+      .takeaways ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 7px;
+      }
+      .takeaways li {
+        font-size: 11px;
+        line-height: 1.6;
+        color: #52627b;
+        display: flex;
+        gap: 9px;
+      }
+      .takeaways li:before {
+        content: "✓";
+        color: #00a950;
+        font-weight: 800;
+      }
+      .article h2 {
+        font-size: clamp(24px, 2.1vw, 31px);
+        line-height: 1.25;
+        letter-spacing: -0.9px;
+        margin: 25px 0 8px;
+        scroll-margin-top: 90px;
+      }
+      .article h3 {
+        font-size: 19px;
+        line-height: 1.4;
+        margin: 24px 0 8px;
+        scroll-margin-top: 90px;
+      }
+      .article p {
+        font-family: Georgia, "Times New Roman", serif;
+        color: #53627b;
+        font-size: 15px;
+        line-height: 1.78;
+        margin: 0 0 15px;
+      }
+      .article ul,
+      .article ol {
+        color: #53627b;
+        padding-left: 22px;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+      .article li {
+        padding-left: 2px;
+        margin-bottom: 5px;
+      }
+      .article li::marker {
+        color: #00b85a;
+      }
+      .article a:not(.primary-btn) {
+        color: #008f43;
+        text-decoration: underline;
+        text-decoration-color: #b5e8c8;
+        text-underline-offset: 3px;
+      }
+      .article blockquote {
+        margin: 20px 0;
+        padding: 16px 18px;
+        border-left: 4px solid var(--green);
+        background: #f3faf5;
+        border-radius: 0 9px 9px 0;
+        color: #243c2d;
+        font:
+          italic 600 14px/1.7 Georgia,
+          serif;
+      }
+      .article blockquote cite {
+        display: block;
+        margin-top: 5px;
+        font:
+          normal 11px Inter,
+          Arial,
+          sans-serif;
+        color: #66758d;
+      }
+      .article-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+      .related-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 0 10px;
+        font-size: 14px;
+      }
+      .related-heading a {
+        font-size: 11px;
+        color: #009747;
+        text-decoration: none;
+      }
+      .related-card {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        text-decoration: none;
+        margin-bottom: 8px;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .related-card:hover {
+        border-color: #b9e8c8;
+        transform: translateY(-1px);
+      }
+      .related-card img {
+        width: 96px;
+        height: 74px;
+        object-fit: cover;
+        border-radius: 6px;
+        background: #eef4ef;
+      }
+      .related-card .eyebrow {
+        display: block;
+        color: #009747;
+        font-size: 9px;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      .related-card strong {
+        display: block;
+        color: #17243a;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .related-card small {
+        display: block;
+        color: #7b8799;
+        font-size: 10px;
+        margin-top: 6px;
+      }
+      .newsletter {
+        background: #f1faf4;
+        border-color: #e4f4e9;
+        padding: 15px;
+      }
+      .newsletter-title {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+      .newsletter form {
+        display: flex;
+        gap: 7px;
+      }
+      .newsletter input {
+        min-width: 0;
+        width: 100%;
+        border: 1px solid #e0e8e2;
+        border-radius: 6px;
+        background: white;
+        padding: 10px;
+        font:
+          11px Inter,
+          Arial,
+          sans-serif;
+        outline-color: #00b85a;
+      }
+      .newsletter button {
+        border: 0;
+        border-radius: 6px;
+        background: #00ad50;
+        color: white;
+        font:
+          700 10px Inter,
+          Arial,
+          sans-serif;
+        padding: 0 12px;
+        cursor: pointer;
+      }
+      .newsletter-note {
+        font-size: 10px;
+        color: #66758d;
+        line-height: 1.5;
+        margin: 8px 0 0;
+      }
+      .article-footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+      .article-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .article-tags span {
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        padding: 7px 10px;
+        color: #53627b;
+        font-size: 11px;
+      }
+      .back-link {
+        display: inline-block;
+        margin-top: 22px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+        color: #008e43;
+      }
+      .site-footer {
+        border-top: 1px solid var(--line);
+        padding: 25px clamp(18px, 4vw, 56px);
+        color: #6c788a;
+        font-size: 12px;
+      }
+      .footer-inner {
+        max-width: 1328px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .site-footer a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .site-footer a:hover {
+        color: #008e43;
+      }
+      .progress-track {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: transparent;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background: var(--green);
+      }
+      .mobile-toc-toggle {
+        display: none;
+      }
+      @media (max-width: 1120px) {
+        .content-layout {
+          grid-template-columns: 220px minmax(0, 1fr);
+        }
+        .right-sidebar {
+          grid-column: 2;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .right-sidebar .sticky-stack {
+          position: static;
+          display: contents;
+        }
+        .right-sidebar .panel {
+          margin: 0;
+        }
+        .newsletter {
+          grid-column: 1/-1;
+        }
+        .main-nav {
+          margin-left: 0;
+          gap: 20px;
+        }
+        .search-box {
+          width: 185px;
+        }
+      }
+      @media (max-width: 760px) {
+        .site-header {
+          height: auto;
+          min-height: 62px;
+        }
+        .nav-wrap {
+          padding: 12px 16px;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .brand {
+          font-size: 20px;
+        }
+        .main-nav {
+          order: 3;
+          width: 100%;
+          justify-content: space-between;
+          gap: 12px;
+        }
+        .main-nav a {
+          padding: 8px 0 10px;
+        }
+        .main-nav a.active:after {
+          bottom: 0;
+        }
+        .nav-actions {
+          gap: 8px;
+        }
+        .search-box {
+          display: none;
+        }
+        .nav-actions .primary-btn {
+          padding: 10px 13px;
+          font-size: 11px;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 26px 18px 24px;
+          gap: 20px;
+        }
+        .hero h1 {
+          font-size: clamp(36px, 9vw, 48px);
+          letter-spacing: -1.7px;
+        }
+        .hero-image {
+          aspect-ratio: 1.55;
+        }
+        .content-layout {
+          grid-template-columns: minmax(0, 1fr);
+          padding: 18px 16px 42px;
+          gap: 18px;
+        }
+        .left-sidebar {
+          order: 0;
+        }
+        .left-sidebar .sticky-stack {
+          position: static;
+        }
+        .left-sidebar .tool-promo {
+          display: none;
+        }
+        .left-sidebar .panel {
+          padding: 14px;
+        }
+        .toc {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .toc a {
+          font-size: 11px;
+          padding: 7px;
+        }
+        .article {
+          order: 1;
+        }
+        .right-sidebar {
+          grid-column: auto;
+          order: 2;
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .right-sidebar .sticky-stack {
+          display: grid;
+          gap: 12px;
+        }
+        .right-sidebar .newsletter {
+          grid-column: auto;
+        }
+        .article h2 {
+          font-size: 26px;
+        }
+        .article p {
+          font-size: 16px;
+        }
+        .related-card {
+          grid-template-columns: 100px minmax(0, 1fr);
+        }
+        .related-card img {
+          width: 100px;
+        }
+        .byline {
+          gap: 10px 12px;
+        }
+        .image-caption {
+          font-size: 9px;
+        }
+      }
+      @media (max-width: 420px) {
+        .main-nav {
+          gap: 8px;
+        }
+        .main-nav a {
+          font-size: 12px;
+        }
+        .hero h1 {
+          font-size: 35px;
+        }
+        .toc {
+          grid-template-columns: 1fr;
+        }
+        .author-icon {
+          width: 30px;
+          height: 30px;
+        }
+        .byline {
+          font-size: 11px;
+        }
+        .related-card {
+          grid-template-columns: 85px minmax(0, 1fr);
+        }
+        .related-card img {
+          width: 85px;
+          height: 68px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *:before,
+        *:after {
+          transition: none !important;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How to Write SEO-Friendly Blog Posts That Rank",
+        "description": "Learn a practical process for writing helpful SEO-friendly blog posts that match search intent and attract the right audience.",
+        "datePublished": "2026-10-10",
+        "dateModified": "2026-10-10",
+        "image": "https://YOUR-PROJECT.vercel.app/images/seo-blog-hero.jpg",
+        "author": { "@type": "Organization", "name": "GrowthKit" },
+        "publisher": { "@type": "Organization", "name": "GrowthKit" },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://YOUR-PROJECT.vercel.app/blog/seo-friendly-blog-posts.html"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <header class="site-header">
+      <div class="nav-wrap">
+        <a class="brand" href="../index.html" aria-label="GrowthKit home"
+          ><span class="brand-mark" aria-hidden="true"></span>GrowthKit</a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="../index.html">Home</a><a href="../tools.html">Tools</a
+          ><a class="active" href="../blog.html" aria-current="page">Blog</a
+          ><a href="../about.html">About</a>
+        </nav>
+        <div class="nav-actions">
+          <label class="search-box"
+            ><span aria-hidden="true">⌕</span
+            ><input
+              id="siteSearch"
+              type="search"
+              placeholder="Search articles, tools..."
+              aria-label="Search articles and tools"
+          /></label>
+          <a class="primary-btn" href="../tools.html"
+            >Explore Tools <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-band">
+      <div class="hero">
+        <div>
+          <span class="category">SEO &amp; Digital Marketing</span>
+          <h1>How to Write SEO-Friendly Blog Posts That Rank</h1>
+          <p class="hero-desc">
+            Learn a simple, step-by-step process to create blog posts that rank
+            on Google, attract the right audience, and drive real traffic to
+            your website.
+          </p>
+          <div class="byline">
+            <span class="author-icon" aria-hidden="true">G</span
+            ><span>By <strong>GrowthKit Team</strong></span
+            ><span class="meta-dot">•</span
+            ><span class="meta-item"
+              >▢ <time datetime="2026-10-10">Oct 10, 2026</time></span
+            ><span class="meta-dot">•</span
+            ><span class="meta-item">◷ 5 min read</span>
+          </div>
+        </div>
+        <div class="hero-image-wrap">
+          <img
+            class="hero-image"
+            src="../images/seo-blog-hero.jpg"
+            alt="Workspace for SEO research with a laptop, notebook, and marketing books"
+            fetchpriority="high"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'grid';
+            "
+          />
+          <div
+            class="hero-image"
+            style="
+              display: none;
+              place-items: center;
+              padding: 30px;
+              text-align: center;
+              color: #16834b;
+              background: linear-gradient(135deg, #e3f8eb, #f7fcf8);
+              font-size: 22px;
+              font-weight: 800;
+            "
+          >
+            SEO<br />CONTENT<br />GROWTH ↗
+          </div>
+          <span class="image-caption">Better content. Higher rankings.</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-layout">
+      <aside class="left-sidebar" aria-label="Article navigation and tools">
+        <div class="sticky-stack">
+          <nav class="panel" aria-labelledby="tocHeading">
+            <h2 class="panel-heading" id="tocHeading">
+              <span aria-hidden="true">☷</span> Table of Contents
+            </h2>
+            <ol class="toc">
+              <li>
+                <a class="active" href="#why-seo"
+                  ><span class="toc-number">1</span>Why SEO Matters</a
+                >
+              </li>
+              <li>
+                <a href="#keywords"
+                  ><span class="toc-number">2</span>Keyword Research</a
+                >
+              </li>
+              <li>
+                <a href="#content"
+                  ><span class="toc-number">3</span>Create Great Content</a
+                >
+              </li>
+              <li>
+                <a href="#on-page"
+                  ><span class="toc-number">4</span>Optimize On-Page SEO</a
+                >
+              </li>
+              <li>
+                <a href="#links"
+                  ><span class="toc-number">5</span>Build Useful Links</a
+                >
+              </li>
+              <li>
+                <a href="#measure"
+                  ><span class="toc-number">6</span>Track and Improve</a
+                >
+              </li>
+            </ol>
+          </nav>
+          <section class="panel tool-promo">
+            <div class="promo-symbol" aria-hidden="true">◎</div>
+            <h3>Get Better Results with the Right Tools</h3>
+            <p>Use free SEO tools to check, optimize, and grow your website.</p>
+            <a class="primary-btn" href="../tools.html">Explore Free Tools →</a>
+          </section>
+        </div>
+      </aside>
+
+      <article class="article" id="articleContent">
+        <section class="takeaways" aria-labelledby="takeawayHeading">
+          <div class="takeaways-title">
+            <span class="mini-icon" aria-hidden="true">♧</span
+            ><span id="takeawayHeading">Key Takeaways</span>
+          </div>
+          <ul>
+            <li>Focus on user intent, not just keywords.</li>
+            <li>Create helpful, original, well-structured content.</li>
+            <li>Optimize on-page SEO and build relevant links.</li>
+            <li>Track results and keep improving.</li>
+          </ul>
+        </section>
+
+        <h2 id="why-seo">1. Why SEO Matters</h2>
+        <p>
+          SEO helps your content get discovered by people who are already
+          searching for answers. When your pages appear for relevant searches,
+          you can earn more visibility, attract useful traffic, and give readers
+          a way to discover your brand.
+        </p>
+        <p>
+          Unlike paid advertising, organic search visibility can continue
+          bringing visitors after publication. Results take time and are never
+          guaranteed, but useful content and a technically sound website give
+          you a stronger foundation.
+        </p>
+        <blockquote>
+          “Create for people first. Optimize so the right people can find
+          it.”<cite>— The GrowthKit approach</cite>
+        </blockquote>
+
+        <h2 id="keywords">2. Keyword Research</h2>
+        <p>
+          Keyword research helps you understand what your audience is searching
+          for. Choose a topic that matches the reader's intent, fits your
+          website, and lets you provide a genuinely useful answer.
+        </p>
+        <h3>Steps to find useful keywords</h3>
+        <ol>
+          <li>Start with questions your target reader might ask.</li>
+          <li>
+            Use tools such as Google Keyword Planner or Google Search Console
+            where appropriate.
+          </li>
+          <li>
+            Review search results to understand what type of answer people
+            expect.
+          </li>
+          <li>Choose a focused primary topic and closely related subtopics.</li>
+        </ol>
+
+        <h2 id="content">3. Create Great Content</h2>
+        <p>
+          Organize your article around the reader's problem. Begin with a direct
+          introduction, use descriptive headings, and include examples or steps
+          that help readers put the advice into practice.
+        </p>
+        <p>
+          Avoid adding paragraphs just to make an article longer. Every section
+          should answer a question, explain an important detail, or help the
+          reader make a decision.
+        </p>
+
+        <h2 id="on-page">4. Optimize On-Page SEO</h2>
+        <p>
+          Make it easy for people and search engines to understand your page.
+          Write a specific title, create a helpful meta description, use one
+          clear main heading, and organize the rest of the article with logical
+          subheadings.
+        </p>
+        <ul>
+          <li>
+            Use descriptive image alt text when an image conveys useful
+            information.
+          </li>
+          <li>Link to relevant pages on your website naturally.</li>
+          <li>
+            Check mobile usability, loading performance, and broken links.
+          </li>
+          <li>Keep your content accurate and update it when needed.</li>
+        </ul>
+        <p>
+          Want to check one element? Try the
+          <a href="../tools/title-tag-checker.html"
+            >GrowthKit Title Tag Checker</a
+          >.
+        </p>
+
+        <h2 id="links">5. Build Useful Links</h2>
+        <p>
+          Internal links help readers discover related resources on your site.
+          External links can support claims and point to reliable sources. Use
+          meaningful link text and add links only when they genuinely help the
+          reader.
+        </p>
+
+        <h2 id="measure">6. Track and Improve</h2>
+        <p>
+          Use Google Search Console to monitor search impressions, clicks,
+          queries, and indexing. Use what you learn to improve pages that are
+          relevant but underperforming. Rankings fluctuate, so evaluate trends
+          rather than reacting to every small change.
+        </p>
+
+        <h2 id="conclusion">Conclusion</h2>
+        <p>
+          Strong SEO content starts with a real reader need. Research the topic,
+          provide a useful answer, make the page easy to navigate, and review
+          performance over time. Consistent improvements are more valuable than
+          chasing shortcuts.
+        </p>
+        <div class="article-footer">
+          <div class="article-tags">
+            <span>SEO</span><span>Content Marketing</span
+            ><span>Beginner Guide</span>
+          </div>
+          <a class="back-link" href="../blog.html">← Back to all articles</a>
+        </div>
+      </article>
+
+      <aside class="right-sidebar" aria-label="Related resources">
+        <div class="sticky-stack">
+          <section class="panel tool-promo">
+            <div class="promo-symbol" aria-hidden="true">↗</div>
+            <h3>Start Growing Today</h3>
+            <p>
+              Explore practical tools to improve your SEO, content, and online
+              presence.
+            </p>
+            <a class="primary-btn" href="../tools.html" style="width: 100%"
+              >Explore All Tools →</a
+            >
+          </section>
+          <section>
+            <div class="related-heading">
+              <strong>Related Articles</strong
+              ><a href="../blog.html">View all →</a>
+            </div>
+            <a class="related-card" href="../blog.html"
+              ><img
+                src="../images/keyword-research.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.style.visibility = 'hidden'"
+              /><span
+                ><span class="eyebrow">SEO</span
+                ><strong>The Beginner's Guide to Keyword Research</strong
+                ><small>5 min read</small></span
+              ></a
+            >
+            <a class="related-card" href="../blog.html"
+              ><img
+                src="../images/content-strategy.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.style.visibility = 'hidden'"
+              /><span
+                ><span class="eyebrow">Content Marketing</span
+                ><strong>How to Build a Simple Content Strategy</strong
+                ><small>4 min read</small></span
+              ></a
+            >
+            <a class="related-card" href="../tools/title-tag-checker.html"
+              ><img
+                src="../images/title-tag-tool.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.style.visibility = 'hidden'"
+              /><span
+                ><span class="eyebrow">Free Tool</span
+                ><strong>How to Check Your Title Tag</strong
+                ><small>3 min read</small></span
+              ></a
+            >
+          </section>
+          <section class="panel newsletter">
+            <div class="newsletter-title">
+              <span class="mini-icon" aria-hidden="true">✉</span
+              ><span>Get useful SEO tips and tools from GrowthKit.</span>
+            </div>
+            <form id="newsletterForm">
+              <input
+                id="newsletterEmail"
+                type="email"
+                placeholder="Enter your email"
+                aria-label="Your email address"
+                required
+              /><button type="submit">Subscribe</button>
+            </form>
+            <p class="newsletter-note" id="newsletterMessage">
+              No spam. Just useful resources.
+            </p>
+          </section>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span
+          >© <span id="currentYear">2026</span> GrowthKit. Learn, build,
+          grow.</span
+        ><span
+          ><a href="../index.html">Home</a> ·
+          <a href="../tools.html">Tools</a> ·
+          <a href="../blog.html">Blog</a></span
+        >
+      </div>
+    </footer>
+
+    <script>
+      // Reading progress indicator
+      (() => {
+        const bar = document.getElementById("progressBar");
+        const article = document.getElementById("articleContent");
+        if (!bar || !article) return;
+        let pending = false;
+        function update() {
+          const rect = article.getBoundingClientRect();
+          const total = article.offsetHeight - window.innerHeight;
+          const amount =
+            total > 0
+              ? Math.max(0, Math.min(100, (-rect.top / total) * 100))
+              : 0;
+          bar.style.width = amount + "%";
+          pending = false;
+        }
+        function schedule() {
+          if (!pending) {
+            pending = true;
+            requestAnimationFrame(update);
+          }
+        }
+        window.addEventListener("scroll", schedule, { passive: true });
+        window.addEventListener("resize", schedule);
+        update();
+      })();
+      // Highlight the table-of-contents link for the current section
+      (() => {
+        const headings = [
+          ...document.querySelectorAll("#articleContent h2[id]"),
+        ];
+        const links = [...document.querySelectorAll(".toc a")];
+        if (!("IntersectionObserver" in window)) return;
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                links.forEach((link) => {
+                  const active = link.hash === "#" + entry.target.id;
+                  link.classList.toggle("active", active);
+                  if (active) link.setAttribute("aria-current", "location");
+                  else link.removeAttribute("aria-current");
+                });
+              }
+            });
+          },
+          { rootMargin: "-15% 0px -72% 0px" },
+        );
+        headings.forEach((h) => observer.observe(h));
+      })();
+      // Demo search: filters local links only; connect to a real search page when available.
+      const search = document.getElementById("siteSearch");
+      if (search) {
+        search.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" && search.value.trim()) {
+            const term = encodeURIComponent(search.value.trim());
+            window.location.href = "../blog.html?q=" + term;
+          }
+        });
+      }
+      // Demo newsletter form: no email is sent without a connected backend/provider.
+      const form = document.getElementById("newsletterForm");
+      if (form) {
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          document.getElementById("newsletterMessage").textContent =
+            "This form is a front-end demo. Connect an email service to collect subscriptions.";
+        });
+      }
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

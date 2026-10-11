@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Explore practical SEO, content marketing, and AI search guides from GrowthKit. Learn how to improve search visibility and create better content."
+    />
+
+    <meta name="theme-color" content="#07130f" id="theme-color" />
+
+    <title>SEO & Marketing Insights | GrowthKit</title>
+
+    <!-- Replace with your actual deployed blog URL -->
+    <link rel="canonical" href="https://YOUR-DOMAIN.com/blog/" />
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      /* ================= THEME VARIABLES ================= */
+
+      :root {
+        color-scheme: light;
+
+        --bg: #f5faf7;
+        --bg-secondary: #ffffff;
+        --card: #ffffff;
+        --text: #10251b;
+        --text-secondary: #587066;
+        --primary: #00c853;
+        --primary-light: #34d399;
+        --primary-dark: #00963f;
+        --border: #dce9e0;
+        --shadow: 0 10px 35px rgba(16, 37, 27, 0.08);
+      }
+
+      [data-theme="dark"] {
+        color-scheme: dark;
+
+        --bg: #07130f;
+        --bg-secondary: #0a1913;
+        --card: #0d2119;
+
+        --text: #ecfdf5;
+        --text-secondary: #9bb5aa;
+
+        --primary: #22c55e;
+        --primary-light: #34d399;
+        --primary-dark: #16a34a;
+
+        --border: #1c3a2d;
+        --shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+      }
+
+      /* ================= BASE ================= */
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        transition:
+          background-color 0.25s ease,
+          color 0.25s ease;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      /* ================= HEADER / THEME BUTTON ================= */
+
+      #header,
+      #footer {
+        color: var(--text);
+      }
+
+      .theme-toggle-wrap {
+        display: flex;
+        justify-content: flex-end;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 18px 24px 0;
+      }
+
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 42px;
+        padding: 10px 15px;
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        background: var(--card);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .theme-toggle:hover {
+        border-color: var(--primary);
+        transform: translateY(-1px);
+      }
+
+      .theme-toggle:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 4px;
+      }
+
+      .theme-icon {
+        color: var(--primary);
+        font-size: 17px;
+        line-height: 1;
+      }
+
+      /* ================= BLOG PAGE ================= */
+
+      .blog-page {
+        --blog-accent: var(--primary);
+        --blog-bg: var(--bg);
+        --blog-card: var(--card);
+        --blog-border: var(--border);
+        --blog-text: var(--text);
+        --blog-muted: var(--text-secondary);
+
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 55px 24px 100px;
+        color: var(--blog-text);
+      }
+
+      /* ================= HERO ================= */
+
+      .blog-hero {
+        max-width: 760px;
+        margin: 0 auto 58px;
+        text-align: center;
+      }
+
+      .blog-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 24px;
+        padding: 8px 13px;
+        border: 1px solid var(--blog-border);
+        border-radius: 100px;
+        background: var(--blog-card);
+        color: var(--blog-accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      .blog-eyebrow::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--blog-accent);
+        box-shadow: 0 0 12px var(--blog-accent);
+      }
+
+      .blog-hero h1 {
+        margin: 0 0 22px;
+        font-size: clamp(42px, 7vw, 76px);
+        line-height: 1.04;
+        letter-spacing: -3.5px;
+        font-weight: 800;
+      }
+
+      .blog-hero h1 span {
+        color: var(--blog-accent);
+      }
+
+      .blog-hero p {
+        max-width: 580px;
+        margin: 0 auto;
+        color: var(--blog-muted);
+        font-size: 17px;
+        line-height: 1.85;
+      }
+
+      /* ================= TOOLBAR ================= */
+
+      .blog-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--blog-border);
+      }
+
+      .blog-toolbar h2 {
+        margin: 0;
+        font-size: 19px;
+        letter-spacing: -0.4px;
+      }
+
+      .blog-toolbar > span {
+        color: var(--blog-muted);
+        font-size: 13px;
+      }
+
+      /* ================= ARTICLE GRID ================= */
+
+      .post-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .post-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid var(--blog-border);
+        border-radius: 18px;
+        background: var(--blog-card);
+        color: inherit;
+        text-decoration: none;
+        box-shadow: var(--shadow);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background-color 180ms ease;
+      }
+
+      .post-card::before {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--blog-accent);
+        content: "";
+        opacity: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .post-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--blog-accent);
+      }
+
+      .post-card:hover::before {
+        opacity: 1;
+      }
+
+      /* Blog thumbnail */
+
+      .post-image {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: var(--blog-bg);
+      }
+
+      .post-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 250ms ease;
+      }
+
+      .post-card:hover .post-image img {
+        transform: scale(1.035);
+      }
+
+      .post-content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 25px;
+      }
+
+      .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+
+      .post-tag {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid var(--blog-border);
+        border-radius: 7px;
+        background: var(--blog-bg);
+        color: var(--blog-accent);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .post-date {
+        color: var(--blog-muted);
+        font-size: 12px;
+      }
+
+      .post-card h3 {
+        margin: 0 0 13px;
+        font-size: 22px;
+        line-height: 1.35;
+        letter-spacing: -0.7px;
+      }
+
+      .post-card p {
+        flex: 1;
+        margin: 0 0 24px;
+        color: var(--blog-muted);
+        font-size: 14px;
+        line-height: 1.85;
+      }
+
+      .post-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: auto;
+        color: var(--blog-text);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .post-arrow {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        place-items: center;
+        border: 1px solid var(--blog-border);
+        border-radius: 50%;
+        color: var(--blog-accent);
+        font-size: 18px;
+        transition: transform 180ms ease;
+      }
+
+      .post-card:hover .post-arrow {
+        transform: translateX(3px);
+      }
+
+      /* ================= BOTTOM CTA ================= */
+
+      .blog-bottom {
+        margin-top: 55px;
+        padding: 35px 30px;
+        border: 1px solid var(--blog-border);
+        border-radius: 18px;
+        background: var(--blog-card);
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+
+      .blog-bottom h2 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        letter-spacing: -0.7px;
+      }
+
+      .blog-bottom p {
+        margin: 0;
+        color: var(--blog-muted);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .blog-bottom a {
+        color: var(--blog-accent);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .blog-bottom a:hover {
+        text-decoration: underline;
+      }
+
+      /* ================= ACCESSIBILITY ================= */
+
+      .post-card:focus-visible,
+      .blog-bottom a:focus-visible {
+        outline: 2px solid var(--blog-accent);
+        outline-offset: 5px;
+      }
+
+      /* ================= TABLET ================= */
+
+      @media (max-width: 900px) {
+        .post-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .blog-hero h1 {
+          letter-spacing: -2.5px;
+        }
+      }
+
+      /* ================= MOBILE ================= */
+
+      @media (max-width: 600px) {
+        .theme-toggle-wrap {
+          padding: 14px 18px 0;
+        }
+
+        .blog-page {
+          padding: 45px 18px 70px;
+        }
+
+        .blog-hero {
+          margin-bottom: 42px;
+        }
+
+        .blog-hero h1 {
+          font-size: clamp(38px, 10vw, 54px);
+          letter-spacing: -2px;
+        }
+
+        .blog-hero p {
+          font-size: 15px;
+        }
+
+        .post-grid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .post-content {
+          padding: 23px;
+        }
+
+        .blog-toolbar {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 7px;
+        }
+
+        .blog-bottom {
+          padding: 25px 20px;
+        }
+      }
+
+      /* ================= REDUCED MOTION ================= */
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+
+        .post-card:hover {
+          transform: none;
+        }
+
+        .post-card:hover .post-image img {
+          transform: none;
+        }
+      }
+    </style>
+
+    <!-- Apply saved theme before the page is displayed -->
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem("growthkit-theme");
+          const theme = savedTheme === "light" ? "light" : "dark";
+
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="blog-page">
+      <header class="blog-hero">
+        <span class="blog-eyebrow">The GrowthKit Journal</span>
+
+        <h1>
+          Learn smarter.<br />
+          Grow <span>organically.</span>
+        </h1>
+
+        <p>
+          Practical guides to SEO, content marketing, and AI search. No
+          unnecessary jargon — just useful ideas you can put into practice.
+        </p>
+      </header>
+
+      <section aria-labelledby="latest-posts">
+        <div class="blog-toolbar">
+          <h2 id="latest-posts">Latest articles</h2>
+          <span>Ideas to help you grow online</span>
+        </div>
+
+        <div class="post-grid">
+          <!-- Keep the newest article first -->
+
+          <a
+            class="post-card"
+            href="/blog/blog content/seo-guide-for-beginners.html"
+          >
+            <div class="post-image">
+              <img
+                src="/element/blog-images/seo-guide-for-beginners.png"
+                alt="Illustration for the SEO Guide for Beginners"
+                loading="lazy"
+                width="640"
+                height="360"
+              />
+            </div>
+
+            <div class="post-content">
+              <div class="post-meta">
+                <span class="post-tag">SEO Basics</span>
+
+                <time class="post-date" datetime="2026-10-09">
+                  Oct 9, 2026
+                </time>
+              </div>
+
+              <h3>Complete SEO Guide for Beginners</h3>
+
+              <p>
+                Learn the fundamentals of SEO and discover how to optimize your
+                website for search engines.
+              </p>
+
+              <div class="post-link">
+                <span>Read the guide</span>
+                <span class="post-arrow" aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Copy the post-card block to add another article -->
+        </div>
+      </section>
+
+      <aside class="blog-bottom">
+        <h2>Small improvements. Better growth.</h2>
+
+        <p>
+          Explore practical ways to improve your website and content.
+          <a href="../index.html">Discover GrowthKit tools →</a>
+        </p>
+      </aside>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

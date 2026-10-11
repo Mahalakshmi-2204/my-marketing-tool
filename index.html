@@ -3,15 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <script>
-     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-   </script>
-   <script defer src="/_vercel/insights/script.js"></script>
+
+    <!-- GrowthKit favicon -->
+    <link rel="icon" type="image/png" href="element/favicon.png" />
+    <link rel="apple-touch-icon" href="element/favicon.png" />
+
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
     <meta
       name="description"
       content="GrowthKit provides free SEO and digital marketing tools for marketers, freelancers, agencies and website owners."
     />
-    <meta name="google-site-verification" content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8" />
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
     <meta
       name="keywords"
       content="free SEO tools, meta tag checker, title tag checker, SEO tools, marketing tools"
@@ -27,286 +39,332 @@
 
     <div id="header"></div>
 
-    <!-- ================= HERO ================= -->
+    <!-- ================= HERO SECTION ================= -->
 
-    <header class="hero" id="home">
-      <div class="hero-content">
-        <div class="hero-badge">✦ 100% Free Marketing Tools</div>
+    <section class="gk-hero" id="home">
+      <div class="gk-hero-inner">
+        <div class="gk-hero-content">
+          <span class="gk-badge">
+            <span class="gk-badge-dot">✦</span>
+            100% Free Marketing Tools
+          </span>
 
-        <h1>
-          Free SEO Tools to
-          <span>Grow Your Website</span>
-        </h1>
+          <h1>
+            Free SEO Tools to
+            <span>Grow Your Website</span>
+          </h1>
 
-        <p>
-          Analyze, optimize and improve your website with simple, fast and free
-          SEO & digital marketing tools.
-        </p>
+          <p class="gk-hero-description">
+            Analyze, optimize and improve your website with simple, fast and
+            free SEO and digital marketing tools.
+          </p>
 
-        <div class="hero-buttons">
-          <a href="#tools" class="primary-btn"> Explore Tools → </a>
+          <div class="gk-hero-actions">
+            <a href="#tools" class="gk-btn gk-btn-primary">
+              Explore Tools <span>→</span>
+            </a>
 
-          <a href="tools/meta-tag-checker.html" class="secondary-btn">
-            Try Meta Checker
-          </a>
+            <a
+              href="tools/meta-tag-checker.html"
+              class="gk-btn gk-btn-secondary"
+            >
+              Try Meta Checker
+            </a>
+          </div>
+
+          <div class="gk-benefits">
+            <span><i>✓</i> Free Forever</span>
+            <span><i>↗</i> No Registration</span>
+            <span><i>◷</i> Fast & Reliable</span>
+          </div>
+        </div>
+
+        <!-- Decorative SEO dashboard illustration -->
+        <div class="gk-hero-visual" aria-hidden="true">
+          <div class="gk-visual-glow"></div>
+
+          <div class="gk-floating-card gk-float-top">
+            <span class="gk-float-icon">↗</span>
+            <span>
+              <strong>Better Rankings</strong>
+              <small>Grow your visibility</small>
+            </span>
+          </div>
+
+          <div class="gk-dashboard">
+            <div class="gk-dashboard-top">
+              <span class="gk-dashboard-logo">G</span>
+              <span class="gk-dashboard-title">Website Overview</span>
+              <span class="gk-dashboard-menu">•••</span>
+            </div>
+
+            <div class="gk-dashboard-score">
+              <div>
+                <small>SEO HEALTH SCORE</small>
+                <strong>92<span>/100</span></strong>
+                <em>↑ Looking good</em>
+              </div>
+
+              <div class="gk-score-ring">
+                <span>92%</span>
+              </div>
+            </div>
+
+            <div class="gk-chart-heading">
+              <strong>Organic Performance</strong>
+              <span>Last 7 days</span>
+            </div>
+
+            <div class="gk-chart">
+              <div class="gk-chart-y">
+                <span>100</span>
+                <span>75</span>
+                <span>50</span>
+                <span>25</span>
+              </div>
+
+              <svg
+                viewBox="0 0 320 120"
+                role="img"
+                aria-label="Illustrative upward organic performance chart"
+              >
+                <defs>
+                  <linearGradient id="gkChartFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00b85a" stop-opacity=".22" />
+                    <stop offset="100%" stop-color="#00b85a" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+
+                <path
+                  d="M0 100 L40 82 L80 88 L120 57 L160 68 L205 38 L250 46 L320 10 L320 120 L0 120 Z"
+                  fill="url(#gkChartFill)"
+                />
+
+                <path
+                  d="M0 100 L40 82 L80 88 L120 57 L160 68 L205 38 L250 46 L320 10"
+                  fill="none"
+                  stroke="#00b85a"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <circle cx="320" cy="10" r="5" fill="#00b85a" />
+              </svg>
+            </div>
+
+            <div class="gk-dashboard-bottom">
+              <span><i></i> Traffic</span>
+              <strong>+28.4%</strong>
+            </div>
+          </div>
+
+          <div class="gk-floating-card gk-float-bottom">
+            <span class="gk-float-icon">◎</span>
+            <span>
+              <strong>More Visibility</strong>
+              <small>Smarter SEO starts here</small>
+            </span>
+          </div>
         </div>
       </div>
-    </header>
+    </section>
 
-    <!-- ================= TOOLS ================= -->
+    <!-- ================= SEO TOOLS ================= -->
 
     <main id="tools">
-      <!-- SEO TOOLS -->
-
-      <section class="tools-section">
-        <div class="section-heading">
-          <span class="section-label"> SEO </span>
-
-          <h2>SEO Tools</h2>
-
+      <section class="gk-tools-section">
+        <div class="gk-section-heading">
+          <span class="gk-section-label">SEO TOOLS</span>
+          <h2>Everything You Need for Better SEO</h2>
           <p>
             Analyze important SEO elements and find opportunities to improve
             your website.
           </p>
         </div>
 
-        <div class="card-grid">
-          <!-- META TAG -->
-
-          <article class="tool-card featured">
-            <div class="card-icon">🏷️</div>
-
-            <div class="card-content">
-              <span class="card-label"> SEO ANALYSIS </span>
-
+        <div class="gk-tool-grid">
+          <article class="gk-tool-card">
+            <div class="gk-tool-icon gk-icon-green">⌑</div>
+            <div class="gk-tool-info">
+              <span class="gk-tool-category">SEO ANALYSIS</span>
               <h3>Meta Tag Checker</h3>
-
               <p>
                 Check your title, meta description, Open Graph tags and other
                 important metadata.
               </p>
-
-              <a href="tools/meta-tag-checker.html" class="card-link">
-                Open Tool →
-              </a>
+              <a href="tools/meta-tag-checker.html">Open Tool <span>→</span></a>
             </div>
           </article>
 
-          <!-- TITLE -->
-
-          <article class="tool-card">
-            <div class="card-icon">📝</div>
-
-            <div class="card-content">
-              <span class="card-label"> ON-PAGE SEO </span>
-
+          <article class="gk-tool-card">
+            <div class="gk-tool-icon gk-icon-blue">▤</div>
+            <div class="gk-tool-info">
+              <span class="gk-tool-category">ON-PAGE SEO</span>
               <h3>Title Tag Checker</h3>
-
               <p>
                 Check title length and optimize your page title for search
                 engines.
               </p>
-
-              <a href="tools/title-tag-checker.html" class="card-link">
-                Open Tool →
-              </a>
+              <a href="tools/title-tag-checker.html"
+                >Open Tool <span>→</span></a
+              >
             </div>
           </article>
 
-          <!-- META DESCRIPTION -->
-
-          <article class="tool-card">
-            <div class="card-icon">📄</div>
-
-            <div class="card-content">
-              <span class="card-label"> ON-PAGE SEO </span>
-
+          <article class="gk-tool-card">
+            <div class="gk-tool-icon gk-icon-orange">▧</div>
+            <div class="gk-tool-info">
+              <span class="gk-tool-category">ON-PAGE SEO</span>
               <h3>Meta Description Checker</h3>
-
               <p>
                 Analyze your meta description length and create better search
                 snippets.
               </p>
-
-              <a href="tools/meta-description-checker.html" class="card-link">
-                Open Tool →
-              </a>
+              <a href="tools/meta-description-checker.html"
+                >Open Tool <span>→</span></a
+              >
             </div>
           </article>
 
-          <!-- OG -->
-
-          <article class="tool-card">
-            <div class="card-icon">🔗</div>
-
-            <div class="card-content">
-              <span class="card-label"> SOCIAL SEO </span>
-
+          <article class="gk-tool-card">
+            <div class="gk-tool-icon gk-icon-purple">↗</div>
+            <div class="gk-tool-info">
+              <span class="gk-tool-category">SOCIAL SEO</span>
               <h3>Open Graph Preview</h3>
-
               <p>
                 Preview how your website will appear when shared on social
                 media.
               </p>
-
-              <a href="tools/open-graph-preview.html" class="card-link">
-                Open Tool →
-              </a>
+              <a href="tools/open-graph-preview.html"
+                >Open Tool <span>→</span></a
+              >
             </div>
           </article>
 
-          <!-- KEYWORD -->
-
-          <article class="tool-card">
-            <div class="card-icon">🔍</div>
-
-            <div class="card-content">
-              <span class="card-label"> CONTENT SEO </span>
-
+          <article class="gk-tool-card">
+            <div class="gk-tool-icon gk-icon-green">⌕</div>
+            <div class="gk-tool-info">
+              <span class="gk-tool-category">CONTENT SEO</span>
               <h3>Keyword Density Checker</h3>
-
               <p>
-                Analyze keyword usage and discover the most frequently used
-                terms.
+                Analyze keyword usage and discover frequently used terms in your
+                content.
               </p>
-
-              <a href="tools/keyword-density-checker.html" class="card-link">
-                Open Tool →
-              </a>
+              <a href="tools/keyword-density-checker.html"
+                >Open Tool <span>→</span></a
+              >
             </div>
           </article>
 
-          <!-- WORD COUNTER -->
-
-          <article class="tool-card">
-            <div class="card-icon">🔢</div>
-
-            <div class="card-content">
-              <span class="card-label"> CONTENT </span>
-
+          <article class="gk-tool-card">
+            <div class="gk-tool-icon gk-icon-blue">123</div>
+            <div class="gk-tool-info">
+              <span class="gk-tool-category">CONTENT TOOLS</span>
               <h3>Word Counter</h3>
-
               <p>
                 Count words, characters and sentences in your content instantly.
               </p>
-
-              <a href="tools/word-counter.html" class="card-link">
-                Open Tool →
-              </a>
+              <a href="tools/word-counter.html">Open Tool <span>→</span></a>
             </div>
           </article>
         </div>
       </section>
 
-      <!-- MARKETING TOOLS 
+      <!-- ================= ABOUT GROWTHKIT ================= -->
 
-      <section class="tools-section alternate">
-        <div class="section-heading">
-          <span class="section-label"> MARKETING </span>
+      <section class="gk-about-section" id="about">
+        <div class="gk-about-content">
+          <span class="gk-section-label">ABOUT GROWTHKIT</span>
 
-          <h2>Marketing Tools</h2>
+          <h2>
+            Simple Tools.<br />
+            <span>Better Marketing.</span>
+          </h2>
 
           <p>
-            Build campaigns and track your marketing traffic more effectively.
+            GrowthKit brings together simple, free SEO and digital marketing
+            utilities to help marketers, freelancers, agencies and website
+            owners work smarter.
           </p>
+
+          <a href="#tools" class="gk-btn gk-btn-primary">
+            Explore Tools <span>→</span>
+          </a>
         </div>
 
-        <div class="card-grid">
-          <article class="tool-card">
-            <div class="card-icon">📊</div>
+        <div class="gk-about-visual" aria-hidden="true">
+          <div class="gk-target">
+            <div class="gk-target-ring gk-ring-one"></div>
+            <div class="gk-target-ring gk-ring-two"></div>
+            <div class="gk-target-ring gk-ring-three"></div>
+            <div class="gk-target-center"></div>
+            <div class="gk-target-arrow">➤</div>
+          </div>
 
-            <div class="card-content">
-              <span class="card-label"> ANALYTICS </span>
-
-              <h3>UTM Campaign Builder</h3>
-
-              <p>
-                Create UTM tracking URLs for Google Analytics and marketing
-                campaigns.
-              </p>
-
-              <span class="coming-soon"> Coming Soon </span>
+          <div class="gk-about-stat gk-stat-one">
+            <span>↗</span>
+            <div>
+              <strong>Work smarter</strong><small>Save valuable time</small>
             </div>
-          </article>
-        </div>
-      </section>-->
+          </div>
 
-      <!-- TECHNICAL SEO 
-
-      <section class="tools-section">
-        <div class="section-heading">
-          <span class="section-label"> TECHNICAL SEO </span>
-
-          <h2>Technical SEO Tools</h2>
-
-          <p>Useful utilities for managing important technical SEO files.</p>
-        </div>
-
-        <div class="card-grid">
-          <article class="tool-card">
-            <div class="card-icon">🤖</div>
-
-            <div class="card-content">
-              <span class="card-label"> CRAWLING </span>
-
-              <h3>Robots.txt Generator</h3>
-
-              <p>Generate a robots.txt file for your website in seconds.</p>
-
-              <span class="coming-soon"> Coming Soon </span>
+          <div class="gk-about-stat gk-stat-two">
+            <span>✓</span>
+            <div>
+              <strong>SEO made simple</strong
+              ><small>Practical, useful tools</small>
             </div>
-          </article>
+          </div>
+
+          <div class="gk-about-stat gk-stat-three">
+            <span>♡</span>
+            <div>
+              <strong>Free to use</strong><small>No paid plan required</small>
+            </div>
+          </div>
         </div>
       </section>
-    </main>-->
 
-    <!-- ================= ABOUT ================= -->
+      <!-- ================= LEARNING RESOURCES ================= -->
 
-    <section class="about-section" id="about">
-      <div class="about-container">
-        <span class="section-label"> ABOUT GROWTHKIT </span>
-
-        <h2>
-          Simple Tools.
-          <span>Better Marketing.</span>
-        </h2>
-
-        <p>
-          GrowthKit is a collection of simple and free SEO and digital marketing
-          utilities designed to help marketers, freelancers, agencies and
-          website owners work faster.
-        </p>
-      </div>
-    </section>
-
-    <!-- ================= BLOG ================= 
-
-    <section class="blog-section">
-      <div class="section-heading">
-        <span class="section-label"> LEARN </span>
-
-        <h2>SEO Guides & Resources</h2>
-
-        <p>Learn practical SEO and digital marketing strategies.</p>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-icon">📚</div>
-
-        <div>
-          <span class="card-label"> SEO GUIDE </span>
-
-          <h3>Complete SEO Guide for Beginners</h3>
-
+      <section class="gk-blog-section" id="resources">
+        <div class="gk-section-heading">
+          <span class="gk-section-label">LEARN & GROW</span>
+          <h2>SEO Guides & Resources</h2>
           <p>
-            Learn the fundamentals of SEO and how to optimize your website for
-            search engines.
+            Learn practical SEO and digital marketing strategies with
+            beginner-friendly guides.
           </p>
-
-          <a href="blog/seo-guide.html" class="card-link"> Read Guide → </a>
         </div>
-      </div>
-    </section>-->
+
+        <article class="gk-guide-card">
+          <div class="gk-guide-art" aria-hidden="true">
+            <div class="gk-guide-plant">✳</div>
+            <div class="gk-guide-paper">
+              <span class="gk-guide-paper-label">THE BEGINNER'S GUIDE</span>
+              <strong>SEO</strong>
+              <span class="gk-guide-lines"></span>
+              <span class="gk-guide-lines"></span>
+              <span class="gk-guide-lines short"></span>
+            </div>
+            <div class="gk-guide-pencil"></div>
+          </div>
+
+          <div class="gk-guide-content">
+            <span class="gk-tool-category">SEO GUIDE</span>
+            <h3>Complete SEO Guide for Beginners</h3>
+            <p>
+              Learn the fundamentals of SEO and discover how to optimize your
+              website for search engines.
+            </p>
+            <a href="blog/blog content/seo-guide-for-beginners.html">
+              Read the Guide <span>→</span>
+            </a>
+          </div>
+        </article>
+      </section>
+    </main>
 
     <!-- ================= FOOTER ================= -->
 

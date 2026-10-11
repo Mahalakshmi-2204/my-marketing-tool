@@ -10,9 +10,7 @@
 async function loadComponent(id, file) {
   const element = document.getElementById(id);
 
-  if (!element) {
-    return;
-  }
+  if (!element) return;
 
   try {
     const response = await fetch(file);
@@ -52,81 +50,86 @@ async function initializeFooter() {
 
 function initializeThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
-
   const themeIcon = document.getElementById("theme-icon");
 
-  if (!themeToggle || !themeIcon) {
-    return;
-  }
+  if (!themeToggle || !themeIcon) return;
 
   const savedTheme = localStorage.getItem("growthkit-theme");
+  const initialTheme = savedTheme === "dark" ? "dark" : "light";
 
-  /* Load saved theme */
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("growthkit-theme", theme);
 
-  if (savedTheme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
+    themeIcon.src =
+      theme === "dark" ? "/element/dark-mode.svg" : "/element/light-mode.svg";
 
-    themeIcon.src = "/element/dark-mode.svg";
+    themeIcon.alt = theme === "dark" ? "Dark mode" : "Light mode";
 
-    themeIcon.alt = "Dark mode";
-  } else {
-    document.documentElement.setAttribute("data-theme", "light");
-
-    themeIcon.src = "/element/light-mode.svg";
-
-    themeIcon.alt = "Light mode";
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+    );
   }
 
-  /* Toggle theme */
+  applyTheme(initialTheme);
 
   themeToggle.addEventListener("click", () => {
     const currentTheme = document.documentElement.getAttribute("data-theme");
 
-    if (currentTheme === "dark") {
-      document.documentElement.setAttribute("data-theme", "light");
-
-      localStorage.setItem("growthkit-theme", "light");
-
-      themeIcon.src = "/element/light-mode.svg";
-
-      themeIcon.alt = "Light mode";
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-
-      localStorage.setItem("growthkit-theme", "dark");
-
-      themeIcon.src = "/element/dark-mode.svg";
-
-      themeIcon.alt = "Dark mode";
-    }
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
   });
 }
 
 /* =====================================================
-   MOBILE MENU
+   MOBILE NAVIGATION
 ===================================================== */
 
 function initializeMobileMenu() {
-  const mobileMenu = document.getElementById("mobile-menu");
+  const menuButton = document.getElementById("mobile-menu");
+  const navLinks = document.getElementById("nav-links");
 
-  const navLinks = document.querySelector(".nav-links");
+  if (!menuButton || !navLinks) return;
 
-  if (!mobileMenu || !navLinks) {
-    return;
+  function closeMenu() {
+    navLinks.classList.remove("is-open");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Open navigation menu");
   }
 
-  /* Open / close menu */
+  function openMenu() {
+    navLinks.classList.add("is-open");
+    menuButton.setAttribute("aria-expanded", "true");
+    menuButton.setAttribute("aria-label", "Close navigation menu");
+  }
 
-  mobileMenu.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+  menuButton.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
-  /* Close menu after clicking a link */
-
+  // Close the menu after clicking a navigation link.
   navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("active");
-    });
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close the menu with the Escape key.
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+
+  // Close the menu when returning to desktop width.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 850) {
+      closeMenu();
+    }
   });
 }
 
