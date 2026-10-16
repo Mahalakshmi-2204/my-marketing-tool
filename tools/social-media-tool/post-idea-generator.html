@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/element/favicon.png" />
+    <link rel="apple-touch-icon" href="/element/favicon.png" />
+    <script>
+      window.va = window.va || function () {
+        (window.vaq = window.vaq || []).push(arguments);
+      };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta
+      name="description"
+      content="Free Post Idea Generator for Instagram, LinkedIn, TikTok, Facebook, YouTube, Pinterest and X. Get practical content ideas, post angles, hooks and calls to action."
+    />
+    <meta name="robots" content="index,follow" />
+    <title>Free Social Media Post Idea Generator | GrowthKit</title>
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span { color: var(--primary); }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .optional { color: var(--text-secondary); font-weight: 500; }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .form-grid .full { grid-column: 1 / -1; }
+
+      .text-input, .select-input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .text-input:focus, .select-input:focus { border-color: var(--primary); }
+
+      .field-hint {
+        margin-top: 6px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .options-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 24px;
+      }
+
+      .option {
+        display: inline-flex !important;
+        align-items: center;
+        gap: 8px;
+        margin: 0 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        cursor: pointer;
+      }
+
+      .option input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+
+      .actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .primary-button {
+        padding: 13px 24px;
+        border: none;
+        border-radius: 10px;
+        background: var(--primary);
+        color: white;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .primary-button:hover { opacity: 0.9; }
+
+      .small-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+
+      .small-button {
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .small-button:hover { border-color: var(--primary); }
+
+      .primary-button:focus-visible, .small-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .form-error {
+        min-height: 18px;
+        margin-top: 12px;
+        color: #a8503f;
+        font-size: 13px;
+      }
+
+      #results { display: none; margin-top: 10px; }
+
+      .results-heading {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .section-title { margin: 0 0 6px; font-size: 20px; }
+
+      .section-sub {
+        margin: 0 0 16px;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .idea-list { display: flex; flex-direction: column; gap: 12px; }
+
+      .idea-card {
+        padding: 18px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      .idea-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .idea-number {
+        display: inline-block;
+        margin-bottom: 7px;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .idea-title {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+      }
+
+      .idea-tag {
+        display: inline-block;
+        margin-top: 9px;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .idea-field { margin-top: 12px; }
+
+      .idea-field strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .idea-field p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.65;
+        overflow-wrap: anywhere;
+      }
+
+      .idea-card-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 14px;
+      }
+
+      .tip-box {
+        margin-top: 22px;
+        padding: 16px 18px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--primary);
+        border-radius: 10px;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .faq { max-width: 900px; margin: 0 auto; padding: 0 24px 90px; }
+      .faq h2 { margin-bottom: 22px; font-size: clamp(26px, 4vw, 34px); letter-spacing: -1px; }
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: "+"; color: var(--primary); font-size: 20px; font-weight: 600; }
+      .faq details[open] summary::after { content: "–"; }
+      .faq details[open] summary { border-bottom: 1px solid var(--border); }
+      .faq details p { padding: 14px 18px 18px; color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+      .faq summary:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+      @media (max-width: 600px) {
+        .tool-page { padding-top: 55px; }
+        .checker-box { padding: 20px; }
+        .form-grid { grid-template-columns: 1fr; }
+        .idea-card-top { flex-direction: column; align-items: stretch; }
+        .idea-card-actions { justify-content: flex-start; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does the Post Idea Generator work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enter a topic, audience and content preferences. The tool combines your inputs with built-in templates to suggest post ideas, angles, hooks and calls to action that you can adapt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the Post Idea Generator AI-powered?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This version uses built-in templates and runs in your browser. It does not generate new information with an AI model, so edit the suggestions and verify any claims before publishing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which platforms does it support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can create ideas for Instagram, LinkedIn, TikTok, Facebook, X, YouTube and Pinterest. The suggestions are starting points; adapt the length and format to each platform."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use these ideas for a business page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Enter your business topic and intended audience, then choose a goal such as educating, engagement, promotion or website traffic. Make sure each idea matches your brand and offer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool save my topic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The generator processes your inputs in the browser and does not send them to a server or save them."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label">FREE SOCIAL MEDIA TOOL</span>
+        <h1>Post Idea <span>Generator</span></h1>
+        <p>
+          Stuck on what to post next? Enter your topic and get practical social media
+          content ideas with a creative angle, opening hook and call to action.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <form id="genForm" novalidate>
+          <div class="form-grid">
+            <div class="full">
+              <label for="topicInput">What is your page or post topic?</label>
+              <input
+                id="topicInput"
+                class="text-input"
+                type="text"
+                maxlength="100"
+                placeholder="Example: skincare for beginners, digital marketing, personal finance"
+                autocomplete="off"
+                required
+              />
+              <p class="field-hint">Be specific for more useful ideas. Example: Instagram marketing for small businesses.</p>
+            </div>
+
+            <div>
+              <label for="audienceInput">Target audience <span class="optional">(optional)</span></label>
+              <input id="audienceInput" class="text-input" type="text" maxlength="70" placeholder="Example: beginner creators" autocomplete="off" />
+            </div>
+
+            <div>
+              <label for="platformSelect">Platform</label>
+              <select id="platformSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="goalSelect">Content goal</label>
+              <select id="goalSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="pillarSelect">Content angle</label>
+              <select id="pillarSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="toneSelect">Tone</label>
+              <select id="toneSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="countSelect">Number of ideas</label>
+              <select id="countSelect" class="select-input">
+                <option value="6">6 ideas</option>
+                <option value="9" selected>9 ideas</option>
+                <option value="12">12 ideas</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label for="ctaInput">Specific offer or call to action <span class="optional">(optional)</span></label>
+              <input id="ctaInput" class="text-input" type="text" maxlength="100" placeholder="Example: Download my free checklist" autocomplete="off" />
+            </div>
+
+            <div class="full options-row">
+              <label class="option" for="emojiToggle">
+                <input id="emojiToggle" type="checkbox" checked /> Include a suggested emoji
+              </label>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <button class="primary-button" type="submit">Generate post ideas</button>
+            <div class="small-buttons">
+              <button id="shuffleButton" class="small-button" type="button">Shuffle ideas</button>
+              <button id="sampleButton" class="small-button" type="button">Try an example</button>
+              <button id="clearButton" class="small-button" type="button">Clear</button>
+            </div>
+          </div>
+          <div id="formError" class="form-error" role="alert" aria-live="polite"></div>
+        </form>
+
+        <section id="results" aria-live="polite">
+          <div class="results-heading">
+            <div>
+              <h2 class="section-title">Your post ideas</h2>
+              <p id="resultsSub" class="section-sub"></p>
+            </div>
+            <button id="copyAllButton" class="small-button" type="button">Copy all ideas</button>
+          </div>
+          <div id="ideaList" class="idea-list"></div>
+          <div class="tip-box">
+            <strong>Make each idea your own:</strong> these are template-based prompts, not researched facts or AI-generated answers. Add real examples, original opinions or verified data before publishing. Avoid presenting a sample scenario as a real personal experience.
+          </div>
+        </section>
+      </div>
+
+      <a href="/index.html" class="back-link">← Back to GrowthKit</a>
+    </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+      <details open>
+        <summary>How does the Post Idea Generator work?</summary>
+        <p>Enter a topic, audience and content preferences. The tool combines your inputs with built-in templates to suggest post ideas, angles, hooks and calls to action that you can adapt.</p>
+      </details>
+      <details>
+        <summary>Is the Post Idea Generator AI-powered?</summary>
+        <p>No. This version uses built-in templates and runs in your browser. It does not generate new information with an AI model, so edit the suggestions and verify any claims before publishing.</p>
+      </details>
+      <details>
+        <summary>Which platforms does it support?</summary>
+        <p>You can create ideas for Instagram, LinkedIn, TikTok, Facebook, X, YouTube and Pinterest. The suggestions are starting points; adapt the length and format to each platform.</p>
+      </details>
+      <details>
+        <summary>Can I use these ideas for a business page?</summary>
+        <p>Yes. Enter your business topic and intended audience, then choose a goal such as educating, engagement, promotion or website traffic. Make sure each idea matches your brand and offer.</p>
+      </details>
+      <details>
+        <summary>Does this tool save my topic?</summary>
+        <p>No. The generator processes your inputs in the browser and does not send them to a server or save them.</p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+    <script src="/script.js"></script>
+
+    <script>
+      const el = (id) => document.getElementById(id);
+
+      const PLATFORMS = {
+        instagram: { name: "Instagram", formats: ["Carousel", "Reel", "Single-image post", "Story series"] },
+        linkedin: { name: "LinkedIn", formats: ["Text post", "Document carousel", "Short video", "Poll"] },
+        tiktok: { name: "TikTok", formats: ["Short video", "Reply-to-comment video", "Tutorial", "Storytime prompt"] },
+        facebook: { name: "Facebook", formats: ["Text post", "Photo post", "Short video", "Question post"] },
+        x: { name: "X", formats: ["Short post", "Thread", "Question", "Mini checklist"] },
+        youtube: { name: "YouTube", formats: ["Shorts video", "Long-form video", "Community post", "Tutorial"] },
+        pinterest: { name: "Pinterest", formats: ["Idea Pin", "Step-by-step pin", "Checklist graphic", "Infographic"] }
+      };
+
+      const GOALS = {
+        educate: "Educate / share tips",
+        engage: "Encourage comments",
+        promote: "Promote an offer",
+        inspire: "Inspire / motivate",
+        traffic: "Drive clicks / saves"
+      };
+
+      const PILLARS = {
+        mixed: "Mixed ideas",
+        howto: "How-to / tutorials",
+        mistakes: "Mistakes to avoid",
+        myths: "Myths / misconceptions",
+        list: "Lists / quick tips",
+        questions: "Questions / discussion",
+        comparison: "Comparisons",
+        behind: "Behind the scenes",
+        story: "Story / lesson learned",
+        checklist: "Checklist / step-by-step"
+      };
+
+      const TONES = {
+        friendly: "Friendly",
+        professional: "Professional",
+        playful: "Playful",
+        bold: "Bold / direct"
+      };
+
+      const IDEA_TEMPLATES = [
+        {
+          pillar: "howto", label: "How-to", title: "A beginner's guide to {topic}",
+          angle: "Break {topic} into three to five practical steps that {audience} can follow without feeling overwhelmed.",
+          hook: "New to {topic}? Start with these simple steps.",
+          formats: ["Carousel", "Tutorial", "Thread"], goal: ["educate", "traffic"],
+          cta: "Save this guide and try the first step today."
+        },
+        {
+          pillar: "mistakes", label: "Common mistakes", title: "{n} mistakes people make with {topic}",
+          angle: "Explain common beginner mistakes, why they happen, and one practical correction for each. Use examples you can verify.",
+          hook: "Doing {topic}? Check whether you're making one of these mistakes.",
+          formats: ["Carousel", "Short video", "Mini checklist"], goal: ["educate", "engage"],
+          cta: "Which mistake would you add? Share it below."
+        },
+        {
+          pillar: "myths", label: "Myth-busting", title: "Let's rethink a common belief about {topic}",
+          angle: "Choose one widespread assumption about {topic}, explain what is missing from the claim, and support your point with credible evidence.",
+          hook: "A common belief about {topic} deserves a second look.",
+          formats: ["Text post", "Reel", "Short video"], goal: ["educate", "engage"],
+          cta: "What have you heard about this? Let's discuss."
+        },
+        {
+          pillar: "list", label: "Quick tips", title: "{n} quick wins for better {topic}",
+          angle: "Share small, specific actions your audience can try today. Keep each tip useful on its own.",
+          hook: "Short on time? Try these quick wins for {topic}.",
+          formats: ["Carousel", "Short video", "Checklist graphic"], goal: ["educate", "traffic"],
+          cta: "Save this list for your next working session."
+        },
+        {
+          pillar: "questions", label: "Conversation starter", title: "Ask your audience one useful question about {topic}",
+          angle: "Ask a focused question with a few answer choices or invite people to share the challenge they are facing.",
+          hook: "What's the hardest part of {topic} for you right now?",
+          formats: ["Poll", "Question post", "Community post"], goal: ["engage"],
+          cta: "Answer in the comments—I'll use the responses to plan future posts."
+        },
+        {
+          pillar: "comparison", label: "Comparison", title: "{topic}: beginner approach vs. more advanced approach", 
+          angle: "Compare two approaches, explain when each is useful, and avoid claiming there is one perfect option for everyone.",
+          hook: "Which approach to {topic} fits your current stage?",
+          formats: ["Carousel", "Text post", "Infographic"], goal: ["educate", "engage"],
+          cta: "Which option would you choose, and why?"
+        },
+        {
+          pillar: "behind", label: "Behind the scenes", title: "Show the process behind your work on {topic}",
+          angle: "Walk through your real workflow, tools, preparation or decision-making process. Use your own footage or screenshots where appropriate.",
+          hook: "Here's what the process behind {topic} actually looks like.",
+          formats: ["Story series", "Short video", "Document carousel"], goal: ["engage", "promote"],
+          cta: "What part of the process would you like to see next?"
+        },
+        {
+          pillar: "story", label: "Lesson learned", title: "A lesson someone can learn from a {topic} experience", 
+          angle: "Share a real experience, challenge or turning point and the lesson it taught you. If you do not have a personal example, present it as a hypothetical scenario instead.",
+          hook: "One lesson that can change how you approach {topic}.",
+          formats: ["Text post", "Storytime prompt", "Short video"], goal: ["inspire", "engage"],
+          cta: "Have you learned a similar lesson? Tell us about it."
+        },
+        {
+          pillar: "checklist", label: "Checklist", title: "A simple {topic} checklist to use before you begin", 
+          angle: "Create a short sequence of checks or steps people can screenshot and return to when they work on {topic}.",
+          hook: "Before you start {topic}, run through this checklist.",
+          formats: ["Carousel", "Checklist graphic", "Infographic"], goal: ["educate", "traffic"],
+          cta: "Save this checklist so you can use it later."
+        },
+        {
+          pillar: "howto", label: "Explainer", title: "Explain one confusing part of {topic} in plain language", 
+          angle: "Choose one term, step or concept beginners often misunderstand. Explain it using a simple analogy and one concrete example.",
+          hook: "Let's make one confusing part of {topic} easier to understand.",
+          formats: ["Reel", "Short video", "Text post"], goal: ["educate"],
+          cta: "Send this to someone who is learning about {topic}."
+        },
+        {
+          pillar: "comparison", label: "Pros and cons", title: "The trade-offs to consider before choosing a {topic} approach", 
+          angle: "Lay out the main benefits, limitations and situations where different choices make sense. Keep the comparison fair.",
+          hook: "Before choosing an approach to {topic}, weigh these trade-offs.",
+          formats: ["Carousel", "Thread", "Document carousel"], goal: ["educate", "engage"],
+          cta: "What factor matters most to you?"
+        },
+        {
+          pillar: "list", label: "Resource roundup", title: "Useful resources for people learning {topic}", 
+          angle: "Curate tools, books, websites or learning resources you have checked yourself. Explain what each resource is useful for.",
+          hook: "Learning {topic}? Here are resources worth exploring.",
+          formats: ["Carousel", "Text post", "Pinterest pin"], goal: ["traffic", "educate"],
+          cta: "Save the list and tell me which resource you try."
+        },
+        {
+          pillar: "questions", label: "FAQ", title: "Answer a frequently asked question about {topic}", 
+          angle: "Pick one real question from comments, customer conversations or search suggestions and answer it clearly with a practical example.",
+          hook: "One question about {topic} that deserves a clear answer.",
+          formats: ["Short video", "Text post", "Carousel"], goal: ["educate", "engage"],
+          cta: "Leave your next question below."
+        },
+        {
+          pillar: "promote", label: "Offer spotlight", title: "Show how your offer helps with a specific {topic} task", 
+          angle: "Demonstrate one real feature, service or product benefit. Explain who it is for, what it helps with, and any limitations honestly.",
+          hook: "Working on {topic}? Here's how this resource may help.",
+          formats: ["Demo video", "Carousel", "Product post"], goal: ["promote"],
+          cta: "{customCta}"
+        },
+        {
+          pillar: "story", label: "Progress check-in", title: "Share a progress update about your work with {topic}", 
+          angle: "Share a genuine update: what you tried, what you learned, what remains challenging and what you will do next. Do not invent results.",
+          hook: "A realistic progress update on {topic}: what worked and what didn't.",
+          formats: ["Text post", "Story series", "Short video"], goal: ["inspire", "engage"],
+          cta: "What are you currently working toward?"
+        },
+        {
+          pillar: "checklist", label: "Before and after", title: "Show a before-and-after improvement in {topic}", 
+          angle: "Use a real example to compare the starting point with the improved version. Explain what changed and why, and get permission for any external example.",
+          hook: "Here's what a clear improvement in {topic} can look like.",
+          formats: ["Carousel", "Short video", "Case-study post"], goal: ["educate", "promote"],
+          cta: "Which part of the process would you like explained?"
+        },
+        {
+          pillar: "myths", label: "Do this, not that", title: "A more helpful alternative to a common {topic} habit", 
+          angle: "Identify a habit that may not fit every situation and suggest a more practical alternative, explaining when it may help.",
+          hook: "Instead of automatically doing this with {topic}, try considering this alternative.",
+          formats: ["Carousel", "Reel", "Thread"], goal: ["educate", "engage"],
+          cta: "Save this as a reminder for next time."
+        },
+        {
+          pillar: "questions", label: "Audience research", title: "Ask your audience what they want to learn next about {topic}", 
+          angle: "Offer three specific subtopics and let your audience vote. Use the responses to shape future content rather than guessing.",
+          hook: "Help me choose the next topic: which part of {topic} should we cover?",
+          formats: ["Poll", "Story poll", "Community post"], goal: ["engage"],
+          cta: "Vote for an option or suggest your own."
+        },
+        {
+          pillar: "howto", label: "Mini challenge", title: "A simple 3-day challenge around {topic}", 
+          angle: "Create one small task per day, with a clear action and an easy way for participants to reflect on what they learned.",
+          hook: "Want to build momentum with {topic}? Try this mini challenge.",
+          formats: ["Story series", "Carousel", "Short video series"], goal: ["engage", "inspire"],
+          cta: "Join in and share which day you complete first."
+        }
+      ];
+
+      const STYLE_EMOJI = ["💡", "📌", "🧠", "🚀", "✅", "🔍", "📣", "🎯", "✨"];
+      let hasResults = false;
+      let currentIdeas = [];
+
+      function fillSelect(select, map, selected) {
+        Object.entries(map).forEach(([value, label]) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = label;
+          if (value === selected) option.selected = true;
+          select.appendChild(option);
+        });
+      }
+
+      fillSelect(el("platformSelect"), Object.fromEntries(Object.entries(PLATFORMS).map(([key, value]) => [key, value.name])), "instagram");
+      fillSelect(el("goalSelect"), GOALS, "educate");
+      fillSelect(el("pillarSelect"), PILLARS, "mixed");
+      fillSelect(el("toneSelect"), TONES, "friendly");
+
+      function shuffle(list) {
+        const copy = list.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function capitalize(value) {
+        const clean = String(value || "").trim();
+        return clean ? clean.charAt(0).toUpperCase() + clean.slice(1) : clean;
+      }
+
+      function fillTemplate(template, context) {
+        return template.replace(/\{([\w ]+)\}/g, (match, key) => {
+          const normalizedKey = key.trim();
+          return Object.prototype.hasOwnProperty.call(context, normalizedKey) ? context[normalizedKey] : match;
+        });
+      }
+
+      function readSettings() {
+        return {
+          topic: el("topicInput").value.trim().replace(/\s+/g, " "),
+          audience: el("audienceInput").value.trim().replace(/\s+/g, " "),
+          platform: el("platformSelect").value,
+          goal: el("goalSelect").value,
+          pillar: el("pillarSelect").value,
+          tone: el("toneSelect").value,
+          count: Number(el("countSelect").value),
+          cta: el("ctaInput").value.trim(),
+          emoji: el("emojiToggle").checked
+        };
+      }
+
+      function toneAdjust(text, tone) {
+        if (tone === "professional") return text.replace(/!/g, ".").replace(/\bHey\b/g, "");
+        if (tone === "playful" && !/[!?…]$/.test(text)) return text + " 🎉";
+        if (tone === "bold" && !/[!?…]$/.test(text)) return text + ".";
+        return text;
+      }
+
+      function buildIdeas(settings) {
+        const audience = settings.audience || "people interested in " + settings.topic;
+        let pool = IDEA_TEMPLATES.filter((template) => {
+          const pillarMatch = settings.pillar === "mixed" || template.pillar === settings.pillar;
+          const goalMatch = template.goal.includes(settings.goal) || settings.goal === "inspire" && template.goal.includes("educate");
+          return pillarMatch && goalMatch;
+        });
+
+        if (pool.length < settings.count) {
+          const additional = IDEA_TEMPLATES.filter((template) => !pool.includes(template) && (settings.pillar === "mixed" || template.pillar === settings.pillar));
+          pool = pool.concat(shuffle(additional));
+        }
+        if (pool.length < settings.count) {
+          pool = pool.concat(shuffle(IDEA_TEMPLATES.filter((template) => !pool.includes(template))));
+        }
+
+        pool = shuffle(pool).slice(0, settings.count);
+        const context = {
+          topic: settings.topic,
+          Topic: capitalize(settings.topic),
+          audience,
+          n: [3, 5, 7][Math.floor(Math.random() * 3)],
+          customCta: settings.cta || "Invite interested people to learn more"
+        };
+
+        return pool.map((template, index) => {
+          let ideaCta = settings.cta && (settings.goal === "promote" || settings.goal === "traffic") ? settings.cta : template.cta;
+          const formats = template.formats;
+          let format = formats.find((candidate) => PLATFORMS[settings.platform].formats.some((platformFormat) => platformFormat.toLowerCase().includes(candidate.toLowerCase()) || candidate.toLowerCase().includes(platformFormat.toLowerCase())));
+          if (!format) format = PLATFORMS[settings.platform].formats[index % PLATFORMS[settings.platform].formats.length];
+          let angle = fillTemplate(template.angle, context);
+          let title = fillTemplate(template.title, context);
+          let hook = fillTemplate(template.hook, context);
+          ideaCta = fillTemplate(ideaCta, context);
+
+          if (settings.goal === "promote" && !template.goal.includes("promote")) {
+            angle += " Naturally connect the takeaway to your product or service only where it genuinely fits.";
+          } else if (settings.goal === "traffic") {
+            angle += " Make the next step clear and ensure the destination page delivers what the post promises.";
+          } else if (settings.goal === "inspire") {
+            angle += " Emphasize a realistic next step instead of promising guaranteed results.";
+          }
+
+          if (settings.tone === "professional") {
+            hook = hook.replace(/\?$/, "?");
+          } else if (settings.tone === "bold") {
+            hook = hook.replace(/^Let's /i, "Here is how to ");
+          } else if (settings.tone === "playful") {
+            hook = hook + (/[!?]$/.test(hook) ? "" : "!");
+          }
+
+          if (settings.emoji) title = STYLE_EMOJI[index % STYLE_EMOJI.length] + " " + title;
+          return {
+            number: index + 1,
+            title: toneAdjust(title, settings.tone),
+            label: template.label,
+            angle,
+            hook: toneAdjust(hook, settings.tone),
+            format,
+            cta: toneAdjust(ideaCta, settings.tone)
+          };
+        });
+      }
+
+      function ideaAsText(idea) {
+        return `${idea.number}. ${idea.title}\nContent angle: ${idea.angle}\nSuggested hook: ${idea.hook}\nFormat: ${idea.format}\nCall to action: ${idea.cta}`;
+      }
+
+      async function copyText(text, button, successText = "Copied!") {
+        const original = button.textContent;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const area = document.createElement("textarea");
+            area.value = text;
+            area.setAttribute("readonly", "");
+            area.style.position = "absolute";
+            area.style.left = "-9999px";
+            document.body.appendChild(area);
+            area.select();
+            const copied = document.execCommand("copy");
+            area.remove();
+            if (!copied) throw new Error("Copy command failed");
+          }
+          button.textContent = successText;
+        } catch (error) {
+          button.textContent = "Copy unavailable";
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1500);
+      }
+
+      function renderIdeas(ideas, settings) {
+        const list = el("ideaList");
+        list.replaceChildren();
+
+        ideas.forEach((idea) => {
+          const card = document.createElement("article");
+          card.className = "idea-card";
+
+          const top = document.createElement("div");
+          top.className = "idea-card-top";
+          const titleGroup = document.createElement("div");
+          const number = document.createElement("span");
+          number.className = "idea-number";
+          number.textContent = `IDEA ${String(idea.number).padStart(2, "0")}`;
+          const title = document.createElement("h3");
+          title.className = "idea-title";
+          title.textContent = idea.title;
+          const tag = document.createElement("span");
+          tag.className = "idea-tag";
+          tag.textContent = idea.label;
+          titleGroup.append(number, title, tag);
+          top.append(titleGroup);
+
+          const fields = [
+            ["Content angle", idea.angle],
+            ["Suggested hook", idea.hook],
+            ["Recommended format", idea.format],
+            ["Call to action", idea.cta]
+          ];
+          card.appendChild(top);
+          fields.forEach(([label, value]) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "idea-field";
+            const strong = document.createElement("strong");
+            strong.textContent = label;
+            const p = document.createElement("p");
+            p.textContent = value;
+            wrapper.append(strong, p);
+            card.appendChild(wrapper);
+          });
+
+          const actions = document.createElement("div");
+          actions.className = "idea-card-actions";
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "small-button";
+          button.textContent = "Copy idea";
+          button.addEventListener("click", () => copyText(ideaAsText(idea), button));
+          actions.appendChild(button);
+          card.appendChild(actions);
+          list.appendChild(card);
+        });
+
+        el("resultsSub").textContent = `${ideas.length} ideas for ${PLATFORMS[settings.platform].name} · Goal: ${GOALS[settings.goal]} · Topic: ${settings.topic}`;
+        el("results").style.display = "block";
+        hasResults = true;
+      }
+
+      function generate() {
+        const settings = readSettings();
+        const error = el("formError");
+        if (!settings.topic) {
+          error.textContent = "Please enter a topic before generating ideas.";
+          el("topicInput").focus();
+          return;
+        }
+        error.textContent = "";
+        currentIdeas = buildIdeas(settings);
+        renderIdeas(currentIdeas, settings);
+      }
+
+      el("genForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        generate();
+      });
+
+      el("shuffleButton").addEventListener("click", () => {
+        if (!el("topicInput").value.trim()) {
+          el("formError").textContent = "Enter a topic first, then shuffle your ideas.";
+          el("topicInput").focus();
+          return;
+        }
+        generate();
+      });
+
+      el("sampleButton").addEventListener("click", () => {
+        el("topicInput").value = "digital marketing for small businesses";
+        el("audienceInput").value = "small business owners who are new to marketing";
+        el("platformSelect").value = "linkedin";
+        el("goalSelect").value = "educate";
+        el("pillarSelect").value = "mixed";
+        el("toneSelect").value = "friendly";
+        el("countSelect").value = "9";
+        el("ctaInput").value = "Save this post and follow for practical marketing tips";
+        el("emojiToggle").checked = true;
+        generate();
+      });
+
+      el("clearButton").addEventListener("click", () => {
+        el("topicInput").value = "";
+        el("audienceInput").value = "";
+        el("ctaInput").value = "";
+        el("formError").textContent = "";
+        el("results").style.display = "none";
+        el("ideaList").replaceChildren();
+        currentIdeas = [];
+        hasResults = false;
+        el("topicInput").focus();
+      });
+
+      el("copyAllButton").addEventListener("click", (event) => {
+        if (!currentIdeas.length) return;
+        copyText(currentIdeas.map(ideaAsText).join("\n\n--------------------\n\n"), event.currentTarget, "All ideas copied!");
+      });
+
+      ["platformSelect", "goalSelect", "pillarSelect", "toneSelect", "countSelect", "emojiToggle"].forEach((id) => {
+        el(id).addEventListener("change", () => {
+          if (hasResults && el("topicInput").value.trim()) generate();
+        });
+      });
+    </script>
+  </body>
+</html>

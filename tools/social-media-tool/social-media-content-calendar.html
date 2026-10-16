@@ -1,0 +1,1602 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/element/favicon.png" />
+    <link rel="apple-touch-icon" href="/element/favicon.png" />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
+    <meta
+      name="description"
+      content="Free Social Media Content Calendar. Plan posts for Instagram, LinkedIn, Facebook, X, TikTok and YouTube on a simple monthly calendar, then export it to CSV."
+    />
+
+    <title>Free Social Media Content Calendar | GrowthKit</title>
+
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      /* ---------- Toolbar ---------- */
+      .cal-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .month-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .month-label {
+        min-width: 170px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .icon-button,
+      .small-button {
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .icon-button {
+        width: 38px;
+        padding: 8px 0;
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      .icon-button:hover,
+      .small-button:hover {
+        border-color: var(--primary);
+      }
+
+      .primary-button {
+        padding: 9px 16px;
+        border: none;
+        border-radius: 8px;
+        background: var(--primary);
+        color: white;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .primary-button:hover {
+        opacity: 0.9;
+      }
+
+      .icon-button:focus-visible,
+      .small-button:focus-visible,
+      .primary-button:focus-visible,
+      .day:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .toolbar-right {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .select-input,
+      .text-input,
+      .area-input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .toolbar-right .select-input {
+        width: auto;
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .select-input:focus,
+      .text-input:focus,
+      .area-input:focus {
+        border-color: var(--primary);
+      }
+
+      /* ---------- Stats + legend ---------- */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .stat {
+        padding: 12px 8px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--primary);
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .stat span {
+        color: var(--text-secondary);
+        font-size: 11px;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 16px;
+        margin-bottom: 14px;
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ---------- Calendar grid ---------- */
+      .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 1px;
+        overflow: hidden;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      .weekday {
+        padding: 10px 4px;
+        background: var(--bg);
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .day {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 0;
+        min-height: 112px;
+        padding: 8px;
+        border: none;
+        border-radius: 0;
+        background: var(--card);
+        color: var(--text);
+        font-family: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .day:hover {
+        background: var(--bg);
+      }
+
+      .day.other {
+        opacity: 0.5;
+      }
+
+      .day-num {
+        display: inline-grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .day.today .day-num {
+        background: var(--primary);
+        color: white;
+      }
+
+      .chips {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+      }
+
+      .chip {
+        display: block;
+        overflow: hidden;
+        padding: 3px 6px;
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--border);
+        border-radius: 6px;
+        background: var(--bg);
+        font-size: 11px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .chip b {
+        margin-right: 4px;
+        color: var(--primary);
+        font-size: 10px;
+        letter-spacing: 0.3px;
+      }
+
+      .chip.s-idea {
+        border-left-color: var(--text-secondary);
+      }
+
+      .chip.s-drafting {
+        border-left-color: #b8935a;
+      }
+
+      .chip.s-scheduled {
+        border-left-color: var(--primary);
+      }
+
+      .chip.s-posted {
+        border-color: var(--primary);
+        background: var(--primary);
+        color: white;
+      }
+
+      .chip.s-posted b {
+        color: white;
+      }
+
+      .more {
+        color: var(--text-secondary);
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .dots {
+        display: none;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border: 2px solid var(--text-secondary);
+        border-radius: 50%;
+        background: var(--text-secondary);
+      }
+
+      .dot.s-drafting {
+        border-color: #b8935a;
+        background: #b8935a;
+      }
+
+      .dot.s-scheduled {
+        border-color: var(--primary);
+        background: transparent;
+      }
+
+      .dot.s-posted {
+        border-color: var(--primary);
+        background: var(--primary);
+      }
+
+      .storage-note {
+        margin-top: 16px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .storage-note.warn {
+        color: #a8503f;
+      }
+
+      .bottom-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      /* ---------- Dialog ---------- */
+      dialog.day-dialog {
+        width: min(520px, calc(100% - 32px));
+        max-height: calc(100vh - 48px);
+        padding: 0;
+        overflow: auto;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--card);
+        color: var(--text);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      dialog.day-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .dialog-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .dialog-head h3 {
+        margin: 0;
+        font-size: 17px;
+        letter-spacing: -0.3px;
+      }
+
+      .dialog-body {
+        padding: 18px 22px 22px;
+      }
+
+      .post-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .post-item {
+        padding: 12px 14px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--border);
+        border-radius: 10px;
+      }
+
+      .post-item.s-drafting {
+        border-left-color: #b8935a;
+      }
+
+      .post-item.s-scheduled,
+      .post-item.s-posted {
+        border-left-color: var(--primary);
+      }
+
+      .post-top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      .badge {
+        padding: 2px 8px;
+        border-radius: 20px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .post-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.4;
+        word-break: break-word;
+      }
+
+      .post-notes {
+        margin: 6px 0 0;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.55;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .post-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .post-actions .small-button {
+        padding: 5px 11px;
+        font-size: 12px;
+      }
+
+      .empty-day {
+        margin: 0 0 16px;
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .form-grid .full {
+        grid-column: 1 / -1;
+      }
+
+      .form-grid label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .area-input {
+        min-height: 90px;
+        line-height: 1.5;
+        resize: vertical;
+      }
+
+      .form-error {
+        grid-column: 1 / -1;
+        min-height: 16px;
+        color: #a8503f;
+        font-size: 12px;
+      }
+
+      .form-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
+      /* ---------- Responsive ---------- */
+      @media (max-width: 760px) {
+        .chips {
+          display: none;
+        }
+
+        .dots {
+          display: flex;
+        }
+
+        .day {
+          min-height: 64px;
+          padding: 6px 4px;
+          align-items: center;
+        }
+
+        .stats {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 18px;
+        }
+
+        .cal-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .month-nav {
+          justify-content: space-between;
+        }
+
+        .toolbar-right {
+          justify-content: space-between;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does this content calendar work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Click any day to add a post. Give it a title, choose the platform and status, and add an optional time and notes. Your posts appear on the calendar, and you can edit, delete, filter by platform and export everything to a CSV file."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is my calendar saved?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In your own browser, on your own device. Nothing is sent to a server. Clearing your browser data, using private browsing or switching browsers or devices means your calendar will not be there, so export a CSV regularly as a backup."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool publish posts for me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It is a planning tool and does not connect to any social media account. The Scheduled status is just a label to help you keep track of your own plans."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do the statuses mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Idea is something you might post. Drafting means you are working on it. Scheduled means it is ready and planned for a date. Posted means it is published."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How often should I post?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no universal answer. Pick a schedule you can keep up consistently, for example two or three posts a week, then adjust based on what your audience responds to and how much time you have."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I move my calendar to a spreadsheet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Use the Export CSV button to download all your posts as a file that opens in Excel, Google Sheets and most other spreadsheet apps."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE SOCIAL MEDIA TOOL </span>
+
+        <h1>Social Media Content <span>Calendar</span></h1>
+
+        <p>
+          Plan your posts on a simple monthly calendar. Add ideas, track their
+          status, filter by platform and export everything to a spreadsheet.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <div class="cal-toolbar">
+          <div class="month-nav">
+            <button
+              id="prevButton"
+              class="icon-button"
+              type="button"
+              aria-label="Previous month"
+            >
+              &lsaquo;
+            </button>
+            <div id="monthLabel" class="month-label" aria-live="polite"></div>
+            <button
+              id="nextButton"
+              class="icon-button"
+              type="button"
+              aria-label="Next month"
+            >
+              &rsaquo;
+            </button>
+            <button id="todayButton" class="small-button" type="button">
+              Today
+            </button>
+          </div>
+
+          <div class="toolbar-right">
+            <select
+              id="platformFilter"
+              class="select-input"
+              aria-label="Filter by platform"
+            ></select>
+            <button id="addButton" class="primary-button" type="button">
+              + Add post
+            </button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="statTotal">0</strong>
+            <span>Posts this month</span>
+          </div>
+          <div class="stat">
+            <strong id="statIdea">0</strong>
+            <span>Ideas</span>
+          </div>
+          <div class="stat">
+            <strong id="statDrafting">0</strong>
+            <span>Drafting</span>
+          </div>
+          <div class="stat">
+            <strong id="statScheduled">0</strong>
+            <span>Scheduled</span>
+          </div>
+          <div class="stat">
+            <strong id="statPosted">0</strong>
+            <span>Posted</span>
+          </div>
+        </div>
+
+        <div class="legend" aria-label="Status key">
+          <span><i class="dot s-idea"></i> Idea</span>
+          <span><i class="dot s-drafting"></i> Drafting</span>
+          <span><i class="dot s-scheduled"></i> Scheduled</span>
+          <span><i class="dot s-posted"></i> Posted</span>
+        </div>
+
+        <div id="calendar" class="cal-grid" role="grid"></div>
+
+        <div class="bottom-actions">
+          <button id="exportButton" class="small-button" type="button">
+            Export CSV
+          </button>
+          <button id="sampleButton" class="small-button" type="button">
+            Add sample posts
+          </button>
+          <button id="clearMonthButton" class="small-button" type="button">
+            Clear this month
+          </button>
+        </div>
+
+        <p id="storageNote" class="storage-note">
+          Your calendar is saved in this browser only and is not sent anywhere.
+          Export a CSV now and then to keep a backup.
+        </p>
+      </div>
+
+      <a href="/index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+
+    <dialog id="dayDialog" class="day-dialog" aria-labelledby="dialogTitle">
+      <div class="dialog-head">
+        <h3 id="dialogTitle"></h3>
+        <button
+          id="closeDialog"
+          class="icon-button"
+          type="button"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="dialog-body">
+        <div id="listView">
+          <div id="postList" class="post-list"></div>
+          <button id="newPostButton" class="primary-button" type="button">
+            + Add a post for this day
+          </button>
+        </div>
+
+        <form id="postForm" class="form-grid" style="display: none" novalidate>
+          <div class="full">
+            <label for="fTitle">Title or idea</label>
+            <input
+              id="fTitle"
+              class="text-input"
+              type="text"
+              maxlength="140"
+              placeholder="Example: 5 mistakes to avoid in your meta tags"
+            />
+          </div>
+
+          <div>
+            <label for="fDate">Date</label>
+            <input id="fDate" class="text-input" type="date" />
+          </div>
+
+          <div>
+            <label for="fTime">Time (optional)</label>
+            <input id="fTime" class="text-input" type="time" />
+          </div>
+
+          <div>
+            <label for="fPlatform">Platform</label>
+            <select id="fPlatform" class="select-input"></select>
+          </div>
+
+          <div>
+            <label for="fStatus">Status</label>
+            <select id="fStatus" class="select-input"></select>
+          </div>
+
+          <div class="full">
+            <label for="fNotes">Notes or caption (optional)</label>
+            <textarea
+              id="fNotes"
+              class="area-input"
+              maxlength="1000"
+              placeholder="Caption draft, hashtags, links, reminders..."
+            ></textarea>
+          </div>
+
+          <div id="formError" class="form-error" role="alert"></div>
+
+          <div class="form-actions">
+            <button id="cancelForm" class="small-button" type="button">
+              Cancel
+            </button>
+            <button class="primary-button" type="submit">Save post</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>How does this content calendar work?</summary>
+        <p>
+          Click any day to add a post. Give it a title, choose the platform and
+          status, and add an optional time and notes. Your posts appear on the
+          calendar, and you can edit, delete, filter by platform and export
+          everything to a CSV file.
+        </p>
+      </details>
+
+      <details>
+        <summary>Where is my calendar saved?</summary>
+        <p>
+          In your own browser, on your own device. Nothing is sent to a server.
+          Clearing your browser data, using private browsing or switching
+          browsers or devices means your calendar will not be there, so export a
+          CSV regularly as a backup.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool publish posts for me?</summary>
+        <p>
+          No. It is a planning tool and does not connect to any social media
+          account. The Scheduled status is just a label to help you keep track
+          of your own plans.
+        </p>
+      </details>
+
+      <details>
+        <summary>What do the statuses mean?</summary>
+        <p>
+          Idea is something you might post. Drafting means you are working on
+          it. Scheduled means it is ready and planned for a date. Posted means
+          it is published.
+        </p>
+      </details>
+
+      <details>
+        <summary>How often should I post?</summary>
+        <p>
+          There is no universal answer. Pick a schedule you can keep up
+          consistently, for example two or three posts a week, then adjust based
+          on what your audience responds to and how much time you have.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I move my calendar to a spreadsheet?</summary>
+        <p>
+          Yes. Use the Export CSV button to download all your posts as a file
+          that opens in Excel, Google Sheets and most other spreadsheet apps.
+        </p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="/script.js"></script>
+
+    <script>
+      const STORAGE_KEY = "growthkit-content-calendar-v1";
+
+      const PLATFORMS = [
+        ["instagram", "Instagram", "IG"],
+        ["facebook", "Facebook", "FB"],
+        ["linkedin", "LinkedIn", "LI"],
+        ["x", "X (Twitter)", "X"],
+        ["tiktok", "TikTok", "TT"],
+        ["youtube", "YouTube", "YT"],
+        ["pinterest", "Pinterest", "PI"],
+        ["other", "Other", "•"],
+      ];
+
+      const STATUSES = [
+        ["idea", "Idea"],
+        ["drafting", "Drafting"],
+        ["scheduled", "Scheduled"],
+        ["posted", "Posted"],
+      ];
+
+      const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+      const el = (id) => document.getElementById(id);
+
+      const calendar = el("calendar");
+      const monthLabel = el("monthLabel");
+      const platformFilter = el("platformFilter");
+      const dayDialog = el("dayDialog");
+      const dialogTitle = el("dialogTitle");
+      const listView = el("listView");
+      const postList = el("postList");
+      const postForm = el("postForm");
+      const storageNote = el("storageNote");
+
+      let posts = loadPosts();
+      let viewDate = new Date();
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1);
+
+      let dialogDate = "";
+      let editingId = null;
+      let storageWorks = true;
+
+      /* ---------- storage ---------- */
+      function loadPosts() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          const data = raw ? JSON.parse(raw) : [];
+
+          if (!Array.isArray(data)) {
+            return [];
+          }
+
+          return data
+            .filter(
+              (p) =>
+                p &&
+                typeof p.id === "string" &&
+                typeof p.title === "string" &&
+                /^\d{4}-\d{2}-\d{2}$/.test(p.date),
+            )
+            .map((p) => ({
+              id: p.id,
+              title: p.title,
+              date: p.date,
+              time: typeof p.time === "string" ? p.time : "",
+              notes: typeof p.notes === "string" ? p.notes : "",
+              platform: PLATFORMS.some((x) => x[0] === p.platform)
+                ? p.platform
+                : "other",
+              status: STATUSES.some((x) => x[0] === p.status)
+                ? p.status
+                : "idea",
+            }));
+        } catch {
+          storageWorks = false;
+          return [];
+        }
+      }
+
+      function persist() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        } catch {
+          storageWorks = false;
+        }
+
+        if (!storageWorks) {
+          storageNote.textContent =
+            "Your browser is blocking storage, so your calendar will be lost when you close this page. Use Export CSV to keep a copy.";
+          storageNote.classList.add("warn");
+        }
+      }
+
+      /* ---------- helpers ---------- */
+      const pad = (n) => String(n).padStart(2, "0");
+
+      function toISO(date) {
+        return (
+          date.getFullYear() +
+          "-" +
+          pad(date.getMonth() + 1) +
+          "-" +
+          pad(date.getDate())
+        );
+      }
+
+      function fromISO(iso) {
+        const [y, m, d] = iso.split("-").map(Number);
+        return new Date(y, m - 1, d);
+      }
+
+      function newId() {
+        return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      }
+
+      function platformInfo(key) {
+        return PLATFORMS.find((p) => p[0] === key) || PLATFORMS[7];
+      }
+
+      function statusLabel(key) {
+        const found = STATUSES.find((s) => s[0] === key);
+        return found ? found[1] : "Idea";
+      }
+
+      function sortPosts(list) {
+        return list.slice().sort((a, b) => {
+          if (a.date !== b.date) {
+            return a.date < b.date ? -1 : 1;
+          }
+
+          if (a.time !== b.time) {
+            if (!a.time) return 1;
+            if (!b.time) return -1;
+            return a.time < b.time ? -1 : 1;
+          }
+
+          return a.title.localeCompare(b.title);
+        });
+      }
+
+      function visiblePosts() {
+        const filter = platformFilter.value;
+        return filter === "all"
+          ? posts
+          : posts.filter((p) => p.platform === filter);
+      }
+
+      function prettyDate(iso) {
+        return fromISO(iso).toLocaleDateString(undefined, {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+      }
+
+      /* ---------- setup selects ---------- */
+      function fillSelect(select, options, withAll) {
+        select.innerHTML = "";
+
+        if (withAll) {
+          const all = document.createElement("option");
+          all.value = "all";
+          all.textContent = "All platforms";
+          select.appendChild(all);
+        }
+
+        options.forEach(([value, label]) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = label;
+          select.appendChild(option);
+        });
+      }
+
+      fillSelect(platformFilter, PLATFORMS, true);
+      fillSelect(el("fPlatform"), PLATFORMS, false);
+      fillSelect(el("fStatus"), STATUSES, false);
+
+      /* ---------- render calendar ---------- */
+      function render() {
+        const year = viewDate.getFullYear();
+        const month = viewDate.getMonth();
+
+        monthLabel.textContent = viewDate.toLocaleDateString(undefined, {
+          month: "long",
+          year: "numeric",
+        });
+
+        const list = visiblePosts();
+        const byDate = {};
+
+        sortPosts(list).forEach((p) => {
+          (byDate[p.date] = byDate[p.date] || []).push(p);
+        });
+
+        calendar.innerHTML = "";
+
+        WEEKDAYS.forEach((name) => {
+          const head = document.createElement("div");
+          head.className = "weekday";
+          head.setAttribute("role", "columnheader");
+          head.textContent = name;
+          calendar.appendChild(head);
+        });
+
+        const offset = (new Date(year, month, 1).getDay() + 6) % 7;
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const rows = Math.ceil((offset + daysInMonth) / 7);
+        const todayISO = toISO(new Date());
+
+        for (let i = 0; i < rows * 7; i++) {
+          const date = new Date(year, month, 1 - offset + i);
+          const iso = toISO(date);
+          const dayPosts = byDate[iso] || [];
+
+          const cell = document.createElement("button");
+          cell.type = "button";
+          cell.className = "day";
+          cell.dataset.date = iso;
+
+          if (date.getMonth() !== month) cell.classList.add("other");
+          if (iso === todayISO) cell.classList.add("today");
+
+          cell.setAttribute(
+            "aria-label",
+            prettyDate(iso) +
+              ", " +
+              dayPosts.length +
+              (dayPosts.length === 1 ? " post" : " posts"),
+          );
+
+          const num = document.createElement("span");
+          num.className = "day-num";
+          num.textContent = date.getDate();
+          cell.appendChild(num);
+
+          const chips = document.createElement("span");
+          chips.className = "chips";
+
+          dayPosts.slice(0, 2).forEach((p) => {
+            const chip = document.createElement("span");
+            chip.className = "chip s-" + p.status;
+
+            const tag = document.createElement("b");
+            tag.textContent = platformInfo(p.platform)[2];
+
+            chip.append(tag, document.createTextNode(p.title));
+            chips.appendChild(chip);
+          });
+
+          if (dayPosts.length > 2) {
+            const more = document.createElement("span");
+            more.className = "more";
+            more.textContent = "+" + (dayPosts.length - 2) + " more";
+            chips.appendChild(more);
+          }
+
+          cell.appendChild(chips);
+
+          const dots = document.createElement("span");
+          dots.className = "dots";
+
+          dayPosts.slice(0, 6).forEach((p) => {
+            const dot = document.createElement("i");
+            dot.className = "dot s-" + p.status;
+            dots.appendChild(dot);
+          });
+
+          cell.appendChild(dots);
+          calendar.appendChild(cell);
+        }
+
+        renderStats(list);
+      }
+
+      function renderStats(list) {
+        const year = viewDate.getFullYear();
+        const month = viewDate.getMonth();
+
+        const inMonth = list.filter((p) => {
+          const d = fromISO(p.date);
+          return d.getFullYear() === year && d.getMonth() === month;
+        });
+
+        const count = (status) =>
+          inMonth.filter((p) => p.status === status).length;
+
+        el("statTotal").textContent = inMonth.length;
+        el("statIdea").textContent = count("idea");
+        el("statDrafting").textContent = count("drafting");
+        el("statScheduled").textContent = count("scheduled");
+        el("statPosted").textContent = count("posted");
+      }
+
+      /* ---------- dialog ---------- */
+      function openDay(iso) {
+        dialogDate = iso;
+        editingId = null;
+        showList();
+
+        if (!dayDialog.open) {
+          dayDialog.showModal();
+        }
+      }
+
+      function showList() {
+        dialogTitle.textContent = prettyDate(dialogDate);
+        postForm.style.display = "none";
+        listView.style.display = "block";
+        renderDayList();
+      }
+
+      function renderDayList() {
+        postList.innerHTML = "";
+
+        const dayPosts = sortPosts(posts.filter((p) => p.date === dialogDate));
+
+        if (dayPosts.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "empty-day";
+          empty.textContent = "No posts planned for this day yet.";
+          postList.appendChild(empty);
+          return;
+        }
+
+        dayPosts.forEach((p) => {
+          const item = document.createElement("div");
+          item.className = "post-item s-" + p.status;
+
+          const top = document.createElement("div");
+          top.className = "post-top";
+
+          const platform = document.createElement("span");
+          platform.className = "badge";
+          platform.textContent = platformInfo(p.platform)[1];
+
+          const status = document.createElement("span");
+          status.className = "badge";
+          status.textContent = statusLabel(p.status);
+
+          top.append(platform, status);
+
+          if (p.time) {
+            const time = document.createElement("span");
+            time.textContent = p.time;
+            top.appendChild(time);
+          }
+
+          const title = document.createElement("p");
+          title.className = "post-title";
+          title.textContent = p.title;
+
+          item.append(top, title);
+
+          if (p.notes) {
+            const notes = document.createElement("p");
+            notes.className = "post-notes";
+            notes.textContent = p.notes;
+            item.appendChild(notes);
+          }
+
+          const actions = document.createElement("div");
+          actions.className = "post-actions";
+
+          const edit = document.createElement("button");
+          edit.type = "button";
+          edit.className = "small-button";
+          edit.textContent = "Edit";
+          edit.addEventListener("click", () => showForm(p));
+
+          const del = document.createElement("button");
+          del.type = "button";
+          del.className = "small-button";
+          del.textContent = "Delete";
+          del.addEventListener("click", () => {
+            if (confirm("Delete this post?")) {
+              posts = posts.filter((x) => x.id !== p.id);
+              persist();
+              render();
+              renderDayList();
+            }
+          });
+
+          actions.append(edit, del);
+          item.appendChild(actions);
+          postList.appendChild(item);
+        });
+      }
+
+      function showForm(post) {
+        editingId = post ? post.id : null;
+
+        dialogTitle.textContent = post ? "Edit post" : "Add a post";
+        el("fTitle").value = post ? post.title : "";
+        el("fDate").value = post ? post.date : dialogDate;
+        el("fTime").value = post ? post.time : "";
+        el("fPlatform").value = post
+          ? post.platform
+          : platformFilter.value !== "all"
+            ? platformFilter.value
+            : "instagram";
+        el("fStatus").value = post ? post.status : "idea";
+        el("fNotes").value = post ? post.notes : "";
+        el("formError").textContent = "";
+
+        listView.style.display = "none";
+        postForm.style.display = "grid";
+        el("fTitle").focus();
+      }
+
+      postForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const title = el("fTitle").value.trim();
+        const date = el("fDate").value;
+
+        if (!title) {
+          el("formError").textContent = "Please add a title or idea.";
+          return;
+        }
+
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+          el("formError").textContent = "Please choose a date.";
+          return;
+        }
+
+        const data = {
+          title,
+          date,
+          time: el("fTime").value,
+          platform: el("fPlatform").value,
+          status: el("fStatus").value,
+          notes: el("fNotes").value.trim(),
+        };
+
+        if (editingId) {
+          posts = posts.map((p) =>
+            p.id === editingId ? { id: p.id, ...data } : p,
+          );
+        } else {
+          posts.push({ id: newId(), ...data });
+        }
+
+        persist();
+
+        // Jump the calendar to the month of the saved post
+        const saved = fromISO(date);
+        viewDate = new Date(saved.getFullYear(), saved.getMonth(), 1);
+
+        dialogDate = date;
+        editingId = null;
+        render();
+        showList();
+      });
+
+      el("cancelForm").addEventListener("click", showList);
+      el("newPostButton").addEventListener("click", () => showForm(null));
+      el("closeDialog").addEventListener("click", () => dayDialog.close());
+
+      dayDialog.addEventListener("click", (event) => {
+        if (event.target === dayDialog) {
+          dayDialog.close();
+        }
+      });
+
+      calendar.addEventListener("click", (event) => {
+        const cell = event.target.closest(".day");
+
+        if (cell) {
+          openDay(cell.dataset.date);
+        }
+      });
+
+      /* ---------- toolbar ---------- */
+      el("prevButton").addEventListener("click", () => {
+        viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+        render();
+      });
+
+      el("nextButton").addEventListener("click", () => {
+        viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+        render();
+      });
+
+      el("todayButton").addEventListener("click", () => {
+        const now = new Date();
+        viewDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        render();
+      });
+
+      el("addButton").addEventListener("click", () => {
+        const now = new Date();
+        const sameMonth =
+          now.getFullYear() === viewDate.getFullYear() &&
+          now.getMonth() === viewDate.getMonth();
+
+        dialogDate = toISO(sameMonth ? now : viewDate);
+        showForm(null);
+
+        if (!dayDialog.open) {
+          dayDialog.showModal();
+        }
+      });
+
+      platformFilter.addEventListener("change", render);
+
+      /* ---------- sample, clear, export ---------- */
+      el("sampleButton").addEventListener("click", () => {
+        const y = viewDate.getFullYear();
+        const m = viewDate.getMonth();
+        const last = new Date(y, m + 1, 0).getDate();
+
+        const samples = [
+          [2, "instagram", "scheduled", "Carousel: 5 quick tips for beginners"],
+          [
+            4,
+            "linkedin",
+            "drafting",
+            "Lesson learned this week (short story post)",
+          ],
+          [7, "tiktok", "idea", "Short video: behind the scenes of my process"],
+          [9, "instagram", "idea", "Poll: what should I share next?"],
+          [
+            11,
+            "facebook",
+            "scheduled",
+            "Share the latest blog post with a question",
+          ],
+          [
+            14,
+            "youtube",
+            "drafting",
+            "Tutorial video outline and thumbnail ideas",
+          ],
+          [
+            16,
+            "linkedin",
+            "scheduled",
+            "Carousel: common mistakes and how to fix them",
+          ],
+          [18, "instagram", "posted", "Customer story or testimonial"],
+          [21, "x", "idea", "Thread: a simple step-by-step guide"],
+          [23, "pinterest", "drafting", "Pin: checklist graphic"],
+          [25, "instagram", "idea", "Reel: tool walkthrough in 30 seconds"],
+          [28, "linkedin", "idea", "Monthly recap and what is coming next"],
+        ];
+
+        samples.forEach(([day, platform, status, title]) => {
+          if (day <= last) {
+            posts.push({
+              id: newId(),
+              title,
+              date: toISO(new Date(y, m, day)),
+              time: "",
+              notes: "",
+              platform,
+              status,
+            });
+          }
+        });
+
+        persist();
+        render();
+      });
+
+      el("clearMonthButton").addEventListener("click", () => {
+        const year = viewDate.getFullYear();
+        const month = viewDate.getMonth();
+
+        const inMonth = posts.filter((p) => {
+          const d = fromISO(p.date);
+          return d.getFullYear() === year && d.getMonth() === month;
+        });
+
+        if (inMonth.length === 0) {
+          return;
+        }
+
+        const label = viewDate.toLocaleDateString(undefined, {
+          month: "long",
+          year: "numeric",
+        });
+
+        if (
+          confirm(
+            "Delete all " +
+              inMonth.length +
+              " posts in " +
+              label +
+              "? This cannot be undone.",
+          )
+        ) {
+          const ids = new Set(inMonth.map((p) => p.id));
+          posts = posts.filter((p) => !ids.has(p.id));
+          persist();
+          render();
+        }
+      });
+
+      function csvCell(value) {
+        let text = String(value == null ? "" : value);
+
+        // Stop spreadsheets from treating text as a formula
+        if (/^[=+\-@\t\r]/.test(text)) {
+          text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      el("exportButton").addEventListener("click", () => {
+        if (posts.length === 0) {
+          alert("There are no posts to export yet.");
+          return;
+        }
+
+        const rows = [["Date", "Time", "Platform", "Status", "Title", "Notes"]];
+
+        sortPosts(posts).forEach((p) => {
+          rows.push([
+            p.date,
+            p.time,
+            platformInfo(p.platform)[1],
+            statusLabel(p.status),
+            p.title,
+            p.notes,
+          ]);
+        });
+
+        const csv = rows.map((row) => row.map(csvCell).join(",")).join("\r\n");
+        const blob = new Blob(["\ufeff" + csv], {
+          type: "text/csv;charset=utf-8;",
+        });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "content-calendar.csv";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(link.href);
+      });
+
+      persist();
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/element/favicon.png" />
+    <link rel="apple-touch-icon" href="/element/favicon.png" />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
+    <meta
+      name="description"
+      content="Free Engagement Rate Calculator. Work out your social media engagement rate from followers, reach or impressions, and see how likes, comments, shares and saves add up."
+    />
+
+    <title>Free Engagement Rate Calculator | GrowthKit</title>
+
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .field-grid.four {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .field-full {
+        grid-column: 1 / -1;
+      }
+
+      .optional {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .text-input,
+      .select-input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 15px;
+        outline: none;
+      }
+
+      .text-input:focus,
+      .select-input:focus {
+        border-color: var(--primary);
+      }
+
+      .field-hint {
+        margin-top: 6px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .section-title {
+        margin: 30px 0 14px;
+        font-size: 16px;
+      }
+
+      .actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .small-button {
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .small-button:hover {
+        border-color: var(--primary);
+      }
+
+      .small-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      /* ---------- Result ---------- */
+      .result-box {
+        margin-top: 26px;
+        padding: 26px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        text-align: center;
+      }
+
+      .rate-label {
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .rate-value {
+        margin: 6px 0 12px;
+        color: var(--primary);
+        font-size: clamp(44px, 9vw, 68px);
+        font-weight: 800;
+        letter-spacing: -2px;
+        line-height: 1.1;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .status:empty {
+        display: none;
+      }
+
+      .status.good {
+        background: rgba(74, 124, 89, 0.12);
+        color: #4a7c59;
+      }
+
+      .status.warning {
+        background: rgba(184, 147, 90, 0.15);
+        color: #9a783e;
+      }
+
+      .status.bad {
+        background: rgba(168, 80, 63, 0.12);
+        color: #a8503f;
+      }
+
+      .rate-message {
+        max-width: 560px;
+        margin: 0 auto;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .stat {
+        padding: 16px 10px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--primary);
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .stat span {
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+
+      /* ---------- Breakdown ---------- */
+      .breakdown {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .break-card {
+        padding: 14px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+
+      .break-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 9px;
+        font-size: 14px;
+      }
+
+      .break-top strong {
+        font-weight: 700;
+      }
+
+      .break-top span {
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .break-track {
+        height: 8px;
+        overflow: hidden;
+        background: var(--card);
+        border-radius: 20px;
+      }
+
+      .break-fill {
+        width: 0;
+        height: 100%;
+        background: var(--primary);
+        border-radius: 20px;
+        transition: width 0.2s ease;
+      }
+
+      .formula-note {
+        margin-top: 16px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
+      @media (max-width: 700px) {
+        .field-grid.four {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 20px;
+        }
+
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .field-grid.four {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .break-fill {
+          transition: none;
+        }
+      }
+    </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is engagement rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Engagement rate is the percentage of your audience that interacts with your content. It is calculated by dividing the total interactions, such as likes, comments, shares and saves, by your audience size, then multiplying by 100."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate engagement rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Add up the interactions on your post or posts, divide by your followers, reach or impressions, and multiply by 100. If you are measuring several posts against followers, divide the total by the number of posts as well to get an average per post."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good engagement rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no single good number. It varies by platform, industry and account size, and smaller accounts often see higher rates. As a loose guide for rates based on followers, under 1 percent is low, 1 to 3 percent is average, and above that is strong. Comparing against your own past results is usually more useful than comparing against other accounts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between followers, reach and impressions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Followers is how many people follow your account. Reach is how many different people saw your content. Impressions or views count every time your content was shown, including repeat views by the same person. Rates based on reach or impressions are usually higher than rates based on followers, so only compare like with like."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which interactions should I count?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most people count likes, comments, shares and saves. Be consistent: use the same set of interactions every time so your results stay comparable. Link clicks and video views are sometimes counted too, but this tool uses the four above."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool store my numbers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The calculation runs entirely in your browser, and nothing you enter is sent to a server or saved."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE SOCIAL MEDIA TOOL </span>
+
+        <h1>Engagement Rate <span>Calculator</span></h1>
+
+        <p>
+          Enter your followers and interactions to see your engagement rate, how
+          it splits across likes, comments, shares and saves, and how it
+          compares with a rough benchmark.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <div class="field-grid">
+          <div>
+            <label for="methodSelect"> Calculate engagement rate by </label>
+            <select id="methodSelect" class="select-input">
+              <option value="followers">Followers</option>
+              <option value="reach">Reach</option>
+              <option value="impressions">Impressions / views</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="audienceInput" id="audienceLabel"> Followers </label>
+            <input
+              id="audienceInput"
+              class="text-input"
+              type="number"
+              min="0"
+              inputmode="numeric"
+              placeholder="Example: 12000"
+            />
+          </div>
+
+          <div class="field-full">
+            <label for="postsInput">
+              Number of posts <span class="optional">(optional)</span>
+            </label>
+            <input
+              id="postsInput"
+              class="text-input"
+              type="number"
+              min="1"
+              inputmode="numeric"
+              placeholder="1"
+            />
+            <p class="field-hint" id="postsHint">
+              Enter the totals for all posts below. With several posts, the
+              result is the average rate per post.
+            </p>
+          </div>
+        </div>
+
+        <h3 class="section-title">Interactions</h3>
+
+        <div class="field-grid four" id="interactionGrid">
+          <div>
+            <label for="likesInput"> Likes </label>
+            <input
+              id="likesInput"
+              class="text-input"
+              type="number"
+              min="0"
+              inputmode="numeric"
+              placeholder="0"
+            />
+          </div>
+
+          <div>
+            <label for="commentsInput"> Comments </label>
+            <input
+              id="commentsInput"
+              class="text-input"
+              type="number"
+              min="0"
+              inputmode="numeric"
+              placeholder="0"
+            />
+          </div>
+
+          <div>
+            <label for="sharesInput"> Shares </label>
+            <input
+              id="sharesInput"
+              class="text-input"
+              type="number"
+              min="0"
+              inputmode="numeric"
+              placeholder="0"
+            />
+          </div>
+
+          <div>
+            <label for="savesInput"> Saves </label>
+            <input
+              id="savesInput"
+              class="text-input"
+              type="number"
+              min="0"
+              inputmode="numeric"
+              placeholder="0"
+            />
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <button id="sampleButton" class="small-button" type="button">
+            Try sample numbers
+          </button>
+          <button id="clearButton" class="small-button" type="button">
+            Clear
+          </button>
+        </div>
+
+        <div class="result-box" aria-live="polite">
+          <div class="rate-label">Your engagement rate</div>
+          <div id="rateValue" class="rate-value">0.00%</div>
+          <span id="status" class="status"></span>
+          <p id="rateMessage" class="rate-message">
+            Enter your followers and at least one interaction to see your
+            result.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <strong id="statTotal">0</strong>
+              <span>Total interactions</span>
+            </div>
+            <div class="stat">
+              <strong id="statAverage">0</strong>
+              <span>Interactions per post</span>
+            </div>
+            <div class="stat">
+              <strong id="statAudience">0</strong>
+              <span id="statAudienceLabel">Followers</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title">Where your engagement comes from</h3>
+
+        <div id="breakdown" class="breakdown"></div>
+        <p id="breakdownEmpty" class="field-hint">
+          Add some interactions to see the split.
+        </p>
+
+        <p class="formula-note">
+          Engagement rate = total interactions &divide; audience &times; 100.
+          When you use followers and enter more than one post, the audience is
+          multiplied by the number of posts to give an average per post.
+          Benchmarks are a loose guide only and apply to rates based on
+          followers.
+        </p>
+      </div>
+
+      <a href="../index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>What is engagement rate?</summary>
+        <p>
+          Engagement rate is the percentage of your audience that interacts with
+          your content. It is calculated by dividing the total interactions,
+          such as likes, comments, shares and saves, by your audience size, then
+          multiplying by 100.
+        </p>
+      </details>
+
+      <details>
+        <summary>How do I calculate engagement rate?</summary>
+        <p>
+          Add up the interactions on your post or posts, divide by your
+          followers, reach or impressions, and multiply by 100. If you are
+          measuring several posts against followers, divide the total by the
+          number of posts as well to get an average per post.
+        </p>
+      </details>
+
+      <details>
+        <summary>What is a good engagement rate?</summary>
+        <p>
+          There is no single good number. It varies by platform, industry and
+          account size, and smaller accounts often see higher rates. As a loose
+          guide for rates based on followers, under 1 percent is low, 1 to 3
+          percent is average, and above that is strong. Comparing against your
+          own past results is usually more useful than comparing against other
+          accounts.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          What is the difference between followers, reach and impressions?
+        </summary>
+        <p>
+          Followers is how many people follow your account. Reach is how many
+          different people saw your content. Impressions or views count every
+          time your content was shown, including repeat views by the same
+          person. Rates based on reach or impressions are usually higher than
+          rates based on followers, so only compare like with like.
+        </p>
+      </details>
+
+      <details>
+        <summary>Which interactions should I count?</summary>
+        <p>
+          Most people count likes, comments, shares and saves. Be consistent:
+          use the same set of interactions every time so your results stay
+          comparable. Link clicks and video views are sometimes counted too, but
+          this tool uses the four above.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool store my numbers?</summary>
+        <p>
+          No. The calculation runs entirely in your browser, and nothing you
+          enter is sent to a server or saved.
+        </p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="/script.js"></script>
+
+    <script>
+      const methodSelect = document.getElementById("methodSelect");
+      const audienceInput = document.getElementById("audienceInput");
+      const postsInput = document.getElementById("postsInput");
+      const likesInput = document.getElementById("likesInput");
+      const commentsInput = document.getElementById("commentsInput");
+      const sharesInput = document.getElementById("sharesInput");
+      const savesInput = document.getElementById("savesInput");
+
+      const audienceLabel = document.getElementById("audienceLabel");
+      const postsHint = document.getElementById("postsHint");
+      const rateValue = document.getElementById("rateValue");
+      const statusEl = document.getElementById("status");
+      const rateMessage = document.getElementById("rateMessage");
+      const statTotal = document.getElementById("statTotal");
+      const statAverage = document.getElementById("statAverage");
+      const statAudience = document.getElementById("statAudience");
+      const statAudienceLabel = document.getElementById("statAudienceLabel");
+      const breakdown = document.getElementById("breakdown");
+      const breakdownEmpty = document.getElementById("breakdownEmpty");
+
+      const METHODS = {
+        followers: {
+          label: "Followers",
+          placeholder: "Example: 12000",
+          hint: "Enter the totals for all posts below. With several posts, the result is the average rate per post.",
+        },
+        reach: {
+          label: "Total reach",
+          placeholder: "Example: 8500",
+          hint: "Enter the total reach and the total interactions for the same posts.",
+        },
+        impressions: {
+          label: "Total impressions / views",
+          placeholder: "Example: 15000",
+          hint: "Enter the total impressions or views and the total interactions for the same posts.",
+        },
+      };
+
+      const inputs = [
+        audienceInput,
+        postsInput,
+        likesInput,
+        commentsInput,
+        sharesInput,
+        savesInput,
+      ];
+
+      inputs.forEach((el) => el.addEventListener("input", calculate));
+      methodSelect.addEventListener("change", () => {
+        updateMethodLabels();
+        calculate();
+      });
+
+      document.getElementById("sampleButton").addEventListener("click", () => {
+        methodSelect.value = "followers";
+        audienceInput.value = 12000;
+        postsInput.value = 4;
+        likesInput.value = 1650;
+        commentsInput.value = 142;
+        sharesInput.value = 96;
+        savesInput.value = 210;
+        updateMethodLabels();
+        calculate();
+      });
+
+      document.getElementById("clearButton").addEventListener("click", () => {
+        inputs.forEach((el) => (el.value = ""));
+        calculate();
+      });
+
+      function updateMethodLabels() {
+        const method = METHODS[methodSelect.value];
+
+        audienceLabel.textContent = method.label;
+        audienceInput.placeholder = method.placeholder;
+        postsHint.textContent = method.hint;
+        statAudienceLabel.textContent = method.label;
+      }
+
+      function getNumber(el) {
+        const value = parseFloat(el.value);
+        return Number.isFinite(value) && value > 0 ? value : 0;
+      }
+
+      function format(value) {
+        return Math.round(value * 100) / 100;
+      }
+
+      function formatInt(value) {
+        return Math.round(value).toLocaleString();
+      }
+
+      function calculate() {
+        const method = methodSelect.value;
+        const audience = getNumber(audienceInput);
+        const posts = Math.max(1, Math.floor(getNumber(postsInput)) || 1);
+
+        const likes = getNumber(likesInput);
+        const comments = getNumber(commentsInput);
+        const shares = getNumber(sharesInput);
+        const saves = getNumber(savesInput);
+        const total = likes + comments + shares + saves;
+
+        statTotal.textContent = formatInt(total);
+        statAverage.textContent = formatInt(total / posts);
+        statAudience.textContent = formatInt(audience);
+
+        renderBreakdown(
+          [
+            ["Likes", likes],
+            ["Comments", comments],
+            ["Shares", shares],
+            ["Saves", saves],
+          ],
+          total,
+        );
+
+        if (!audience) {
+          rateValue.textContent = "0.00%";
+          setStatus("", "");
+          rateMessage.textContent =
+            "Enter your " +
+            METHODS[method].label.toLowerCase() +
+            " and at least one interaction to see your result.";
+          return;
+        }
+
+        const denominator =
+          method === "followers" ? audience * posts : audience;
+        const rate = (total / denominator) * 100;
+
+        rateValue.textContent = format(rate).toFixed(2) + "%";
+
+        if (total === 0) {
+          setStatus("", "");
+          rateMessage.textContent =
+            "Add your likes, comments, shares or saves to see your rate.";
+          return;
+        }
+
+        if (method !== "followers") {
+          setStatus("", "");
+          rateMessage.textContent =
+            "Rates based on reach or impressions are usually higher than rates based on followers, so compare this only with other reach or impressions based numbers, ideally your own past posts.";
+        } else if (rate < 1) {
+          setStatus("Low", "warning");
+          rateMessage.textContent =
+            "This is below 1%, which is on the low side. Try more interactive formats, such as questions, carousels or short videos, and compare with your own earlier posts to see what works.";
+        } else if (rate < 3) {
+          setStatus("Average", "good");
+          rateMessage.textContent =
+            "This is in the typical range of roughly 1% to 3%. Look at your best performing posts to find what your audience responds to most.";
+        } else {
+          setStatus("Strong", "good");
+          rateMessage.textContent =
+            "This is above 3%, which is a strong result on a followers basis. Keep track of which posts drive it so you can repeat what works.";
+        }
+
+        if (rate > 100) {
+          rateMessage.textContent +=
+            " A rate above 100% can happen on viral posts, but double-check your numbers.";
+        }
+      }
+
+      function setStatus(text, className) {
+        statusEl.textContent = text;
+        statusEl.className = "status " + className;
+      }
+
+      function renderBreakdown(items, total) {
+        breakdown.innerHTML = "";
+
+        if (total === 0) {
+          breakdown.style.display = "none";
+          breakdownEmpty.style.display = "block";
+          return;
+        }
+
+        breakdown.style.display = "flex";
+        breakdownEmpty.style.display = "none";
+
+        items.forEach(([name, value]) => {
+          const share = (value / total) * 100;
+
+          const card = document.createElement("div");
+          card.className = "break-card";
+
+          const top = document.createElement("div");
+          top.className = "break-top";
+
+          const label = document.createElement("strong");
+          label.textContent = name;
+
+          const numbers = document.createElement("span");
+          numbers.textContent =
+            formatInt(value) + " · " + format(share).toFixed(1) + "%";
+
+          top.append(label, numbers);
+
+          const track = document.createElement("div");
+          track.className = "break-track";
+
+          const fill = document.createElement("div");
+          fill.className = "break-fill";
+          fill.style.width = share + "%";
+
+          track.appendChild(fill);
+          card.append(top, track);
+          breakdown.appendChild(card);
+        });
+      }
+
+      updateMethodLabels();
+      calculate();
+    </script>
+  </body>
+</html>

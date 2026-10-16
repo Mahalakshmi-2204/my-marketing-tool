@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/element/favicon.png" />
+    <link rel="apple-touch-icon" href="/element/favicon.png" />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <meta
+      name="google-site-verification"
+      content="newIcLfdELIzf5uwoa4ZubHLVfCCSFHu2-xpGXI2Te8"
+    />
+    <meta
+      name="description"
+      content="Free Caption and Hook Generator. Get scroll-stopping hook ideas and ready-to-edit captions with hashtags for Instagram, LinkedIn, TikTok, Facebook, X and more."
+    />
+
+    <title>Free Caption &amp; Hook Generator | GrowthKit</title>
+
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      .tool-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .tool-header h1 {
+        font-size: clamp(38px, 6vw, 58px);
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .tool-header h1 span {
+        color: var(--primary);
+      }
+
+      .tool-header p {
+        max-width: 680px;
+        margin: auto;
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+
+      .checker-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .checker-box label {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .optional {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .form-grid .full {
+        grid-column: 1 / -1;
+      }
+
+      .text-input,
+      .select-input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .text-input:focus,
+      .select-input:focus {
+        border-color: var(--primary);
+      }
+
+      .field-hint {
+        margin-top: 6px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .options-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 24px;
+      }
+
+      .option {
+        display: inline-flex !important;
+        align-items: center;
+        gap: 8px;
+        margin: 0 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        cursor: pointer;
+      }
+
+      .option input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+
+      .actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .primary-button {
+        padding: 13px 24px;
+        border: none;
+        border-radius: 10px;
+        background: var(--primary);
+        color: white;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .primary-button:hover {
+        opacity: 0.9;
+      }
+
+      .small-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .small-button {
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .small-button:hover {
+        border-color: var(--primary);
+      }
+
+      .primary-button:focus-visible,
+      .small-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .form-error {
+        min-height: 18px;
+        margin-top: 12px;
+        color: #a8503f;
+        font-size: 13px;
+      }
+
+      /* ---------- Results ---------- */
+      #results {
+        display: none;
+      }
+
+      .section-title {
+        margin: 32px 0 6px;
+        font-size: 18px;
+      }
+
+      .section-sub {
+        margin: 0 0 14px;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .hook-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hook-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+
+      .hook-text {
+        min-width: 0;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      .hook-style {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .caption-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .caption-card {
+        padding: 18px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      .caption-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .caption-head strong {
+        font-size: 14px;
+      }
+
+      .caption-text {
+        margin: 0;
+        padding: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .caption-meta {
+        margin-top: 10px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .caption-meta.over {
+        color: #a8503f;
+        font-weight: 700;
+      }
+
+      .tip-box {
+        margin-top: 22px;
+        padding: 16px 18px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--primary);
+        border-radius: 10px;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 24px 90px;
+      }
+
+      .faq h2 {
+        margin-bottom: 22px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: -1px;
+      }
+
+      .faq details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--primary);
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .faq details[open] summary::after {
+        content: "–";
+      }
+
+      .faq details[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq details p {
+        padding: 14px 18px 18px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: -2px;
+      }
+
+      @media (max-width: 600px) {
+        .checker-box {
+          padding: 20px;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hook-item {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+    </style>
+
+    <!-- FAQ schema (must match the visible FAQ text) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does the caption and hook generator work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You enter a topic and choose a platform, goal and tone. The tool fills your topic into ready-made hook and caption structures, adds a call to action and a few hashtags, and shows you several options to copy and edit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this AI-generated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It uses ready-made templates and runs entirely in your browser. That makes it fast and private, but other people can get similar wording, so treat the results as a starting point and edit them to sound like you."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes a good hook?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A good hook is the first line of your post. It makes a clear promise, raises curiosity or names a problem your audience recognises. Keep it short and specific, and try different styles to see what your audience responds to."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use the personal story hooks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only if they are true for you. Story hooks are written in the first person as prompts. Change the details to match your real experience, or pick a different hook style."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long should a caption be?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on the platform and your goal. Platform limits, such as 2,200 characters on Instagram, 3,000 on LinkedIn and 280 on X for standard accounts, are maximums rather than targets. Often only the first line or two shows before the see more link, so make the start count."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many hashtags should I use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no fixed number. A few relevant hashtags usually work better than many. The tool suggests a small amount for each platform, and you can add, remove or swap them for ones your audience actually follows."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool store my topic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Everything runs in your browser, and nothing you enter is sent to a server or saved."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <main class="tool-page">
+      <div class="tool-header">
+        <span class="section-label"> FREE SOCIAL MEDIA TOOL </span>
+
+        <h1>Caption &amp; Hook <span>Generator</span></h1>
+
+        <p>
+          Enter your topic to get scroll-stopping hook ideas and ready-to-edit
+          captions with hashtags, tailored to your platform, goal and tone.
+        </p>
+      </div>
+
+      <div class="checker-box">
+        <form id="genForm" novalidate>
+          <div class="form-grid">
+            <div class="full">
+              <label for="topicInput"> What is your post about? </label>
+              <input
+                id="topicInput"
+                class="text-input"
+                type="text"
+                maxlength="80"
+                placeholder="Example: meta descriptions"
+                autocomplete="off"
+              />
+              <p class="field-hint">
+                Use a short topic or phrase, such as "email marketing" or
+                "morning routines".
+              </p>
+            </div>
+
+            <div class="full">
+              <label for="audienceInput">
+                Who is it for? <span class="optional">(optional)</span>
+              </label>
+              <input
+                id="audienceInput"
+                class="text-input"
+                type="text"
+                maxlength="60"
+                placeholder="Example: beginner bloggers"
+                autocomplete="off"
+              />
+            </div>
+
+            <div>
+              <label for="platformSelect"> Platform </label>
+              <select id="platformSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="goalSelect"> Goal </label>
+              <select id="goalSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="toneSelect"> Tone </label>
+              <select id="toneSelect" class="select-input"></select>
+            </div>
+
+            <div>
+              <label for="styleSelect"> Hook style </label>
+              <select id="styleSelect" class="select-input"></select>
+            </div>
+
+            <div class="full">
+              <label for="ctaInput">
+                Your own call to action
+                <span class="optional">(optional)</span>
+              </label>
+              <input
+                id="ctaInput"
+                class="text-input"
+                type="text"
+                maxlength="100"
+                placeholder="Example: Book a free call via the link in my bio"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="full options-row">
+              <label class="option" for="emojiToggle">
+                <input id="emojiToggle" type="checkbox" checked />
+                Add emojis
+              </label>
+              <label class="option" for="hashtagToggle">
+                <input id="hashtagToggle" type="checkbox" checked />
+                Add hashtags
+              </label>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <button class="primary-button" type="submit">
+              Generate hooks &amp; captions
+            </button>
+
+            <div class="small-buttons">
+              <button id="shuffleButton" class="small-button" type="button">
+                Shuffle again
+              </button>
+              <button id="sampleButton" class="small-button" type="button">
+                Try an example
+              </button>
+              <button id="clearButton" class="small-button" type="button">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div id="formError" class="form-error" role="alert"></div>
+        </form>
+
+        <div id="results">
+          <h3 class="section-title">Hook ideas</h3>
+          <p class="section-sub">
+            The first line is what stops the scroll. Pick a few and test them.
+          </p>
+          <div id="hookList" class="hook-list"></div>
+
+          <h3 class="section-title">Caption ideas</h3>
+          <p id="captionSub" class="section-sub"></p>
+          <div id="captionList" class="caption-list"></div>
+
+          <div class="tip-box">
+            <strong>Make it yours:</strong> these are template-based starting
+            points, not finished posts. Add a real example, a detail only you
+            know, or a number from your own results. First-person story hooks
+            are prompts, so only use them if they're true for you.
+          </div>
+        </div>
+      </div>
+
+      <a href="/index.html" class="back-link"> ← Back to GrowthKit </a>
+    </main>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <details open>
+        <summary>How does the caption and hook generator work?</summary>
+        <p>
+          You enter a topic and choose a platform, goal and tone. The tool fills
+          your topic into ready-made hook and caption structures, adds a call to
+          action and a few hashtags, and shows you several options to copy and
+          edit.
+        </p>
+      </details>
+
+      <details>
+        <summary>Is this AI-generated?</summary>
+        <p>
+          No. It uses ready-made templates and runs entirely in your browser.
+          That makes it fast and private, but other people can get similar
+          wording, so treat the results as a starting point and edit them to
+          sound like you.
+        </p>
+      </details>
+
+      <details>
+        <summary>What makes a good hook?</summary>
+        <p>
+          A good hook is the first line of your post. It makes a clear promise,
+          raises curiosity or names a problem your audience recognises. Keep it
+          short and specific, and try different styles to see what your audience
+          responds to.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I use the personal story hooks?</summary>
+        <p>
+          Only if they are true for you. Story hooks are written in the first
+          person as prompts. Change the details to match your real experience,
+          or pick a different hook style.
+        </p>
+      </details>
+
+      <details>
+        <summary>How long should a caption be?</summary>
+        <p>
+          It depends on the platform and your goal. Platform limits, such as
+          2,200 characters on Instagram, 3,000 on LinkedIn and 280 on X for
+          standard accounts, are maximums rather than targets. Often only the
+          first line or two shows before the "see more" link, so make the start
+          count.
+        </p>
+      </details>
+
+      <details>
+        <summary>How many hashtags should I use?</summary>
+        <p>
+          There is no fixed number. A few relevant hashtags usually work better
+          than many. The tool suggests a small amount for each platform, and you
+          can add, remove or swap them for ones your audience actually follows.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this tool store my topic?</summary>
+        <p>
+          No. Everything runs in your browser, and nothing you enter is sent to
+          a server or saved.
+        </p>
+      </details>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="/script.js"></script>
+
+    <script>
+      const el = (id) => document.getElementById(id);
+
+      /* ---------- settings ---------- */
+      const PLATFORMS = {
+        instagram: {
+          name: "Instagram",
+          limit: 2200,
+          tags: 5,
+          body: "full",
+          gap: "\n",
+          link: "the link in my bio",
+        },
+        linkedin: {
+          name: "LinkedIn",
+          limit: 3000,
+          tags: 3,
+          body: "full",
+          gap: "\n\n",
+          link: "the link in the comments",
+        },
+        tiktok: {
+          name: "TikTok",
+          limit: null,
+          tags: 4,
+          body: "short",
+          gap: "\n",
+          link: "the link in my bio",
+        },
+        facebook: {
+          name: "Facebook",
+          limit: null,
+          tags: 2,
+          body: "full",
+          gap: "\n",
+          link: "the link below",
+        },
+        x: {
+          name: "X (Twitter)",
+          limit: 280,
+          tags: 2,
+          body: "none",
+          gap: "\n",
+          link: "the link below",
+        },
+        youtube: {
+          name: "YouTube description",
+          limit: null,
+          tags: 3,
+          body: "full",
+          gap: "\n",
+          link: "the link in the description",
+        },
+        pinterest: {
+          name: "Pinterest",
+          limit: null,
+          tags: 3,
+          body: "short",
+          gap: "\n",
+          link: "the link on this pin",
+        },
+      };
+
+      const GOALS = {
+        educate: "Educate or share tips",
+        engage: "Get comments and conversation",
+        promote: "Promote a product or service",
+        inspire: "Inspire or motivate",
+        traffic: "Drive clicks to a link",
+      };
+
+      const TONES = {
+        friendly: "Friendly",
+        professional: "Professional",
+        playful: "Playful",
+      };
+
+      const STYLES = {
+        mixed: "Mixed (a bit of everything)",
+        curiosity: "Curiosity",
+        problem: "Problem and solution",
+        list: "Numbers and lists",
+        story: "Personal story",
+        question: "Question",
+        bold: "Bold opinion",
+        howto: "How-to",
+      };
+
+      const STYLE_LABELS = {
+        curiosity: "Curiosity",
+        problem: "Problem",
+        list: "List",
+        story: "Story",
+        question: "Question",
+        bold: "Bold",
+        howto: "How-to",
+      };
+
+      const HOOKS = {
+        curiosity: [
+          "Nobody talks about this part of {topic}.",
+          "The truth about {topic} that most people miss.",
+          "I changed one thing about {topic} and everything shifted.",
+          "There's a small detail about {topic} that changes everything.",
+          "What if {topic} is easier than you've been told?",
+          "Here's what really matters with {topic} (it's not what you think).",
+          "Most people overlook this when it comes to {topic}.",
+          "This one idea about {topic} is worth saving.",
+        ],
+        problem: [
+          "Struggling with {topic}? Start here.",
+          "If {topic} feels overwhelming, read this.",
+          "Tired of getting nowhere with {topic}?",
+          "The biggest reason {topic} feels so hard (and how to fix it).",
+          "Why your {topic} isn't working yet.",
+          "Stuck on {topic}? Here's a simple way forward.",
+          "Here's why {topic} keeps feeling like a guessing game.",
+          "Not sure where to begin with {topic}? Same.",
+        ],
+        list: [
+          "{n} mistakes to avoid with {topic}.",
+          "{n} simple ways to get better at {topic}.",
+          "{n} things I wish I knew about {topic} sooner.",
+          "{n} quick tips for {topic} you can use today.",
+          "{n} myths about {topic}, busted.",
+          "{n} questions to ask before you start with {topic}.",
+          "Your {n}-step starter guide to {topic}.",
+          "{n} small changes that make a big difference to {topic}.",
+        ],
+        story: [
+          "I used to get {topic} completely wrong.",
+          "Here's what I learned after months of working on {topic}.",
+          "A year ago, {topic} confused me. Now it makes sense.",
+          "My honest experience with {topic}.",
+          "The moment {topic} finally clicked for me.",
+          "I almost gave up on {topic}. Here's what changed.",
+          "What {topic} taught me that I didn't expect.",
+          "Real talk: my {topic} journey so far.",
+        ],
+        question: [
+          "What's your biggest question about {topic}?",
+          "Be honest: how do you feel about {topic}?",
+          "Quick question: what would you change about your {topic}?",
+          "Do you make this mistake with {topic}?",
+          "What's one thing you'd tell a beginner about {topic}?",
+          "Is {topic} worth your time? Let's talk.",
+          "Which is harder for you: starting or staying consistent with {topic}?",
+          "What's the best advice you've heard about {topic}?",
+        ],
+        bold: [
+          "Unpopular opinion: {topic} is simpler than people make it.",
+          "Stop overcomplicating {topic}.",
+          "You don't need more tools for {topic}. You need a plan.",
+          "Hot take: most advice about {topic} is too complicated.",
+          "{Topic} isn't about perfection. It's about consistency.",
+          "Forget the hype around {topic}. Focus on this instead.",
+          "Here's what I'd do differently with {topic} if I started today.",
+          "Let's be honest about {topic}.",
+        ],
+        howto: [
+          "How to get started with {topic} today.",
+          "A simple beginner's guide to {topic}.",
+          "How to make {topic} part of your weekly routine.",
+          "The easiest way to start with {topic} (step by step).",
+          "How to improve your {topic} without extra tools.",
+          "Save this: a quick checklist for {topic}.",
+          "Here's how I'd explain {topic} to a beginner.",
+          "{Topic} made simple: start with these basics.",
+        ],
+      };
+
+      const BODY = {
+        educate: [
+          [
+            "Here's the simple version:",
+            "• Start with one clear goal for your {topic}.",
+            "• Think about who it's for: {audience}.",
+            "• Review what works, then repeat it.",
+          ],
+          [
+            "Three things to remember about {topic}:",
+            "1. Clarity beats cleverness.",
+            "2. Consistency beats intensity.",
+            "3. Small improvements add up over time.",
+          ],
+          [
+            "{Topic} doesn't have to be complicated.",
+            "Start with the basics, test one change at a time, and keep what works.",
+            "Made for {audience}.",
+          ],
+        ],
+        engage: [
+          [
+            "I'm curious about your experience with {topic}.",
+            "What has worked for you? What hasn't?",
+            "Share it below so others can learn from it.",
+          ],
+          [
+            "Let's make this a conversation about {topic}.",
+            "What's one tip, question or lesson you'd add?",
+          ],
+          [
+            "There's no single right way to approach {topic}.",
+            "How do you do it? Tell me what works for you.",
+          ],
+        ],
+        promote: [
+          [
+            "I made something to help with {topic}.",
+            "It's designed for {audience}, with clear steps you can follow.",
+            "Take a look and tell me what you think.",
+          ],
+          [
+            "Introducing something new for {topic}.",
+            "Simple, practical and made for {audience}.",
+          ],
+          [
+            "If {topic} is on your to-do list, this can help.",
+            "Perfect for {audience}.",
+          ],
+        ],
+        inspire: [
+          [
+            "Progress with {topic} rarely looks dramatic.",
+            "It looks like showing up, learning a little, and trying again.",
+            "Keep going. It adds up.",
+          ],
+          [
+            "You don't have to be an expert in {topic} to begin.",
+            "Start where you are, use what you have, and take one small step today.",
+          ],
+          [
+            "Every expert in {topic} was once a beginner.",
+            "Be patient with yourself, and keep learning.",
+          ],
+        ],
+        traffic: [
+          [
+            "I put together a guide to {topic}.",
+            "It covers the basics and common mistakes, so you can get started faster.",
+          ],
+          [
+            "Want to go deeper on {topic}?",
+            "I've shared the full details, plus practical steps you can follow.",
+          ],
+          [
+            "Short on time? Here's a quick resource on {topic}.",
+            "Have a look when you get a chance.",
+          ],
+        ],
+      };
+
+      const CTA = {
+        educate: {
+          friendly:
+            "Save this for later and share it with someone who needs it.",
+          professional: "Save this post for future reference.",
+          playful: "Save this for later (future you will say thanks!).",
+        },
+        engage: {
+          friendly: "Tell me in the comments.",
+          professional: "Share your thoughts in the comments.",
+          playful: "Drop your answer below!",
+        },
+        promote: {
+          friendly: "Learn more via {link}.",
+          professional: "For more details, see {link}.",
+          playful: "Come and take a peek via {link}!",
+        },
+        inspire: {
+          friendly: "Share this with someone who needs the reminder today.",
+          professional: "Share this with someone who may find it useful.",
+          playful: "Tag someone who needs this today!",
+        },
+        traffic: {
+          friendly: "Read more via {link}.",
+          professional: "The full guide is available via {link}.",
+          playful: "Grab the full guide via {link}!",
+        },
+      };
+
+      const EMOJI = {
+        educate: ["💡", "📌"],
+        engage: ["💬", "👇"],
+        promote: ["✨", "🚀"],
+        inspire: ["🌱", "✨"],
+        traffic: ["🔗", "📖"],
+      };
+
+      const GENERIC_TAGS = { educate: ["tips"], inspire: ["motivation"] };
+
+      const STOP = new Set([
+        "the",
+        "and",
+        "for",
+        "with",
+        "your",
+        "how",
+        "you",
+        "are",
+        "that",
+        "this",
+        "from",
+        "about",
+        "into",
+        "more",
+        "what",
+        "why",
+        "get",
+      ]);
+
+      /* ---------- setup ---------- */
+      function fillSelect(select, map, selected) {
+        Object.entries(map).forEach(([value, label]) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = typeof label === "string" ? label : label.name;
+          if (value === selected) option.selected = true;
+          select.appendChild(option);
+        });
+      }
+
+      fillSelect(el("platformSelect"), PLATFORMS, "instagram");
+      fillSelect(el("goalSelect"), GOALS, "educate");
+      fillSelect(el("toneSelect"), TONES, "friendly");
+      fillSelect(el("styleSelect"), STYLES, "mixed");
+
+      let hasResults = false;
+
+      /* ---------- helpers ---------- */
+      function shuffle(list) {
+        const copy = list.slice();
+
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+
+        return copy;
+      }
+
+      function capitalize(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+      }
+
+      function pick(list) {
+        return list[Math.floor(Math.random() * list.length)];
+      }
+
+      function fill(template, ctx) {
+        return template.replace(/\{(\w+)\}/g, (match, key) =>
+          ctx[key] !== undefined ? ctx[key] : "",
+        );
+      }
+
+      function adjustTone(text, tone) {
+        return tone === "professional" ? text.replace(/!/g, ".") : text;
+      }
+
+      function buildContext(settings) {
+        return {
+          topic: settings.topic,
+          Topic: capitalize(settings.topic),
+          audience:
+            settings.audience || "anyone interested in " + settings.topic,
+          link: PLATFORMS[settings.platform].link,
+          n: pick([3, 5, 7]),
+        };
+      }
+
+      function makeHooks(settings) {
+        let templates;
+
+        if (settings.style === "mixed") {
+          const keys = shuffle(Object.keys(HOOKS));
+          const pools = keys.map((key) => ({
+            key,
+            list: shuffle(HOOKS[key]),
+          }));
+
+          templates = [];
+
+          for (let round = 0; templates.length < 8; round++) {
+            for (const pool of pools) {
+              if (pool.list[round] && templates.length < 8) {
+                templates.push({ key: pool.key, text: pool.list[round] });
+              }
+            }
+          }
+        } else {
+          templates = shuffle(HOOKS[settings.style])
+            .slice(0, 8)
+            .map((text) => ({ key: settings.style, text }));
+        }
+
+        return templates.map((item) => {
+          const ctx = buildContext(settings);
+
+          return {
+            style: item.key,
+            text: capitalize(adjustTone(fill(item.text, ctx), settings.tone)),
+          };
+        });
+      }
+
+      function makeHashtags(settings) {
+        const words = settings.topic.match(/[\p{L}\p{N}]+/gu) || [];
+        const tags = [];
+
+        if (words.length > 0 && words.length <= 3) {
+          const joined = words.join("").toLowerCase();
+          if (joined.length <= 30) tags.push(joined);
+        }
+
+        words
+          .map((w) => w.toLowerCase())
+          .filter((w) => w.length >= 3 && !STOP.has(w))
+          .forEach((w) => tags.push(w));
+
+        (GENERIC_TAGS[settings.goal] || []).forEach((t) => tags.push(t));
+
+        return Array.from(new Set(tags))
+          .slice(0, PLATFORMS[settings.platform].tags)
+          .map((t) => "#" + t);
+      }
+
+      function makeCaption(settings, hook, bodyIndex) {
+        const platform = PLATFORMS[settings.platform];
+        const ctx = buildContext(settings);
+        const useEmoji = settings.emoji && settings.tone !== "professional";
+        const emoji = EMOJI[settings.goal];
+
+        let bodyLines = BODY[settings.goal][bodyIndex % 3].map((line) =>
+          adjustTone(fill(line, ctx), settings.tone),
+        );
+
+        if (platform.body === "none") bodyLines = [];
+        if (platform.body === "short") bodyLines = bodyLines.slice(0, 2);
+
+        const ctaText = settings.cta
+          ? settings.cta
+          : fill(CTA[settings.goal][settings.tone], ctx);
+
+        const hookLine = (useEmoji ? emoji[0] + " " : "") + hook;
+        const ctaLine =
+          adjustTone(ctaText, settings.tone) + (useEmoji ? " " + emoji[1] : "");
+        const tags = settings.hashtags ? makeHashtags(settings).join(" ") : "";
+
+        const build = (withBody, withTags) => {
+          const parts = [hookLine];
+
+          if (withBody && bodyLines.length) {
+            parts.push("", bodyLines.join(platform.gap));
+          }
+
+          parts.push("", ctaLine);
+
+          if (withTags && tags) {
+            parts.push("", tags);
+          }
+
+          return parts.join("\n");
+        };
+
+        let text = build(true, true);
+
+        if (platform.limit && text.length > platform.limit) {
+          text = build(false, true);
+        }
+
+        if (platform.limit && text.length > platform.limit) {
+          text = build(false, false);
+        }
+
+        if (platform.limit && text.length > platform.limit) {
+          text = hookLine;
+        }
+
+        if (platform.limit && text.length > platform.limit) {
+          text = text.slice(0, platform.limit - 1) + "…";
+        }
+
+        return { text, limit: platform.limit };
+      }
+
+      /* ---------- render ---------- */
+      function readSettings() {
+        return {
+          topic: el("topicInput").value.trim().replace(/\s+/g, " "),
+          audience: el("audienceInput").value.trim().replace(/\s+/g, " "),
+          platform: el("platformSelect").value,
+          goal: el("goalSelect").value,
+          tone: el("toneSelect").value,
+          style: el("styleSelect").value,
+          cta: el("ctaInput").value.trim(),
+          emoji: el("emojiToggle").checked,
+          hashtags: el("hashtagToggle").checked,
+        };
+      }
+
+      async function copyText(text, button) {
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const area = document.createElement("textarea");
+          area.value = text;
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+        }
+
+        const original = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => (button.textContent = original), 1500);
+      }
+
+      function generate() {
+        const settings = readSettings();
+        const error = el("formError");
+
+        if (!settings.topic) {
+          error.textContent = "Please enter what your post is about.";
+          el("topicInput").focus();
+          return;
+        }
+
+        error.textContent = "";
+
+        const hooks = makeHooks(settings);
+        const platform = PLATFORMS[settings.platform];
+        const offset = Math.floor(Math.random() * 3);
+
+        // Hooks
+        const hookList = el("hookList");
+        hookList.innerHTML = "";
+
+        hooks.forEach((hook) => {
+          const row = document.createElement("div");
+          row.className = "hook-item";
+
+          const textWrap = document.createElement("div");
+          textWrap.className = "hook-text";
+
+          if (settings.style === "mixed") {
+            const label = document.createElement("span");
+            label.className = "hook-style";
+            label.textContent = STYLE_LABELS[hook.style];
+            textWrap.appendChild(label);
+          }
+
+          textWrap.appendChild(document.createTextNode(hook.text));
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "small-button";
+          button.textContent = "Copy";
+          button.addEventListener("click", () => copyText(hook.text, button));
+
+          row.append(textWrap, button);
+          hookList.appendChild(row);
+        });
+
+        // Captions
+        const captionList = el("captionList");
+        captionList.innerHTML = "";
+
+        el("captionSub").textContent =
+          platform.name +
+          ' captions for your goal. Often only the first line or two shows before "see more", so the hook comes first.';
+
+        for (let i = 0; i < 3; i++) {
+          const hook = hooks[i % hooks.length];
+          const caption = makeCaption(settings, hook.text, offset + i);
+
+          const card = document.createElement("div");
+          card.className = "caption-card";
+
+          const head = document.createElement("div");
+          head.className = "caption-head";
+
+          const title = document.createElement("strong");
+          title.textContent = "Caption " + (i + 1);
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "small-button";
+          button.textContent = "Copy caption";
+          button.addEventListener("click", () =>
+            copyText(caption.text, button),
+          );
+
+          head.append(title, button);
+
+          const body = document.createElement("pre");
+          body.className = "caption-text";
+          body.textContent = caption.text;
+
+          const meta = document.createElement("div");
+          meta.className = "caption-meta";
+
+          const length = Array.from(caption.text).length;
+
+          if (caption.limit) {
+            meta.textContent =
+              length.toLocaleString() +
+              " / " +
+              caption.limit.toLocaleString() +
+              " characters";
+
+            if (length > caption.limit) meta.classList.add("over");
+          } else {
+            meta.textContent = length.toLocaleString() + " characters";
+          }
+
+          card.append(head, body, meta);
+          captionList.appendChild(card);
+        }
+
+        el("results").style.display = "block";
+        hasResults = true;
+      }
+
+      /* ---------- events ---------- */
+      el("genForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        generate();
+      });
+
+      el("shuffleButton").addEventListener("click", generate);
+
+      [
+        "platformSelect",
+        "goalSelect",
+        "toneSelect",
+        "styleSelect",
+        "emojiToggle",
+        "hashtagToggle",
+      ].forEach((id) => {
+        el(id).addEventListener("change", () => {
+          if (hasResults && el("topicInput").value.trim()) {
+            generate();
+          }
+        });
+      });
+
+      el("sampleButton").addEventListener("click", () => {
+        el("topicInput").value = "meta descriptions";
+        el("audienceInput").value = "beginner bloggers";
+        el("platformSelect").value = "instagram";
+        el("goalSelect").value = "educate";
+        el("toneSelect").value = "friendly";
+        el("styleSelect").value = "mixed";
+        el("ctaInput").value = "";
+        generate();
+      });
+
+      el("clearButton").addEventListener("click", () => {
+        el("topicInput").value = "";
+        el("audienceInput").value = "";
+        el("ctaInput").value = "";
+        el("formError").textContent = "";
+        el("results").style.display = "none";
+        hasResults = false;
+        el("topicInput").focus();
+      });
+    </script>
+  </body>
+</html>
